@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <title>Properties for Mr. Mendez — Tenerife Resort Invest</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+
+        :root {
+            --white: #ffffff;
+            --blue: #1a3a5c;
+            --blue-light: #2d5f8a;
+            --blue-faint: #e8eef4;
+            --ink: #1a1a2e;
+            --ink-soft: #4a4a5a;
+            --ink-quiet: #7a7a8a;
+            --rule: #e2e6ea;
+            --serif: 'Playfair Display', 'Georgia', serif;
+            --sans: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            font-family: var(--sans);
+            background: var(--white);
+            color: var(--ink);
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+            padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+            -webkit-text-size-adjust: 100%;
+        }
+
+        header {
+            background: var(--white);
+            text-align: center;
+            padding: 40px 20px 32px;
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .logo {
+            display: block;
+            margin: 0 auto 32px;
+            height: 70px;
+            width: auto;
+            max-width: 80%;
+            object-fit: contain;
+        }
+
+        .personal-note {
+            font-family: var(--sans);
+            font-weight: 300;
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            line-height: 1.7;
+            max-width: 440px;
+            margin: 20px auto 0;
+            padding: 0 8px;
+            font-style: italic;
+        }
+
+        .personal-note strong {
+            font-weight: 500;
+            font-style: normal;
+            color: var(--blue);
+        }
+
+        .headline {
+            font-family: var(--serif);
+            font-weight: 600;
+            font-size: clamp(1.6rem, 5vw, 2.4rem);
+            color: var(--blue);
+            letter-spacing: 0.5px;
+            line-height: 1.2;
+            margin-bottom: 12px;
+        }
+
+        .subtitle {
+            font-family: var(--sans);
+            font-weight: 300;
+            font-size: 0.85rem;
+            color: var(--ink-quiet);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            padding: 20px 24px;
+            background: var(--white);
+        }
+
+        .tag {
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            padding: 5px 14px;
+            border: 1px solid var(--blue);
+            color: var(--blue);
+            border-radius: 20px;
+        }
+
+        .section-header {
+            text-align: center;
+            padding: 40px 24px 20px;
+        }
+
+        .section-title {
+            font-family: var(--serif);
+            font-weight: 500;
+            font-size: 1.25rem;
+            color: var(--blue);
+            margin-bottom: 8px;
+        }
+
+        .section-desc {
+            font-size: 0.8rem;
+            color: var(--ink-quiet);
+            max-width: 480px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 16px 40px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+
+        @media (min-width: 600px) { .grid { grid-template-columns: repeat(2, 1fr); gap: 20px; } }
+        @media (min-width: 900px) { .grid { grid-template-columns: repeat(3, 1fr); gap: 24px; } }
+
+        .prop {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            background: var(--white);
+            border: 1px solid var(--rule);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            opacity: 0;
+            animation: fadeUp 0.5s ease forwards;
+            -webkit-tap-highlight-color: transparent;
+            min-height: 44px; /* iOS touch target */
+        }
+
+        .prop:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(26, 58, 92, 0.1);
+        }
+
+        .prop:active {
+            transform: scale(0.98);
+            transition: transform 0.1s ease;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .prop:nth-child(1) { animation-delay: 0.05s; }
+        .prop:nth-child(2) { animation-delay: 0.1s; }
+        .prop:nth-child(3) { animation-delay: 0.15s; }
+        .prop:nth-child(4) { animation-delay: 0.2s; }
+        .prop:nth-child(5) { animation-delay: 0.25s; }
+        .prop:nth-child(6) { animation-delay: 0.3s; }
+        .prop:nth-child(7) { animation-delay: 0.35s; }
+        .prop:nth-child(8) { animation-delay: 0.4s; }
+        .prop:nth-child(9) { animation-delay: 0.45s; }
+
+        .prop-photo {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            background-size: cover;
+            background-position: center;
+            background-color: var(--blue-faint);
+            position: relative;
+        }
+
+        @media (min-width: 600px) {
+            .prop-photo { aspect-ratio: 16 / 10; }
+        }
+
+        .prop-photo--none {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--ink-quiet);
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .prop-agency {
+            position: absolute;
+            bottom: 8px;
+            left: 8px;
+            font-size: 0.55rem;
+            font-weight: 600;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            padding: 3px 8px;
+            border-radius: 3px;
+            background: rgba(26, 58, 92, 0.75);
+            color: var(--white);
+            backdrop-filter: blur(6px);
+        }
+
+        .prop-body { padding: 14px 14px 18px; }
+
+        @media (min-width: 600px) {
+            .prop-body { padding: 16px 16px 20px; }
+        }
+
+        .prop-name {
+            font-family: var(--serif);
+            font-weight: 600;
+            font-size: 0.95rem;
+            line-height: 1.35;
+            color: var(--ink);
+            margin-bottom: 8px;
+        }
+
+        .prop-meta {
+            font-size: 0.73rem;
+            color: var(--ink-soft);
+            margin-bottom: 14px;
+        }
+
+        .prop-meta span + span::before {
+            content: ' \00b7 ';
+            color: var(--rule);
+        }
+
+        .prop-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+
+        .prop-price {
+            font-weight: 600;
+            font-size: 1.05rem;
+            color: var(--blue);
+            letter-spacing: -0.3px;
+        }
+
+        .prop-where {
+            font-size: 0.68rem;
+            color: var(--ink-quiet);
+            text-align: right;
+        }
+
+        .divider {
+            border: none;
+            border-top: 1px solid var(--rule);
+            margin: 0 20px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 24px 48px;
+            font-size: 0.68rem;
+            line-height: 1.7;
+            color: var(--ink-quiet);
+        }
+
+        footer strong {
+            font-weight: 500;
+            color: var(--ink-soft);
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        footer a { color: var(--blue-light); text-decoration: none; }
+
+        .footer-logo { height: 36px; margin-bottom: 16px; opacity: 0.6; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .prop { animation: none; opacity: 1; }
+            .prop:hover { transform: none; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <img class="logo" src="tri_logo.png" alt="Tenerife Resort Invest">
+    <h1 class="headline">Properties for Mr. Mendez</h1>
+    <p class="subtitle">Curated Selection &middot; April 2026</p>
+    <p class="personal-note">Hemos seleccionado estas propiedades especialmente para usted &mdash; cada una elegida con cuidado para ajustarse a lo que busca en el sur de Tenerife. Esperamos que alguna de ellas se sienta como su futuro hogar.<br><strong>&mdash; Staz &amp; Tino</strong></p>
+</header>
+
+<div class="filters">
+    <span class="tag">2 Bedrooms</span>
+    <span class="tag">2 Bathrooms</span>
+    <span class="tag">Los Cristianos</span>
+    <span class="tag">Las Americas</span>
+    <span class="tag">Budget: &euro;400,000</span>
+</div>
+
+<div class="section-header">
+    <h2 class="section-title">Matching Your Criteria</h2>
+    <p class="section-desc">Properties with 2+ bedrooms, 2+ bathrooms, within your budget in Los Cristianos, Las Americas, and surrounding areas.</p>
+</div>
+
+<main>
+<div class="grid">
+
+    <a class="prop" href="https://www.morfittpropertiestenerife.com/sales/apartment-los-cristianos-3587" target="_blank" rel="noopener">
+        <div class="prop-photo" style="background-image:url('https://www.morfittpropertiestenerife.com/sites/default/files/styles/listing_photo/public/ApartmentinCastleHarbour11.jpg?itok=LQehsVDW')">
+            <span class="prop-agency">Morfitt Properties</span>
+        </div>
+        <div class="prop-body">
+            <h3 class="prop-name">Apartment in Los Cristianos</h3>
+            <p class="prop-meta"><span>2 bed</span><span>2 bath</span><span>50 m&sup2;</span></p>
+            <div class="prop-row">
+                <span class="prop-price">&euro;325,000</span>
+                <span class="prop-where">Los Cristianos</span>
+            </div>
+        </div>
+    </a>
+
+    <a class="prop" href="https://www.morfittpropertiestenerife.com/sales/apartment-los-cristianos-3581" target="_blank" rel="noopener">
+        <div class="prop-photo" style="background-image:url('https://www.morfittpropertiestenerife.com/sites/default/files/styles/listing_photo/public/ApartmentinKanal5.jpg?itok=0PTsfAhi')">
+            <span class="prop-agency">Morfitt Properties</span>
+        </div>
+        <div class="prop-body">
+            <h3 class="prop-name">Spacious Apartment in Los Cristianos</h3>
+            <p class="prop-meta"><span>3 bed</span><span>2 bath</span><span>72 m&sup2;</span></p>
+            <div class="prop-row">
+                <span class="prop-price">&euro;399,000</span>
+                <span class="prop-where">Los Cristianos</span>
+            </div>
+        </div>
+    </a>
+
+    <a class="prop" href="https://www.morfittpropertiestenerife.com/sales/linked-house-chayofa-3645" target="_blank" rel="noopener">
+        <div class="prop-photo" style="background-image:url('https://www.morfittpropertiestenerife.com/sites/default/files/styles/listing_photo/public/HouseinChayofa13_2.JPG?itok=KFW4YDxn')">
+            <span class="prop-agency">Morfitt Properties</span>
+        </div>
+        <div class="prop-body">
+            <h3 class="prop-name">Linked House in Chayofa</h3>
+            <p class="prop-meta"><span>3 bed</span><span>2 bath</span><span>125 m&sup2;</span></p>
+            <div class="prop-row">
+                <span class="prop-price">&euro;369,950</span>
+                <span class="prop-where">Chayofa, Arona</span>
+            </div>
+        </div>
+    </a>
+
+    <a class="prop" href="https://www.morfittpropertiestenerife.com/sales/townhouse-chayofa-3648" target="_blank" rel="noopener">
+        <div class="prop-photo" style="background-image:url('https://www.morfittpropertiestenerife.com/sites/default/files/styles/listing_photo/public/Lomas%20pasillo.jpg?itok=Lh-LLQKS')">
+            <span class="prop-agency">Morfitt Properties</span>
+        </div>
+        <div class="prop-body">
+            <h3 class="prop-name">Townhouse in Chayofa</h3>
+            <p class="prop-meta"><span>2 bed</span><span>2 bath</span><span>127 m&sup2;</span></p>
+            <div class="prop-row">
+                <span class="prop-price">&euro;389,000</span>
+                <span class="prop-where">Chayofa, Arona</span>
+            </div>
+        </div>
+    </a>
+
+    <a class="prop" href="https://gsservices.es/en/property/bright-attic-with-terrace-pool-garage-and-included-parking-in-cho-4245139/" target="_blank" rel="noopener">
+        <div class="prop-photo" style="background-image:url('https://witei-client-photos.s3.eu-north-1.amazonaws.com/agencias/gsservices.es/139e33f6-0004214384.jpg')">
+            <span class="prop-agency">GS Services</span>
+        </div>
+        <div class="prop-body">
+            <h3 class="prop-name">Penthouse with Terrace, Pool &amp; Garage</h3>
+            <p class="prop-meta"><span>2 bed</span><span>2 bath</span></p>
+            <div class="prop-row">
+                <span class="prop-price">&euro;335,000</span>
+                <span class="prop-where">Cho, Arona</span>
+            </div>
+        </div>
+    </a>
+
+    <a class="prop" href="https://gsservices.es/en/property/spacious-apartment-with-garage-and-storage-room-in-fraile-4243618/" target="_blank" rel="noopener">
+        <div class="prop-photo" style="background-image:url('https://witei-client-photos.s3.eu-north-1.amazonaws.com/agencias/gsservices.es/c00512d5-0004217245.jpg')">
+            <span class="prop-agency">GS Services</span>
+        </div>
+        <div class="prop-body">
+            <h3 class="prop-name">Spacious Apartment with Garage &amp; Storage</h3>
+            <p class="prop-meta"><span>3 bed</span><span>2 bath</span></p>
+            <div class="prop-row">
+                <span class="prop-price">&euro;265,000</span>
+                <span class="prop-where">Fraile, Arona</span>
+            </div>
+        </div>
+    </a>
+
+    <a class="prop" href="https://gsservices.es/en/property/modern-apartment-with-terrace-and-sea-views-in-el-madro%C3%B1al-4219640/" target="_blank" rel="noopener">
+        <div class="prop-photo" style="background-image:url('https://witei-client-photos.s3.eu-north-1.amazonaws.com/agencias/gsservices.es/4204777-31e8aadb.jpg')">
+            <span class="prop-agency">GS Services</span>
+        </div>
+        <div class="prop-body">
+            <h3 class="prop-name">Modern Apartment with Sea Views</h3>
+            <p class="prop-meta"><span>2 bed</span><span>2 bath</span></p>
+            <div class="prop-row">
+                <span class="prop-price">&euro;369,000</span>
+                <span class="prop-where">El Madro&ntilde;al, Adeje</span>
+            </div>
+        </div>
+    </a>
+
+    <a class="prop" href="https://gsservices.es/en/property/new-terraced-houses-with-sea-views-in-tijoco-bajo-4192854/" target="_blank" rel="noopener">
+        <div class="prop-photo" style="background-image:url('https://witei-client-photos.s3.eu-north-1.amazonaws.com/agencias/gsservices.es/193f1ceb-0004223855.jpg')">
+            <span class="prop-agency">GS Services</span>
+        </div>
+        <div class="prop-body">
+            <h3 class="prop-name">New Townhouse with Sea Views</h3>
+            <p class="prop-meta"><span>2 bed</span><span>2 bath</span></p>
+            <div class="prop-row">
+                <span class="prop-price">&euro;330,000</span>
+                <span class="prop-where">Tijoco Bajo, Adeje</span>
+            </div>
+        </div>
+    </a>
+
+</div>
+
+<hr class="divider">
+
+<div class="section-header">
+    <h2 class="section-title">Also Worth Considering</h2>
+    <p class="section-desc">These properties exceed your &euro;400,000 budget but are located in Los Cristianos and match your bedroom and bathroom requirements. Given the limited availability in this area, they may be worth a viewing.</p>
+</div>
+
+<div class="grid">
+
+    <a class="prop" href="https://www.morfittpropertiestenerife.com/sales/apartment-los-cristianos-3647" target="_blank" rel="noopener">
+        <div class="prop-photo" style="background-image:url('https://www.morfittpropertiestenerife.com/sites/default/files/styles/listing_photo/public/ApartmentinRoyalPalm6_1.jpg?itok=k7dyvw5L')">
+            <span class="prop-agency">Morfitt Properties</span>
+        </div>
+        <div class="prop-body">
+            <h3 class="prop-name">Apartment in Los Cristianos</h3>
+            <p class="prop-meta"><span>2 bed</span><span>2 bath</span><span>75 m&sup2;</span></p>
+            <div class="prop-row">
+                <span class="prop-price">&euro;419,950</span>
+                <span class="prop-where">Los Cristianos</span>
+            </div>
+        </div>
+    </a>
+
+    <a class="prop" href="https://www.morfittpropertiestenerife.com/sales/apartment-los-cristianos-3620" target="_blank" rel="noopener">
+        <div class="prop-photo" style="background-image:url('https://www.morfittpropertiestenerife.com/sites/default/files/styles/listing_photo/public/IMG_5172.JPG?itok=6A1YcyQY')">
+            <span class="prop-agency">Morfitt Properties</span>
+        </div>
+        <div class="prop-body">
+            <h3 class="prop-name">Apartment in El Rincon, Los Cristianos</h3>
+            <p class="prop-meta"><span>2 bed</span><span>2 bath</span><span>105 m&sup2;</span></p>
+            <div class="prop-row">
+                <span class="prop-price">&euro;465,000</span>
+                <span class="prop-where">Los Cristianos</span>
+            </div>
+        </div>
+    </a>
+
+</div>
+</main>
+
+<footer>
+    <img class="footer-logo" src="tri_logo.png" alt="TRI">
+    <strong>Tenerife Resort Invest</strong>
+    This selection was prepared exclusively for Mr. Mendez.<br>
+    Properties sourced from Morfitt Properties and GS Services.<br>
+    Prices and availability subject to confirmation.<br>
+    <a href="mailto:info@teneriferesortinvest.es">info@teneriferesortinvest.es</a> &middot; <a href="https://teneriferesortinvest.es">teneriferesortinvest.es</a>
+</footer>
+
+</body>
+</html>
