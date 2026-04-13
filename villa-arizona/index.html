@@ -35,6 +35,12 @@
             overflow-x: hidden;
             scroll-snap-type: y mandatory;
         }
+
+        /* ── BILINGUAL CONTENT: hide the inactive language ── */
+        html[lang="en"] .lang-es { display: none !important; }
+        html[lang="es"] .lang-en { display: none !important; }
+        /* Inline spans inside paragraphs */
+        .lang-en, .lang-es { }
         /* Snap targets: every major section becomes a slide */
         .video-hero,
         .hero-videos,
@@ -813,8 +819,9 @@
         <a href="#about" class="top-center-btn">About the Villa</a>
     </div>
     <div class="top-right">
+        <a href="#" id="langToggle" class="lang-toggle" aria-label="Cambiar idioma / Change language"><span class="lang-en">ES</span><span class="lang-es">EN</span></a>
         <a href="https://wa.me/34659003377?text=Hola%2C%20me%20interesa%20Villa%20Arizona%20(TRI-261125-01)" target="_blank" rel="noopener">WhatsApp</a>
-        <a href="#facts">Facts</a>
+        <a href="#facts"><span class="lang-en">Facts</span><span class="lang-es">Datos</span></a>
     </div>
 </nav>
 
@@ -822,13 +829,13 @@
 <!-- HERO — PHOTO BACKGROUND + SCATTERED POEM             -->
 <!-- ════════════════════════════════════════════════════ -->
 <section class="video-hero">
-    <!-- Stacked typography: "You built the life. Now choose where to live it." -->
+    <!-- Stacked typography: bilingual EN / ES -->
     <div class="hero-words">
-        <h1 class="hero-line">You built the life.</h1>
-        <h1 class="hero-line">Now choose where to</h1>
-        <h1 class="hero-line"><em>live it.</em></h1>
+        <h1 class="hero-line"><span class="lang-en">You built the life.</span><span class="lang-es">Usted construyó la vida.</span></h1>
+        <h1 class="hero-line"><span class="lang-en">Now choose where to</span><span class="lang-es">Ahora elija dónde</span></h1>
+        <h1 class="hero-line"><span class="lang-en"><em>live it.</em></span><span class="lang-es"><em>vivirla.</em></span></h1>
     </div>
-    <a href="#hero-videos" class="hero-scroll" aria-label="Scroll to next slide">Keep scrolling &darr;</a>
+    <a href="#hero-videos" class="hero-scroll" aria-label="Scroll to next slide"><span class="lang-en">Keep scrolling &darr;</span><span class="lang-es">Siga deslizando &darr;</span></a>
 </section>
 
 <!-- ════════════════════════════════════════════════════ -->
@@ -848,8 +855,8 @@
 <!-- ════════════════════════════════════════════════════ -->
 <section class="panel" id="about">
     <div class="panel-content">
-        <div class="panel-line panel-line--left panel-salutation">Dear guest,</div>
-        <div class="panel-line panel-line--right panel-salutation"><em>I am</em> Villa Arizona.</div>
+        <div class="panel-line panel-line--left panel-salutation"><span class="lang-en">Dear guest,</span><span class="lang-es">Estimado huésped,</span></div>
+        <div class="panel-line panel-line--right panel-salutation"><span class="lang-en"><em>I am</em> Villa Arizona.</span><span class="lang-es"><em>Soy</em> Villa Arizona.</span></div>
     </div>
     <p class="panel-detail">Twenty-five minutes from the airport. Five en-suite bedrooms. The Atlantic at the bottom of the road.</p>
 </section>
@@ -860,10 +867,12 @@
 <section class="panel">
     <div class="panel-content">
         <div class="panel-line panel-line--left">
-            Most people who land on this page are in the wrong place.
+            <span class="lang-en">Most people who land on this page are in the wrong place.</span>
+            <span class="lang-es">La mayoría de las personas que llegan a esta página están en el lugar equivocado.</span>
         </div>
         <div class="panel-line panel-line--right">
-            I am not a rental. Not a yield. Built once, for a household who wanted to actually live here.
+            <span class="lang-en">I am not a rental. Not a yield. Built once, for a household who wanted to actually live here.</span>
+            <span class="lang-es">No soy un alquiler vacacional. No soy una inversión. Fui construida una sola vez, para una familia que quería vivir aquí de verdad.</span>
         </div>
     </div>
     <p class="panel-detail">Barranco del Ingl&eacute;s is named for an Englishman who chose this hillside in the 1970s.</p>
@@ -880,12 +889,20 @@
 <section class="panel">
     <div class="panel-content">
         <div class="panel-line panel-line--left">
-            Here, February is a month like any other.
-            <br><br>
-            The first light reaches the volcanic foothills behind me and works its way down toward the sea.
+            <span class="lang-en">
+                Here, February is a month like any other.
+                <br><br>
+                The first light reaches the volcanic foothills behind me and works its way down toward the sea.
+            </span>
+            <span class="lang-es">
+                Aqu&iacute;, febrero es un mes como cualquier otro.
+                <br><br>
+                La primera luz alcanza los riscos volc&aacute;nicos detr&aacute;s de m&iacute; y baja despacio hasta el mar.
+            </span>
         </div>
         <div class="panel-line panel-line--right">
-            After a while, you stop checking the calendar.
+            <span class="lang-en">After a while, you stop checking the calendar.</span>
+            <span class="lang-es">Con el tiempo, uno deja de mirar el calendario.</span>
         </div>
     </div>
     <p class="panel-detail">In November the wind drops at four in the afternoon. That is the best hour to sit by the water.</p>
@@ -900,10 +917,10 @@
 <!-- MID-PAGE SCATTERED HEADLINE — What inspired her        -->
 <!-- ══════════════════════════════════════════════════════ -->
 <section class="inspiration">
-    <p class="inspiration-eyebrow">What inspired her</p>
-    <h2 class="inspiration-word inspiration-word--1">What</h2>
-    <h2 class="inspiration-word inspiration-word--2">inspired</h2>
-    <h2 class="inspiration-word inspiration-word--3"><em>her.</em></h2>
+    <p class="inspiration-eyebrow"><span class="lang-en">What inspired her</span><span class="lang-es">Qu&eacute; la inspir&oacute;</span></p>
+    <h2 class="inspiration-word inspiration-word--1"><span class="lang-en">What</span><span class="lang-es">Qu&eacute;</span></h2>
+    <h2 class="inspiration-word inspiration-word--2"><span class="lang-en">inspired</span><span class="lang-es">inspir&oacute;</span></h2>
+    <h2 class="inspiration-word inspiration-word--3"><span class="lang-en"><em>her.</em></span><span class="lang-es"><em>su nombre.</em></span></h2>
 </section>
 
 <!-- ── IMAGE: ARIZONA 1 ── -->
@@ -917,13 +934,22 @@
 <section class="panel">
     <div class="panel-content">
         <div class="panel-line panel-line--left">
-            Nothing about me is accidental.
-            <br><br>
-            The architect drew me with Arizona in mind. The light here in July is the same light you find in
-            Sedona at the same hour.
+            <span class="lang-en">
+                Nothing about me is accidental.
+                <br><br>
+                The architect drew me with Arizona in mind. The light here in July is the same light you find in
+                Sedona at the same hour.
+            </span>
+            <span class="lang-es">
+                En m&iacute; no hay nada accidental.
+                <br><br>
+                El arquitecto me dibuj&oacute; pensando en Arizona. La luz de julio aqu&iacute; es la misma que se
+                encuentra en Sedona a la misma hora.
+            </span>
         </div>
         <div class="panel-line panel-line--right">
-            The palette was waiting.
+            <span class="lang-en">The palette was waiting.</span>
+            <span class="lang-es">La paleta me esperaba.</span>
         </div>
     </div>
     <p class="panel-detail">A desert house on a volcanic island, built for someone who understood that the two landscapes were closer than they looked.</p>
@@ -940,12 +966,20 @@
 <section class="panel">
     <div class="panel-content">
         <div class="panel-line panel-line--left">
-            These are the meals people remember.
-            <br><br>
-            A long table for eight. A single slab of dark Sahara Noir marble. The doors open to the palms.
+            <span class="lang-en">
+                These are the meals people remember.
+                <br><br>
+                A long table for eight. A single slab of dark Sahara Noir marble. The doors open to the palms.
+            </span>
+            <span class="lang-es">
+                Estas son las comidas que la gente recuerda.
+                <br><br>
+                Una mesa larga para ocho. Una sola pieza de m&aacute;rmol Sahara Noir. Las puertas abiertas a las palmeras.
+            </span>
         </div>
         <div class="panel-line panel-line--right">
-            Not the restaurants. The ones at home.
+            <span class="lang-en">Not the restaurants. The ones at home.</span>
+            <span class="lang-es">No los restaurantes. Las que pasaron en casa.</span>
         </div>
     </div>
     <p class="panel-detail">The wines of South Tenerife age in volcanic soil. List&aacute;n Blanco from Vilaflor sells out by July most years.</p>
@@ -962,11 +996,18 @@
 <section class="panel">
     <div class="panel-content">
         <div class="panel-line panel-line--left">
-            Most people build the house they always wanted one size too small.
+            <span class="lang-en">Most people build the house they always wanted one size too small.</span>
+            <span class="lang-es">La mayor&iacute;a construye la casa que siempre quiso una talla m&aacute;s peque&ntilde;a de la cuenta.</span>
         </div>
         <div class="panel-line panel-line--right">
-            Five en-suite bedrooms. A guest apartment with its own entrance. When a friend needs a quiet place to
-            recover, there is a wing for that too.
+            <span class="lang-en">
+                Five en-suite bedrooms. A guest apartment with its own entrance. When a friend needs a quiet place to
+                recover, there is a wing for that too.
+            </span>
+            <span class="lang-es">
+                Cinco dormitorios en suite. Un apartamento de invitados con entrada propia. Cuando un amigo necesita
+                un lugar tranquilo donde recuperarse, hay un ala para eso tambi&eacute;n.
+            </span>
         </div>
     </div>
     <p class="panel-detail">The basement is currently empty. It has been wired for a cinema, a gym, or both.</p>
@@ -983,12 +1024,20 @@
 <section class="panel">
     <div class="panel-content">
         <div class="panel-line panel-line--left">
-            Walk in with a suitcase. The bed will be made.
-            <br><br>
-            Every chair, every plate, every lamp was chosen for the household who would live here next.
+            <span class="lang-en">
+                Walk in with a suitcase. The bed will be made.
+                <br><br>
+                Every chair, every plate, every lamp was chosen for the household who would live here next.
+            </span>
+            <span class="lang-es">
+                Entre con una maleta. La cama estar&aacute; hecha.
+                <br><br>
+                Cada silla, cada plato, cada l&aacute;mpara fue elegida para la familia que vivir&iacute;a aqu&iacute; despu&eacute;s.
+            </span>
         </div>
         <div class="panel-line panel-line--right">
-            I was not sold empty.
+            <span class="lang-en">I was not sold empty.</span>
+            <span class="lang-es">No me vendieron vac&iacute;a.</span>
         </div>
     </div>
     <p class="panel-detail">Down to the cutlery in the drawers. Down to the towels in the linen cupboard.</p>
@@ -1005,11 +1054,18 @@
 <section class="panel">
     <div class="panel-content">
         <div class="panel-line panel-line--left">
-            La Caleta was not invented for the people who will buy me. It existed first.
+            <span class="lang-en">La Caleta was not invented for the people who will buy me. It existed first.</span>
+            <span class="lang-es">La Caleta no se invent&oacute; para la gente que me va a comprar. Exist&iacute;a antes.</span>
         </div>
         <div class="panel-line panel-line--right">
-            A fishing village. Six wooden boats out before sunrise. Costa Adeje and the airport on the same short
-            radius.
+            <span class="lang-en">
+                A fishing village. Six wooden boats out before sunrise. Costa Adeje and the airport on the same short
+                radius.
+            </span>
+            <span class="lang-es">
+                Un pueblo de pescadores. Seis barcos de madera salen antes del amanecer. Costa Adeje y el aeropuerto
+                en el mismo radio corto.
+            </span>
         </div>
     </div>
     <p class="panel-detail">Three Michelin-starred restaurants are within walking distance of my front gate.</p>
@@ -1029,32 +1085,64 @@
 <!-- SPECS PANEL                                           -->
 <!-- ════════════════════════════════════════════════════ -->
 <section class="specs-panel" id="facts">
-    <p class="specs-eyebrow">Facts</p>
-    <h2 class="specs-headline">A modern villa on <em>Avenida de la Macaronesia</em> &mdash; completed June 2023, ready to live in.</h2>
+    <p class="specs-eyebrow"><span class="lang-en">Facts</span><span class="lang-es">Datos</span></p>
+    <h2 class="specs-headline">
+        <span class="lang-en">A modern villa on <em>Avenida de la Macaronesia</em> &mdash; completed June 2023, ready to live in.</span>
+        <span class="lang-es">Una casa moderna en la <em>Avenida de la Macaronesia</em> &mdash; terminada en junio de 2023, lista para entrar a vivir.</span>
+    </h2>
     <dl class="specs-grid">
-        <div class="spec"><div class="spec-label">Bedrooms</div><div class="spec-value">5 en-suite</div></div>
-        <div class="spec"><div class="spec-label">Built</div><div class="spec-value">550 m&sup2;</div></div>
-        <div class="spec"><div class="spec-label">Plot</div><div class="spec-value">2,500 m&sup2;</div></div>
-        <div class="spec"><div class="spec-label">Garage</div><div class="spec-value">6 cars</div></div>
-        <div class="spec"><div class="spec-label">Pool</div><div class="spec-value">Private</div></div>
-        <div class="spec"><div class="spec-label">Price</div><div class="spec-value">&euro;6,150,000</div></div>
+        <div class="spec">
+            <div class="spec-label"><span class="lang-en">Bedrooms</span><span class="lang-es">Dormitorios</span></div>
+            <div class="spec-value"><span class="lang-en">5 en-suite</span><span class="lang-es">5 en suite</span></div>
+        </div>
+        <div class="spec">
+            <div class="spec-label"><span class="lang-en">Built</span><span class="lang-es">Construidos</span></div>
+            <div class="spec-value">550 m&sup2;</div>
+        </div>
+        <div class="spec">
+            <div class="spec-label"><span class="lang-en">Plot</span><span class="lang-es">Parcela</span></div>
+            <div class="spec-value"><span class="lang-en">2,500 m&sup2;</span><span class="lang-es">2.500 m&sup2;</span></div>
+        </div>
+        <div class="spec">
+            <div class="spec-label"><span class="lang-en">Garage</span><span class="lang-es">Garaje</span></div>
+            <div class="spec-value"><span class="lang-en">6 cars</span><span class="lang-es">6 plazas</span></div>
+        </div>
+        <div class="spec">
+            <div class="spec-label"><span class="lang-en">Pool</span><span class="lang-es">Piscina</span></div>
+            <div class="spec-value"><span class="lang-en">Private</span><span class="lang-es">Privada</span></div>
+        </div>
+        <div class="spec">
+            <div class="spec-label"><span class="lang-en">Price</span><span class="lang-es">Precio</span></div>
+            <div class="spec-value"><span class="lang-en">&euro;6,150,000</span><span class="lang-es">6.150.000 &euro;</span></div>
+        </div>
     </dl>
 </section>
 
 <!-- ── CTA ── -->
 <section class="cta-panel" id="viewing">
-    <p class="cta-eyebrow">If you are ready</p>
-    <p class="cta-quote">She was built <em>before you knew</em> you needed her.</p>
+    <p class="cta-eyebrow"><span class="lang-en">If you are ready</span><span class="lang-es">Si est&aacute; lista o listo</span></p>
+    <p class="cta-quote">
+        <span class="lang-en">She was built <em>before you knew</em> you needed her.</span>
+        <span class="lang-es">Fue construida <em>antes de que usted supiera</em> que la necesitaba.</span>
+    </p>
     <div class="cta-buttons">
-        <a class="btn-line btn-line--filled" href="https://wa.me/34659003377?text=Hola%2C%20me%20interesa%20Villa%20Arizona%20(TRI-261125-01)">Message on WhatsApp</a>
+        <a class="btn-line btn-line--filled" href="https://wa.me/34659003377?text=Hola%2C%20me%20interesa%20Villa%20Arizona%20(TRI-261125-01)">
+            <span class="lang-en">Message on WhatsApp</span><span class="lang-es">Escribir por WhatsApp</span>
+        </a>
     </div>
 </section>
 
 <!-- ── FOOTER ── -->
 <footer>
     <img class="stazio-portrait" src="stazio.jpg" alt="Stazio &mdash; Tenerife Resort Invest">
-    <p class="stazio-caption">Stazio &middot; Forty-five years in South Tenerife</p>
-    <p class="footer-quote">&ldquo;Villas like this one are the reason I have stayed on this island for <em>forty-five years</em>.&rdquo;</p>
+    <p class="stazio-caption">
+        <span class="lang-en">Stazio &middot; Forty-five years in South Tenerife</span>
+        <span class="lang-es">Stazio &middot; Cuarenta y cinco a&ntilde;os en el sur de Tenerife</span>
+    </p>
+    <p class="footer-quote">
+        <span class="lang-en">&ldquo;Villas like this one are the reason I have stayed on this island for <em>forty-five years</em>.&rdquo;</span>
+        <span class="lang-es">&laquo;Casas como esta son la raz&oacute;n por la que he permanecido en esta isla durante <em>cuarenta y cinco a&ntilde;os</em>.&raquo;</span>
+    </p>
     <p class="footer-signature">Stazio</p>
     <img class="footer-logo" src="tri_logo.png" alt="Tenerife Resort Invest">
     <p class="footer-meta">
@@ -1093,10 +1181,31 @@
                 link.classList.add('next-slide--dark');
             }
             link.href = '#' + next.id;
-            link.setAttribute('aria-label', 'Scroll to next slide');
-            link.innerHTML = 'Keep scrolling &darr;';
+            link.setAttribute('aria-label', 'Scroll to next slide / Siguiente');
+            // Bilingual button content — CSS shows the right language based on <html lang>
+            link.innerHTML = '<span class="lang-en">Keep scrolling &darr;</span><span class="lang-es">Siga deslizando &darr;</span>';
             el.appendChild(link);
         });
+
+        // ── 1b. Language toggle (EN ⇄ ES) ──
+        // Switches <html lang> attribute; CSS show/hide rules do the rest.
+        // Persists choice in localStorage so the next visit remembers.
+        var langToggle = document.getElementById('langToggle');
+        function setLang(lang) {
+            document.documentElement.lang = lang;
+            try { localStorage.setItem('villaArizonaLang', lang); } catch(e) {}
+        }
+        // Restore previously chosen language on page load
+        try {
+            var saved = localStorage.getItem('villaArizonaLang');
+            if (saved === 'en' || saved === 'es') setLang(saved);
+        } catch(e) {}
+        if (langToggle) {
+            langToggle.addEventListener('click', function (e) {
+                e.preventDefault();
+                setLang(document.documentElement.lang === 'en' ? 'es' : 'en');
+            });
+        }
 
         // ── 2. Entrance animations: slide-in right then left, on view ──
         if (!('IntersectionObserver' in window)) {
