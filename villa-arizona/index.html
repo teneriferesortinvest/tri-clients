@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <title>Villa Arizona — Tenerife Resort Invest</title>
-    <meta name="description" content="A modern villa in Barranco del Inglés, La Caleta. Five en-suite bedrooms, infinity pool, ocean and mountain views. €6,150,000.">
+    <meta name="description" content="A modern villa on Avenida de la Macaronesia, La Caleta. Five en-suite bedrooms, infinity pool, ocean and mountain views. €6,150,000.">
     <meta name="robots" content="noindex, nofollow">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -198,24 +198,31 @@
             pointer-events: none;
         }
 
-        /* Scattered words forming a visual poem across the viewport */
+        /* Three-line stacked headline (was scattered) */
         .hero-words {
             position: absolute;
             inset: 0;
             z-index: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 0 6%;
+            gap: 8px;
         }
 
-        /* ── HERO VIDEO STRIP — 3 reels in a row right under the hero photo ── */
+        /* ── HERO VIDEO STRIP — 2 reels in a row right under the hero photo ── */
         .hero-videos {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 0;
             background: var(--ink);
             width: 100%;
+            height: 100vh;
+            height: 100dvh;
         }
         .hero-video-cell {
             position: relative;
-            aspect-ratio: 9 / 16;
             overflow: hidden;
             background: var(--ink);
         }
@@ -295,31 +302,23 @@
         @media (max-width: 500px) {
             .inspiration-word { font-size: clamp(40px, 13vw, 60px); }
         }
-        .hero-word {
-            position: absolute;
+        .hero-line {
             font-family: var(--hero);
             font-weight: 400;  /* Archivo Black is inherently 900-weight */
             font-style: normal;
             color: white;
-            font-size: clamp(64px, 13vw, 200px);
-            line-height: 0.88;
+            font-size: clamp(40px, 7.5vw, 112px);
+            line-height: 0.96;
             letter-spacing: -0.035em;
             text-shadow: 0 2px 24px rgba(0, 0, 0, 0.35);
             white-space: nowrap;
+            margin: 0;
         }
-        .hero-word em {
+        .hero-line em {
             font-family: 'Archivo', 'Inter', sans-serif;
             font-style: italic;
             font-weight: 500;
         }
-
-        /* Position each word as a separate typographic element */
-        .hero-word--1 { top: 8%;  left: 4%; }                          /* "You've" */
-        .hero-word--2 { top: 10%; right: 5%; }                         /* "been" */
-        .hero-word--3 { top: 36%; left: 16%; }                         /* "arriving" */
-        .hero-word--4 { top: 44%; right: 8%; }                         /* "here" */
-        .hero-word--5 { bottom: 24%; left: 8%; }                       /* "your whole" */
-        .hero-word--6 { bottom: 8%;  right: 10%; }                     /* "life." */
 
         /* Bottom corners: location left, italic body right */
         .hero-corner {
@@ -381,13 +380,8 @@
 
         @media (max-width: 900px) {
             .video-hero { height: 92vh; min-height: 580px; }
-            .hero-word { font-size: clamp(44px, 14vw, 96px); letter-spacing: -0.04em; }
-            .hero-word--1 { top: 9%;  left: 6%; }
-            .hero-word--2 { top: 20%; right: 6%; }
-            .hero-word--3 { top: 34%; left: 6%; }
-            .hero-word--4 { top: 48%; right: 8%; }
-            .hero-word--5 { bottom: 30%; left: 6%; }
-            .hero-word--6 { bottom: 14%; right: 8%; }
+            .hero-words { padding: 0 6%; gap: 6px; }
+            .hero-line { font-size: clamp(32px, 7.5vw, 64px); letter-spacing: -0.04em; }
             .hero-corner--bottom-left,
             .hero-corner--bottom-right { display: none; }
             .hero-scroll { bottom: 18px; }
@@ -395,13 +389,8 @@
 
         @media (max-width: 500px) {
             .video-hero { min-height: 560px; }
-            .hero-word { font-size: clamp(38px, 13.5vw, 64px); }
-            .hero-word--1 { top: 10%; left: 6%; }
-            .hero-word--2 { top: 22%; right: 6%; }
-            .hero-word--3 { top: 36%; left: 6%; }
-            .hero-word--4 { top: 48%; right: 6%; }
-            .hero-word--5 { bottom: 30%; left: 6%; }
-            .hero-word--6 { bottom: 16%; right: 6%; }
+            .hero-words { padding: 0 6%; gap: 4px; }
+            .hero-line { font-size: clamp(26px, 7vw, 42px); white-space: normal; }
         }
 
         /* ── PANEL (text storytelling) ── */
@@ -430,17 +419,17 @@
         .panel-line {
             font-family: var(--serif);
             font-weight: 400;
-            font-size: 19px;
-            line-height: 1.7;
+            font-size: 29px;
+            line-height: 1.5;
             color: var(--ink);
             letter-spacing: 0.1px;
         }
         .panel-line--right {
             text-align: right;
             justify-self: end;
-            max-width: 460px;
+            max-width: 560px;
         }
-        .panel-line--left { max-width: 460px; }
+        .panel-line--left { max-width: 560px; }
 
         /* The opening salutation panel — same Archivo Black as hero */
         .panel-salutation {
@@ -473,7 +462,7 @@
             }
             .panel-content { grid-template-columns: 1fr; gap: 28px; text-align: center; }
             .panel-line--right, .panel-line--left { max-width: 100%; text-align: center; justify-self: center; }
-            .panel-line { font-size: 17px; line-height: 1.65; }
+            .panel-line { font-size: 26px; line-height: 1.5; }
             .panel-script { font-size: 42px; }
         }
 
@@ -833,14 +822,11 @@
 <!-- HERO — PHOTO BACKGROUND + SCATTERED POEM             -->
 <!-- ════════════════════════════════════════════════════ -->
 <section class="video-hero">
-    <!-- Scattered typography: "You've been arriving here your whole life." -->
+    <!-- Stacked typography: "You built the life. Now choose where to live it." -->
     <div class="hero-words">
-        <h1 class="hero-word hero-word--1">You&rsquo;ve</h1>
-        <h1 class="hero-word hero-word--2">been</h1>
-        <h1 class="hero-word hero-word--3">arriving</h1>
-        <h1 class="hero-word hero-word--4">here</h1>
-        <h1 class="hero-word hero-word--5">your whole</h1>
-        <h1 class="hero-word hero-word--6"><em>life.</em></h1>
+        <h1 class="hero-line">You built the life.</h1>
+        <h1 class="hero-line">Now choose where to</h1>
+        <h1 class="hero-line"><em>live it.</em></h1>
     </div>
     <a href="#hero-videos" class="hero-scroll" aria-label="Scroll to next slide">Keep scrolling &darr;</a>
 </section>
@@ -874,21 +860,10 @@
 <section class="panel">
     <div class="panel-content">
         <div class="panel-line panel-line--left">
-            I am a house in the south of Tenerife. I will not pretend that is a small thing to be, but I am going
-            to try to be honest with you about what I am and what I am not, because most of the people who land on
-            this page are in the wrong place, and the few who are in the right place deserve a straight conversation.
-            <br><br>
-            I am not a holiday rental. I am not an investment vehicle. I am not the kind of villa that exists so
-            that someone in another country can collect a yield on it. I was built once, carefully, for a single
-            household who wanted to actually live here. The architect knew that. The materials know that. The land
-            I sit on knows that.
+            Most people who land on this page are in the wrong place.
         </div>
         <div class="panel-line panel-line--right">
-            If you are looking for a property to put on a booking platform, close this page now. There is no version
-            of this conversation in which I become that, and I would rather lose you in the first paragraph than
-            waste your afternoon.
-            <br><br>
-            If you are still here, then you are probably the person I was built for. The rest of this page is for you.
+            I am not a rental. Not a yield. Built once, for a household who wanted to actually live here.
         </div>
     </div>
     <p class="panel-detail">Barranco del Ingl&eacute;s is named for an Englishman who chose this hillside in the 1970s.</p>
@@ -905,15 +880,12 @@
 <section class="panel">
     <div class="panel-content">
         <div class="panel-line panel-line--left">
-            Mornings here have a particular quality. The first light reaches the volcanic foothills behind me and
-            works its way slowly down toward the sea. The pool stays still. The palms are silent. There is a hand
-            of coffee somewhere in the house, and nowhere in particular to be.
+            Here, February is a month like any other.
+            <br><br>
+            The first light reaches the volcanic foothills behind me and works its way down toward the sea.
         </div>
         <div class="panel-line panel-line--right">
-            South Tenerife averages three hundred and twenty days of sun a year. That number means less than it
-            sounds until you have lived somewhere where February is something you survive. Here, February is a
-            month like any other. You step outside without thinking. The stone underfoot has been warm since seven
-            in the morning. You stop checking the forecast. After a while, you stop checking the calendar.
+            After a while, you stop checking the calendar.
         </div>
     </div>
     <p class="panel-detail">In November the wind drops at four in the afternoon. That is the best hour to sit by the water.</p>
@@ -923,27 +895,6 @@
 <div class="image-panel" style="background-image:url('img/11_third_panel_bedroom_art.jpg')">
     <p class="image-caption">An interior courtyard with a single olive tree. A quiet place between the rooms.</p>
 </div>
-
-<!-- ════════════════════════════════════════════════════ -->
-<!-- PANEL 03b — Why I am called Arizona                   -->
-<!-- ════════════════════════════════════════════════════ -->
-<section class="panel">
-    <div class="panel-content">
-        <div class="panel-line panel-line--left">
-            I was named for a desert I do not sit in. The architect who drew me had Arizona in mind &mdash; the long
-            horizontal lines, the way a house in that landscape refuses to compete with the land it sits on, the
-            palette of stone and sand and first light. Low buildings. Warm materials. Rooms that open rather than
-            enclose.
-        </div>
-        <div class="panel-line panel-line--right">
-            The Canary Islands are not a desert, but South Tenerife behaves like one for most of the year. The
-            foothills behind me are volcanic. The light in July is the same light you find in Sedona at the same
-            hour. The Sahara Noir marble in my kitchen came from the other side of an ocean that is, from here, the
-            same ocean that washes against Africa. The palette was waiting for me before I was drawn.
-        </div>
-    </div>
-    <p class="panel-detail">A desert house on a volcanic island, built for someone who understood that the two landscapes were closer than they looked.</p>
-</section>
 
 <!-- ══════════════════════════════════════════════════════ -->
 <!-- MID-PAGE SCATTERED HEADLINE — What inspired her        -->
@@ -960,38 +911,26 @@
     <p class="image-caption">The palette I was drawn from. Long horizontals, warm stone, a house that refuses to compete with the land it sits on.</p>
 </div>
 
-<!-- ── IMAGE: ARIZONA 2 ── -->
-<div class="image-panel" style="background-image:url('img/arizona_2.jpg')">
-    <p class="image-caption">The light in July is the same light you find in Sedona at the same hour.</p>
-</div>
-
-<!-- ── IMAGE: ARIZONA 3 ── -->
-<div class="image-panel" style="background-image:url('img/arizona_3.jpg')">
-    <p class="image-caption">Stone and sand and first light. The palette was waiting for me before I was drawn.</p>
-</div>
-
 <!-- ════════════════════════════════════════════════════ -->
-<!-- PANEL 04 — The interior                               -->
+<!-- PANEL 04 — Why I am called Arizona (moved here)       -->
 <!-- ════════════════════════════════════════════════════ -->
 <section class="panel">
     <div class="panel-content">
         <div class="panel-line panel-line--left">
-            Inside, the boundary between me and the garden is a choice you make in the morning. Floor-to-ceiling
-            glazing slides open from the principal living room onto the pool terrace. When it does, the dining
-            table, the kitchen island, and the garden become one long continuous room.
+            Nothing about me is accidental.
+            <br><br>
+            The architect drew me with Arizona in mind. The light here in July is the same light you find in
+            Sedona at the same hour.
         </div>
         <div class="panel-line panel-line--right">
-            Older villas here treat indoor and outdoor as separate decisions &mdash; one for sitting, one for
-            visiting. I was built differently. The rooms exist for sleeping. Everything else happens in a single
-            horizontal flow toward the pool. You do not host a lunch and then move it outside. You set the table,
-            and the house rearranges itself around you.
+            The palette was waiting.
         </div>
     </div>
-    <p class="panel-detail">The principal living room glazing weighs over four hundred kilograms per panel. It moves on a fingertip.</p>
+    <p class="panel-detail">A desert house on a volcanic island, built for someone who understood that the two landscapes were closer than they looked.</p>
 </section>
 
-<!-- ── IMAGE: LIVING ROOM ── -->
-<div class="image-panel" style="background-image:url('img/06_master_circle_mirror.jpg')">
+<!-- ── IMAGE: PANEL 1 — dining room with chandelier ── -->
+<div class="image-panel" style="background-image:url('img/panel_1.jpg')">
     <p class="image-caption">The principal living room opens completely to the garden. The sofa was placed for the view, not the television.</p>
 </div>
 
@@ -1001,59 +940,20 @@
 <section class="panel">
     <div class="panel-content">
         <div class="panel-line panel-line--left">
-            The kitchen is the kind of room that shapes how a household actually lives. Mine is built around a single
-            slab of dark Sahara Noir marble &mdash; a material that does not need to compete with anything else in
-            the room because nothing else in the room is trying to compete with it.
+            These are the meals people remember.
+            <br><br>
+            A long table for eight. A single slab of dark Sahara Noir marble. The doors open to the palms.
         </div>
         <div class="panel-line panel-line--right">
-            Dinner here is a long table for eight. A designer chandelier overhead. The doors open. A grandchild at
-            one end, slightly too old now to sit still, slightly too young to be anywhere else. A bottle of Tenerife
-            List&aacute;n Blanco, cold and local. The palms outside catching the last of the daylight. Someone says
-            something that makes the whole table laugh. These are the meals people remember. Not the restaurants.
-            Not the anniversaries at hotels. The ones that happened at home, with the doors open, with everyone in
-            the same room for once.
+            Not the restaurants. The ones at home.
         </div>
     </div>
     <p class="panel-detail">The wines of South Tenerife age in volcanic soil. List&aacute;n Blanco from Vilaflor sells out by July most years.</p>
 </section>
 
-<!-- ── IMAGE: KITCHEN ── -->
-<div class="image-panel" style="background-image:url('img/04_bedroom_pendants.jpg')">
-    <p class="image-caption">Sahara Noir marble. German appliances. A countertop you will spend the next twenty years cooking on.</p>
-</div>
-
-<!-- ── IMAGE: DINING ── -->
-<div class="image-panel" style="background-image:url('img/03_twin_room_garden.jpg')">
-    <p class="image-caption">The dining chandelier was custom-fitted before the ceiling was finished. Some details only happen if planned years in advance.</p>
-</div>
-
-<!-- ════════════════════════════════════════════════════ -->
-<!-- PANEL 06 — The principal suite                        -->
-<!-- ════════════════════════════════════════════════════ -->
-<section class="panel">
-    <div class="panel-content">
-        <div class="panel-line panel-line--left">
-            The principal bedroom faces the volcanic foothills. A wall of glass. A circular reading chair in pale
-            wool. The bed is positioned so that, in the first hour after waking, the only thing visible is the line
-            of mountain rising into the morning sky.
-        </div>
-        <div class="panel-line panel-line--right">
-            The en-suite is finished in book-matched marble. Twin basins. Double mirrors with backlight warm enough
-            to read by. The kind of room that turns the start and end of every day into something quietly
-            intentional. Most of adult life is spent waking up in a hurry. Here, waking up is the point.
-        </div>
-    </div>
-    <p class="panel-detail">From the bed, the mountain takes up the entire window between sunrise and ten in the morning.</p>
-</section>
-
-<!-- ── IMAGE: MASTER BEDROOM ── -->
-<div class="image-panel" style="background-image:url('img/06_master_circle_mirror.jpg')">
-    <p class="image-caption">The principal bedroom has a single window the size of a wall. The mountain is the only artwork it needs.</p>
-</div>
-
-<!-- ── IMAGE: MASTER BATHROOM ── -->
-<div class="image-panel" style="background-image:url('img/07_bedroom_garden_side.jpg')">
-    <p class="image-caption">Book-matched marble in the principal bathroom. Two basins, two sinks, two mirrors &mdash; built for two people who do not have to take turns.</p>
+<!-- ── IMAGE: PANEL 2 — bedroom with pool view (the user-specified second image) ── -->
+<div class="image-panel" style="background-image:url('img/panel_2.jpg')">
+    <p class="image-caption">A bedroom that opens to the pool. The mirror was placed for the view, not the reflection.</p>
 </div>
 
 <!-- ════════════════════════════════════════════════════ -->
@@ -1062,26 +962,19 @@
 <section class="panel">
     <div class="panel-content">
         <div class="panel-line panel-line--left">
-            I have five en-suite bedrooms, a basement of two hundred square metres, and a separate guest apartment
-            with its own entrance. What this means in practice: when family arrives in July, no one has to share a
-            bathroom. When friends come for the weekend they can stay as long as they want. When the grandchildren
-            bring their friends one day, there is room for that too.
+            Most people build the house they always wanted one size too small.
         </div>
         <div class="panel-line panel-line--right">
-            Most people, when they finally build the house they always wanted, build it one size too small. They
-            optimize for today and forget that the next twenty years will include birthdays, anniversaries,
-            Christmases, unplanned visits, the summer the children come home with someone new, the winter a friend
-            needs somewhere quiet to recover. I was built one size larger on purpose. Six garage spaces below. A
-            walk-in closet you do not need to apologize for. A laundry the size of someone else&rsquo;s second
-            bedroom. Enough room for the life that happens when you stop counting heads.
+            Five en-suite bedrooms. A guest apartment with its own entrance. When a friend needs a quiet place to
+            recover, there is a wing for that too.
         </div>
     </div>
     <p class="panel-detail">The basement is currently empty. It has been wired for a cinema, a gym, or both.</p>
 </section>
 
-<!-- ── IMAGE: ENTRY HALL ── -->
-<div class="image-panel" style="background-image:url('img/10_master_art_chair.jpg')">
-    <p class="image-caption">The entry hall has a glass elevator and a wood-and-iron staircase. A choice of two ways up.</p>
+<!-- ── IMAGE: PANEL 3 — bedroom facing the volcanic foothills ── -->
+<div class="image-panel" style="background-image:url('img/panel_3.jpg')">
+    <p class="image-caption">A bedroom that faces the volcanic foothills. Built to wake up to the line of mountain rising into the morning sky.</p>
 </div>
 
 <!-- ════════════════════════════════════════════════════ -->
@@ -1090,18 +983,21 @@
 <section class="panel">
     <div class="panel-content">
         <div class="panel-line panel-line--left">
-            I come furnished. The architect did not stop at the walls. Every chair, every plate, every linen, every
-            lamp, every artwork was chosen the same way the marble was &mdash; once, by the household who built me,
-            for the household that would actually live here next.
+            Walk in with a suitcase. The bed will be made.
+            <br><br>
+            Every chair, every plate, every lamp was chosen for the household who would live here next.
         </div>
         <div class="panel-line panel-line--right">
-            You will not need to buy a fork. You will not need to wait three months for the sofa. Walk in with a
-            suitcase. The bed will be made. Most villas at this level are sold empty, so the next owner can spend
-            eighteen months arguing with a designer about cushion fabric. I was not.
+            I was not sold empty.
         </div>
     </div>
     <p class="panel-detail">Down to the cutlery in the drawers. Down to the towels in the linen cupboard.</p>
 </section>
+
+<!-- ── IMAGE: PANEL 4 — bedroom opening to the garden ── -->
+<div class="image-panel" style="background-image:url('img/panel_4.jpg')">
+    <p class="image-caption">A bedroom with a door to the garden. The palms outside were planted before the windows were cut.</p>
+</div>
 
 <!-- ════════════════════════════════════════════════════ -->
 <!-- PANEL 08 — The neighbourhood                          -->
@@ -1109,52 +1005,20 @@
 <section class="panel">
     <div class="panel-content">
         <div class="panel-line panel-line--left">
-            La Caleta started life as a fishing village, and parts of it still behave like one. Six wooden boats go
-            out before sunrise. The seafront is a five-minute drive &mdash; octopus restaurants on the rocks,
-            families walking the promenade in the evening, the Atlantic doing what the Atlantic does on islands
-            that face nothing for three thousand kilometres.
+            La Caleta was not invented for the people who will buy me. It existed first.
         </div>
         <div class="panel-line panel-line--right">
-            The rest of the life you might want is on the same radius. Costa Adeje. The Michelin-starred kitchens of
-            La Caleta village. The marina at Puerto Col&oacute;n. The international school, if that matters. The Sky
-            Bar at Royal Hideaway, if you forget to plan dinner. The airport is twenty-five minutes back the way you
-            came. What La Caleta is not: a development. It was not invented for the people who will buy me. It
-            existed first. That is why it still feels like somewhere, rather than anywhere.
+            A fishing village. Six wooden boats out before sunrise. Costa Adeje and the airport on the same short
+            radius.
         </div>
     </div>
     <p class="panel-detail">Three Michelin-starred restaurants are within walking distance of my front gate.</p>
 </section>
 
-<!-- ── IMAGE: TERRACE ── -->
-<div class="image-panel" style="background-image:url('img/08_bedroom_terrace_view.jpg')">
-    <p class="image-caption">An afternoon in shade. The villa wraps around the pool on three sides. Privacy without walls.</p>
+<!-- ── IMAGE: LA CALETA WIDE COVE (Wikimedia Commons) ── -->
+<div class="image-panel" style="background-image:url('img/la_caleta.jpg')">
+    <p class="image-caption">The cove at La Caleta. Fishing boats heading out at first light. The Atlantic doing what the Atlantic does on islands that face nothing for three thousand kilometres.</p>
 </div>
-
-<!-- ── IMAGE: OUTDOOR DINING ── -->
-<div class="image-panel" style="background-image:url('img/02_master_suite.jpg')">
-    <p class="image-caption">An outdoor dining table backed by banana plants. Everyone&rsquo;s favourite room is the one without a roof.</p>
-</div>
-
-<!-- ════════════════════════════════════════════════════ -->
-<!-- PANEL 09 — The closing                                -->
-<!-- ════════════════════════════════════════════════════ -->
-<section class="panel">
-    <div class="panel-content">
-        <div class="panel-line panel-line--left">
-            I am not a holiday rental, and I have no interest in becoming one. I was built for a single household
-            who wanted a real home in a country where the weather lets you live the way you have always wanted to
-            live &mdash; and who decided that South Tenerife was the right country to do it in.
-        </div>
-        <div class="panel-line panel-line--right">
-            I have been here for some time. Not because no one has looked. Because the right house and the right
-            household recognize each other, and that recognition cannot be hurried. If the photographs on this page
-            have begun to feel less like an interesting abstraction and more like a possibility &mdash; come and
-            walk through me. The right villa is always obvious within five minutes of the first viewing. If I am
-            yours, you will know before you reach the kitchen.
-        </div>
-    </div>
-    <p class="panel-detail">I have been waiting.</p>
-</section>
 
 <!-- ── CURSIVE SIGNATURE ── -->
 <section class="panel" style="min-height: 50vh">
@@ -1166,10 +1030,10 @@
 <!-- ════════════════════════════════════════════════════ -->
 <section class="specs-panel" id="facts">
     <p class="specs-eyebrow">Facts</p>
-    <h2 class="specs-headline">A modern villa in <em>Barranco del Ingl&eacute;s</em>, La Caleta &mdash; completed June 2023, ready to live in.</h2>
+    <h2 class="specs-headline">A modern villa on <em>Avenida de la Macaronesia</em> &mdash; completed June 2023, ready to live in.</h2>
     <dl class="specs-grid">
         <div class="spec"><div class="spec-label">Bedrooms</div><div class="spec-value">5 en-suite</div></div>
-        <div class="spec"><div class="spec-label">Built</div><div class="spec-value">600 m&sup2;</div></div>
+        <div class="spec"><div class="spec-label">Built</div><div class="spec-value">550 m&sup2;</div></div>
         <div class="spec"><div class="spec-label">Plot</div><div class="spec-value">2,500 m&sup2;</div></div>
         <div class="spec"><div class="spec-label">Garage</div><div class="spec-value">6 cars</div></div>
         <div class="spec"><div class="spec-label">Pool</div><div class="spec-value">Private</div></div>
@@ -1194,7 +1058,7 @@
     <p class="footer-signature">Stazio</p>
     <img class="footer-logo" src="tri_logo.png" alt="Tenerife Resort Invest">
     <p class="footer-meta">
-        TRI-261125-01 &middot; Villa Arizona &middot; Barranco del Ingl&eacute;s, La Caleta, Adeje<br>
+        TRI-261125-01 &middot; Villa Arizona &middot; Avenida de la Macaronesia, La Caleta, Adeje<br>
         Av. de la Macaronesia, 9, Costa la Caleta, Adeje, 38679<br>
         <a href="mailto:info@teneriferesortinvest.es">info@teneriferesortinvest.es</a> &middot; <a href="https://teneriferesortinvest.es">teneriferesortinvest.es</a>
     </p>
