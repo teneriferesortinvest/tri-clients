@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>Villa Arizona — Tenerife Resort Invest</title>
+    <meta name="description" content="A modern villa in Barranco del Inglés, La Caleta. Five en-suite bedrooms, infinity pool, ocean and mountain views. €6,150,000.">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&family=Caveat:wght@400&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --paper: #f5f1e8;
+            --paper-deeper: #efe9dc;
+            --ink: #1a1a16;
+            --ink-soft: #44423c;
+            --ink-quiet: #8a8678;
+            --rule: #d8d2c2;
+            --black: #0a0a08;
+            --accent: #6b5d3f;
+
+            --serif: 'EB Garamond', Georgia, serif;
+            --display: 'Fraunces', 'EB Garamond', Georgia, serif;
+            --hero: 'Archivo Black', 'Inter', -apple-system, sans-serif;
+            --sans: 'Inter', -apple-system, system-ui, sans-serif;
+            --script: 'Caveat', cursive;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--serif);
+            background: var(--paper);
+            color: var(--ink);
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+            line-height: 1.6;
+            padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+            -webkit-text-size-adjust: 100%;
+        }
+
+        /* ── TOP BAR (Home of Ambrose style) ── */
+        nav.topbar {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            padding: 24px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            pointer-events: none;
+        }
+        .top-brand {
+            font-family: 'Archivo Black', var(--sans);
+            font-size: 16px;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            color: white;
+            pointer-events: auto;
+            line-height: 1;
+            white-space: nowrap;
+            mix-blend-mode: difference;
+            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+        }
+        .top-brand em {
+            font-family: 'Archivo', 'Inter', sans-serif;
+            font-style: italic;
+            font-weight: 500;
+            font-size: 15px;
+            letter-spacing: 0.3px;
+            text-transform: lowercase;
+            padding: 0 3px;
+            vertical-align: baseline;
+            color: white;
+        }
+        .top-center { pointer-events: auto; }
+        .top-center-btn {
+            display: inline-block;
+            font-family: var(--sans);
+            font-size: 9px;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--ink);
+            border: 1px solid var(--ink);
+            padding: 8px 14px;
+            text-decoration: none;
+            background: var(--paper);
+            transition: all 0.2s;
+        }
+        .top-center-btn:hover { background: var(--ink); color: var(--paper); }
+
+        .top-right {
+            display: flex;
+            gap: 0;
+            pointer-events: auto;
+        }
+        .top-right a {
+            font-family: var(--sans);
+            font-size: 9px;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--paper);
+            background: var(--ink);
+            padding: 8px 12px;
+            text-decoration: none;
+            border-right: 1px solid var(--paper);
+            transition: opacity 0.2s;
+        }
+        .top-right a:last-child { border-right: none; }
+        .top-right a:hover { opacity: 0.8; }
+
+        @media (max-width: 700px) {
+            nav.topbar { padding: 16px; }
+            .top-brand { font-size: 9px; }
+            .top-center-btn { font-size: 8px; padding: 6px 10px; }
+            .top-right a { font-size: 8px; padding: 6px 8px; }
+        }
+
+        /* ── HERO WITH PHOTO BACKGROUND + SCATTERED TYPOGRAPHY (Home of Ambrose) ── */
+        .video-hero {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            min-height: 640px;
+            overflow: hidden;
+            background: var(--ink) url('img/00_hero_exterior_pool.jpg') center/cover no-repeat;
+        }
+        .video-hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.10) 45%, rgba(0,0,0,0.45) 100%);
+            pointer-events: none;
+        }
+
+        /* Scattered words forming a visual poem across the viewport */
+        .hero-words {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+        }
+
+        /* Mid-page scattered headline — same font as hero, on cream paper */
+        .inspiration {
+            position: relative;
+            min-height: 80vh;
+            background: var(--paper);
+            overflow: hidden;
+            padding: 0;
+        }
+        .inspiration-eyebrow {
+            position: absolute;
+            top: 48px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: var(--sans);
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--ink-quiet);
+        }
+        .inspiration-word {
+            position: absolute;
+            font-family: var(--hero);
+            font-weight: 400;
+            font-style: normal;
+            color: var(--ink);
+            font-size: clamp(64px, 13vw, 200px);
+            line-height: 0.88;
+            letter-spacing: -0.035em;
+            white-space: nowrap;
+        }
+        .inspiration-word em {
+            font-family: 'Archivo', 'Inter', sans-serif;
+            font-style: italic;
+            font-weight: 500;
+        }
+        .inspiration-word--1 { top: 18%;  left: 6%; }
+        .inspiration-word--2 { top: 40%;  right: 7%; }
+        .inspiration-word--3 { bottom: 12%; left: 20%; }
+        @media (max-width: 768px) {
+            .inspiration { min-height: 70vh; }
+            .inspiration-word { font-size: clamp(52px, 16vw, 96px); }
+            .inspiration-word--1 { top: 16%; left: 5%; }
+            .inspiration-word--2 { top: 38%; right: 5%; }
+            .inspiration-word--3 { bottom: 14%; left: 8%; }
+        }
+        .hero-word {
+            position: absolute;
+            font-family: var(--hero);
+            font-weight: 400;  /* Archivo Black is inherently 900-weight */
+            font-style: normal;
+            color: white;
+            font-size: clamp(64px, 13vw, 200px);
+            line-height: 0.88;
+            letter-spacing: -0.035em;
+            text-shadow: 0 2px 24px rgba(0, 0, 0, 0.35);
+            white-space: nowrap;
+        }
+        .hero-word em {
+            font-family: 'Archivo', 'Inter', sans-serif;
+            font-style: italic;
+            font-weight: 500;
+        }
+
+        /* Position each word as a separate typographic element */
+        .hero-word--1 { top: 8%;  left: 4%; }                          /* "You've" */
+        .hero-word--2 { top: 10%; right: 5%; }                         /* "been" */
+        .hero-word--3 { top: 36%; left: 16%; }                         /* "arriving" */
+        .hero-word--4 { top: 44%; right: 8%; }                         /* "here" */
+        .hero-word--5 { bottom: 24%; left: 8%; }                       /* "your whole" */
+        .hero-word--6 { bottom: 8%;  right: 10%; }                     /* "life." */
+
+        /* Bottom corners: location left, italic body right */
+        .hero-corner {
+            position: absolute;
+            font-family: var(--sans);
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.6;
+            z-index: 3;
+            text-shadow: 0 1px 8px rgba(0, 0, 0, 0.4);
+        }
+        .hero-corner--bottom-left {
+            bottom: 32px;
+            left: 32px;
+        }
+        .hero-corner--bottom-right {
+            bottom: 32px;
+            right: 32px;
+            max-width: 340px;
+            font-family: var(--serif);
+            font-style: italic;
+            font-size: 14px;
+            font-weight: 400;
+            text-transform: none;
+            letter-spacing: 0.1px;
+            color: rgba(255, 255, 255, 0.92);
+            text-align: right;
+        }
+        .hero-scroll {
+            position: absolute;
+            bottom: 32px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: var(--sans);
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.7);
+            z-index: 3;
+        }
+
+        @media (max-width: 900px) {
+            .video-hero { height: 92vh; min-height: 580px; }
+            .hero-word { font-size: clamp(48px, 16vw, 110px); }
+            .hero-word--1 { top: 10%; left: 5%; }
+            .hero-word--2 { top: 22%; right: 5%; }
+            .hero-word--3 { top: 36%; left: 8%; }
+            .hero-word--4 { top: 50%; right: 10%; }
+            .hero-word--5 { bottom: 28%; left: 5%; }
+            .hero-word--6 { bottom: 14%; right: 10%; }
+            .hero-corner--bottom-left,
+            .hero-corner--bottom-right { display: none; }
+            .hero-scroll { bottom: 16px; }
+        }
+
+        @media (max-width: 500px) {
+            .hero-word { font-size: clamp(42px, 17vw, 78px); }
+        }
+
+        /* ── PANEL (text storytelling) ── */
+        .panel {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 120px 24px 80px;
+            position: relative;
+        }
+        .panel-content {
+            max-width: 1100px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+        }
+        .panel-content--centered {
+            grid-template-columns: 1fr;
+            text-align: center;
+            max-width: 720px;
+        }
+        .panel-line {
+            font-family: var(--serif);
+            font-weight: 400;
+            font-size: 19px;
+            line-height: 1.7;
+            color: var(--ink);
+            letter-spacing: 0.1px;
+        }
+        .panel-line--right {
+            text-align: right;
+            justify-self: end;
+            max-width: 460px;
+        }
+        .panel-line--left { max-width: 460px; }
+
+        /* The opening salutation panel — same Archivo Black as hero */
+        .panel-salutation {
+            font-family: var(--hero);
+            font-weight: 400;
+            font-style: normal;
+            font-size: clamp(36px, 5.5vw, 76px);
+            line-height: 0.95;
+            letter-spacing: -0.035em;
+        }
+        .panel-salutation em {
+            font-family: 'Archivo', 'Inter', sans-serif;
+            font-style: italic;
+            font-weight: 500;
+        }
+
+        .panel-script {
+            font-family: var(--script);
+            font-size: 84px;
+            font-weight: 400;
+            color: var(--ink);
+            text-align: center;
+            line-height: 1;
+        }
+
+        @media (max-width: 700px) {
+            .panel { padding: 100px 20px 60px; min-height: 90vh; }
+            .panel-content { grid-template-columns: 1fr; gap: 32px; text-align: center; }
+            .panel-line--right, .panel-line--left { max-width: 100%; text-align: center; justify-self: center; }
+            .panel-script { font-size: 42px; }
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 36px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: var(--sans);
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--ink-quiet);
+        }
+
+        .panel-detail {
+            position: absolute;
+            bottom: 36px;
+            right: 36px;
+            font-family: var(--serif);
+            font-style: italic;
+            font-weight: 400;
+            font-size: 14px;
+            color: var(--ink-quiet);
+            max-width: 280px;
+            text-align: right;
+            line-height: 1.55;
+        }
+        .panel-detail::before { content: '— '; }
+
+        @media (max-width: 700px) {
+            .panel-detail { right: 16px; bottom: 56px; max-width: 220px; font-size: 12px; }
+            .scroll-indicator { bottom: 16px; }
+        }
+
+        /* ── FULL-BLEED IMAGE PANEL ── */
+        .image-panel {
+            width: 100%;
+            height: 90vh;
+            min-height: 540px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        .image-caption {
+            position: absolute;
+            bottom: 40px;
+            right: 40px;
+            font-family: var(--serif);
+            font-style: italic;
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.95);
+            text-align: right;
+            max-width: 360px;
+            line-height: 1.5;
+            text-shadow: 0 2px 16px rgba(0,0,0,0.6);
+        }
+        .image-caption::before { content: '— '; }
+
+        @media (max-width: 700px) {
+            .image-panel { height: 70vh; min-height: 440px; }
+            .image-caption { right: 20px; bottom: 20px; font-size: 13px; max-width: 260px; }
+        }
+
+        /* ── VIDEO TOUR SECTION ── */
+        .video-section {
+            padding: 100px 24px;
+            background: var(--paper-deeper);
+            border-top: 1px solid var(--rule);
+            border-bottom: 1px solid var(--rule);
+            text-align: center;
+        }
+        .video-eyebrow {
+            font-family: var(--sans);
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--ink-quiet);
+            margin-bottom: 24px;
+        }
+        .video-headline {
+            font-family: var(--display);
+            font-style: italic;
+            font-weight: 300;
+            font-size: clamp(36px, 5vw, 64px);
+            line-height: 1.1;
+            letter-spacing: -0.015em;
+            color: var(--ink);
+            max-width: 820px;
+            margin: 0 auto 48px;
+            font-variation-settings: "opsz" 144;
+        }
+        .video-wrapper {
+            max-width: 1100px;
+            margin: 0 auto;
+            aspect-ratio: 16 / 9;
+            background: var(--ink);
+            position: relative;
+            overflow: hidden;
+        }
+        .video-wrapper video {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+        }
+        .video-note {
+            font-family: var(--serif);
+            font-style: italic;
+            font-size: 12px;
+            color: var(--ink-quiet);
+            margin-top: 20px;
+            max-width: 580px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @media (max-width: 700px) {
+            .video-section { padding: 64px 16px; }
+        }
+
+        /* ── SPECS PANEL ── */
+        .specs-panel {
+            padding: 120px 24px;
+            text-align: center;
+        }
+        .specs-eyebrow {
+            font-family: var(--sans);
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--ink-quiet);
+            margin-bottom: 24px;
+        }
+        .specs-headline {
+            font-family: var(--hero);
+            font-weight: 400;
+            font-style: normal;
+            font-size: clamp(34px, 5vw, 64px);
+            line-height: 1.05;
+            letter-spacing: -0.03em;
+            color: var(--ink);
+            max-width: 900px;
+            margin: 0 auto 64px;
+        }
+        .specs-headline em {
+            font-family: 'Archivo', 'Inter', sans-serif;
+            font-style: italic;
+            font-weight: 500;
+        }
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 32px;
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 36px 0;
+            border-top: 1px solid var(--rule);
+            border-bottom: 1px solid var(--rule);
+        }
+        .spec { text-align: center; }
+        .spec-label {
+            font-family: var(--sans);
+            font-size: 9px;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--ink-quiet);
+            margin-bottom: 8px;
+        }
+        .spec-value {
+            font-family: var(--serif);
+            font-size: 22px;
+            font-weight: 400;
+            color: var(--ink);
+        }
+
+        @media (max-width: 700px) {
+            .specs-panel { padding: 80px 20px; }
+            .specs-grid { grid-template-columns: repeat(2, 1fr); gap: 28px; padding: 28px 0; }
+            .spec-value { font-size: 18px; }
+        }
+
+        /* ── CTA ── */
+        .cta-panel {
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 120px 24px;
+            background: var(--paper-deeper);
+            border-top: 1px solid var(--rule);
+        }
+        .cta-eyebrow {
+            font-family: var(--sans);
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--ink-quiet);
+            margin-bottom: 32px;
+        }
+        .cta-quote {
+            font-family: var(--hero);
+            font-weight: 400;
+            font-style: normal;
+            font-size: clamp(36px, 5.5vw, 76px);
+            line-height: 1.0;
+            letter-spacing: -0.035em;
+            color: var(--ink);
+            max-width: 960px;
+            margin: 0 auto 56px;
+        }
+        .cta-quote em {
+            font-family: 'Archivo', 'Inter', sans-serif;
+            font-style: italic;
+            font-weight: 500;
+        }
+        .cta-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .btn-line {
+            display: inline-block;
+            font-family: var(--sans);
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 14px 24px;
+            text-decoration: none;
+            border: 1px solid var(--ink);
+            color: var(--ink);
+            background: transparent;
+            transition: all 0.2s;
+        }
+        .btn-line:hover { background: var(--ink); color: var(--paper); }
+        .btn-line--filled {
+            background: var(--ink);
+            color: var(--paper);
+        }
+        .btn-line--filled:hover { background: var(--accent); border-color: var(--accent); }
+
+        /* ── FOOTER ── */
+        footer {
+            text-align: center;
+            padding: 120px 24px 80px;
+            border-top: 1px solid var(--rule);
+        }
+        .stazio-portrait {
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 40px;
+            display: block;
+            box-shadow: 0 16px 50px rgba(26, 26, 22, 0.20);
+            border: 8px solid var(--paper);
+        }
+        @media (max-width: 700px) {
+            .stazio-portrait { width: 220px; height: 220px; border-width: 6px; }
+        }
+        .stazio-caption {
+            font-family: var(--sans);
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 1.8px;
+            text-transform: uppercase;
+            color: var(--ink-quiet);
+            margin-bottom: 32px;
+        }
+        .footer-quote {
+            font-family: var(--hero);
+            font-weight: 400;
+            font-style: normal;
+            font-size: clamp(26px, 3.8vw, 44px);
+            line-height: 1.1;
+            letter-spacing: -0.025em;
+            color: var(--ink);
+            max-width: 820px;
+            margin: 0 auto 40px;
+        }
+        .footer-quote em {
+            font-family: 'Archivo', 'Inter', sans-serif;
+            font-style: italic;
+            font-weight: 500;
+        }
+        .footer-signature {
+            font-family: var(--script);
+            font-size: 38px;
+            color: var(--ink);
+            margin-bottom: 40px;
+            line-height: 1;
+        }
+        .footer-logo {
+            height: 24px;
+            margin-bottom: 24px;
+            opacity: 0.5;
+        }
+        .footer-meta {
+            font-family: var(--sans);
+            font-size: 10px;
+            color: var(--ink-quiet);
+            line-height: 1.8;
+        }
+        .footer-meta a { color: var(--ink-soft); text-decoration: none; }
+
+        @media (max-width: 700px) {
+            footer { padding: 64px 20px 48px; }
+            .footer-quote { font-size: 16px; }
+            .footer-signature { font-size: 32px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            * { transition: none !important; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ── FIXED TOP BAR (Home of Ambrose layout) ── -->
+<nav class="topbar">
+    <div class="top-brand">HOME <em>of</em> VILLA ARIZONA</div>
+    <div class="top-center">
+        <a href="#about" class="top-center-btn">About the Villa</a>
+    </div>
+    <div class="top-right">
+        <a href="https://wa.me/34659003377?text=Hola%2C%20me%20interesa%20Villa%20Arizona%20(TRI-261125-01)" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="#facts">Facts</a>
+    </div>
+</nav>
+
+<!-- ════════════════════════════════════════════════════ -->
+<!-- HERO — PHOTO BACKGROUND + SCATTERED POEM             -->
+<!-- ════════════════════════════════════════════════════ -->
+<section class="video-hero">
+    <!-- Scattered typography: "You've been arriving here your whole life." -->
+    <div class="hero-words">
+        <h1 class="hero-word hero-word--1">You&rsquo;ve</h1>
+        <h1 class="hero-word hero-word--2">been</h1>
+        <h1 class="hero-word hero-word--3">arriving</h1>
+        <h1 class="hero-word hero-word--4">here</h1>
+        <h1 class="hero-word hero-word--5">your whole</h1>
+        <h1 class="hero-word hero-word--6"><em>life.</em></h1>
+    </div>
+    <p class="hero-scroll">Keep scrolling &darr;</p>
+</section>
+
+<!-- ════════════════════════════════════════════════════ -->
+<!-- PANEL 01 — Salutation                                -->
+<!-- ════════════════════════════════════════════════════ -->
+<section class="panel" id="about">
+    <div class="panel-content">
+        <div class="panel-line panel-line--left panel-salutation">Dear guest,</div>
+        <div class="panel-line panel-line--right panel-salutation"><em>I am</em> Villa Arizona.</div>
+    </div>
+    <p class="panel-detail">Twenty-five minutes from the airport. Five en-suite bedrooms. The Atlantic at the bottom of the road.</p>
+    <p class="scroll-indicator">Keep scrolling &darr;</p>
+</section>
+
+<!-- ════════════════════════════════════════════════════ -->
+<!-- PANEL 02 — The arrival                                -->
+<!-- ════════════════════════════════════════════════════ -->
+<section class="panel">
+    <div class="panel-content">
+        <div class="panel-line panel-line--left">
+            The drive from Tenerife South takes twenty-five minutes. The motorway curls past the southern coastline,
+            descends toward Adeje, and turns inland through Barranco del Inglés &mdash; a hillside enclave where the
+            houses sit far apart and the road quiets long before you reach the gate.
+        </div>
+        <div class="panel-line panel-line--right">
+            By the time you arrive, the airport feels like another country. The wind drops. The light changes. You
+            have entered the part of South Tenerife that the rest of South Tenerife does not see.
+        </div>
+    </div>
+    <p class="panel-detail">Barranco del Inglés is named for an Englishman who chose this hillside in the 1970s.</p>
+</section>
+
+<!-- ── IMAGE: POOL HERO ── -->
+<div class="image-panel" style="background-image:url('img/09_second_image_master_pool.jpg')">
+    <p class="image-caption">The pool runs the length of the south-facing garden. The mountains do most of the talking.</p>
+</div>
+
+<!-- ════════════════════════════════════════════════════ -->
+<!-- PANEL 03 — Mornings                                   -->
+<!-- ════════════════════════════════════════════════════ -->
+<section class="panel">
+    <div class="panel-content">
+        <div class="panel-line panel-line--left">
+            Mornings here have a particular quality. The first light reaches the volcanic foothills behind me and
+            works its way slowly down toward the sea. The pool stays still. The palms are silent. There is a hand
+            of coffee somewhere in the house, and nowhere in particular to be.
+        </div>
+        <div class="panel-line panel-line--right">
+            South Tenerife averages three hundred and twenty days of sun a year. That number means less than it
+            sounds until you have lived somewhere where February is something you survive. Here, February is a
+            month like any other. You step outside without thinking. The stone underfoot has been warm since seven
+            in the morning. You stop checking the forecast. After a while, you stop checking the calendar.
+        </div>
+    </div>
+    <p class="panel-detail">In November the wind drops at four in the afternoon. That is the best hour to sit by the water.</p>
+</section>
+
+<!-- ── IMAGE: COURTYARD ── -->
+<div class="image-panel" style="background-image:url('img/11_third_panel_bedroom_art.jpg')">
+    <p class="image-caption">An interior courtyard with a single olive tree. A quiet place between the rooms.</p>
+</div>
+
+<!-- ════════════════════════════════════════════════════ -->
+<!-- PANEL 03b — Why I am called Arizona                   -->
+<!-- ════════════════════════════════════════════════════ -->
+<section class="panel">
+    <div class="panel-content">
+        <div class="panel-line panel-line--left">
+            I was named for a desert I do not sit in. The architect who drew me had Arizona in mind &mdash; the long
+            horizontal lines, the way a house in that landscape refuses to compete with the land it sits on, the
+            palette of stone and sand and first light. Low buildings. Warm materials. Rooms that open rather than
+            enclose.
+        </div>
+        <div class="panel-line panel-line--right">
+            The Canary Islands are not a desert, but South Tenerife behaves like one for most of the year. The
+            foothills behind me are volcanic. The light in July is the same light you find in Sedona at the same
+            hour. The Sahara Noir marble in my kitchen came from the other side of an ocean that is, from here, the
+            same ocean that washes against Africa. The palette was waiting for me before I was drawn.
+        </div>
+    </div>
+    <p class="panel-detail">A desert house on a volcanic island, built for someone who understood that the two landscapes were closer than they looked.</p>
+</section>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- MID-PAGE SCATTERED HEADLINE — What inspired her        -->
+<!-- ══════════════════════════════════════════════════════ -->
+<section class="inspiration">
+    <p class="inspiration-eyebrow">What inspired her</p>
+    <h2 class="inspiration-word inspiration-word--1">What</h2>
+    <h2 class="inspiration-word inspiration-word--2">inspired</h2>
+    <h2 class="inspiration-word inspiration-word--3"><em>her.</em></h2>
+</section>
+
+<!-- ── IMAGE: ARIZONA 1 ── -->
+<div class="image-panel" style="background-image:url('img/arizona_1.jpg')">
+    <p class="image-caption">The palette I was drawn from. Long horizontals, warm stone, a house that refuses to compete with the land it sits on.</p>
+</div>
+
+<!-- ── IMAGE: ARIZONA 2 ── -->
+<div class="image-panel" style="background-image:url('img/arizona_2.jpg')">
+    <p class="image-caption">The light in July is the same light you find in Sedona at the same hour.</p>
+</div>
+
+<!-- ── IMAGE: ARIZONA 3 ── -->
+<div class="image-panel" style="background-image:url('img/arizona_3.jpg')">
+    <p class="image-caption">Stone and sand and first light. The palette was waiting for me before I was drawn.</p>
+</div>
+
+<!-- ════════════════════════════════════════════════════ -->
+<!-- PANEL 04 — The interior                               -->
+<!-- ════════════════════════════════════════════════════ -->
+<section class="panel">
+    <div class="panel-content">
+        <div class="panel-line panel-line--left">
+            Inside, the boundary between me and the garden is a choice you make in the morning. Floor-to-ceiling
+            glazing slides open from the principal living room onto the pool terrace. When it does, the dining
+            table, the kitchen island, and the garden become one long continuous room.
+        </div>
+        <div class="panel-line panel-line--right">
+            Older villas here treat indoor and outdoor as separate decisions &mdash; one for sitting, one for
+            visiting. I was built differently. The rooms exist for sleeping. Everything else happens in a single
+            horizontal flow toward the pool. You do not host a lunch and then move it outside. You set the table,
+            and the house rearranges itself around you.
+        </div>
+    </div>
+    <p class="panel-detail">The principal living room glazing weighs over four hundred kilograms per panel. It moves on a fingertip.</p>
+</section>
+
+<!-- ── IMAGE: LIVING ROOM ── -->
+<div class="image-panel" style="background-image:url('img/06_master_circle_mirror.jpg')">
+    <p class="image-caption">The principal living room opens completely to the garden. The sofa was placed for the view, not the television.</p>
+</div>
+
+<!-- ════════════════════════════════════════════════════ -->
+<!-- PANEL 05 — The kitchen and dining                     -->
+<!-- ════════════════════════════════════════════════════ -->
+<section class="panel">
+    <div class="panel-content">
+        <div class="panel-line panel-line--left">
+            The kitchen is the kind of room that shapes how a household actually lives. Mine is built around a single
+            slab of dark Sahara Noir marble &mdash; a material that does not need to compete with anything else in
+            the room because nothing else in the room is trying to compete with it.
+        </div>
+        <div class="panel-line panel-line--right">
+            Dinner here is a long table for eight. A designer chandelier overhead. The doors open. A grandchild at
+            one end, slightly too old now to sit still, slightly too young to be anywhere else. A bottle of Tenerife
+            List&aacute;n Blanco, cold and local. The palms outside catching the last of the daylight. Someone says
+            something that makes the whole table laugh. These are the meals people remember. Not the restaurants.
+            Not the anniversaries at hotels. The ones that happened at home, with the doors open, with everyone in
+            the same room for once.
+        </div>
+    </div>
+    <p class="panel-detail">The wines of South Tenerife age in volcanic soil. List&aacute;n Blanco from Vilaflor sells out by July most years.</p>
+</section>
+
+<!-- ── IMAGE: KITCHEN ── -->
+<div class="image-panel" style="background-image:url('img/04_bedroom_pendants.jpg')">
+    <p class="image-caption">Sahara Noir marble. German appliances. A countertop you will spend the next twenty years cooking on.</p>
+</div>
+
+<!-- ── IMAGE: DINING ── -->
+<div class="image-panel" style="background-image:url('img/03_twin_room_garden.jpg')">
+    <p class="image-caption">The dining chandelier was custom-fitted before the ceiling was finished. Some details only happen if planned years in advance.</p>
+</div>
+
+<!-- ════════════════════════════════════════════════════ -->
+<!-- PANEL 06 — The principal suite                        -->
+<!-- ════════════════════════════════════════════════════ -->
+<section class="panel">
+    <div class="panel-content">
+        <div class="panel-line panel-line--left">
+            The principal bedroom faces the volcanic foothills. A wall of glass. A circular reading chair in pale
+            wool. The bed is positioned so that, in the first hour after waking, the only thing visible is the line
+            of mountain rising into the morning sky.
+        </div>
+        <div class="panel-line panel-line--right">
+            The en-suite is finished in book-matched marble. Twin basins. Double mirrors with backlight warm enough
+            to read by. The kind of room that turns the start and end of every day into something quietly
+            intentional. Most of adult life is spent waking up in a hurry. Here, waking up is the point.
+        </div>
+    </div>
+    <p class="panel-detail">From the bed, the mountain takes up the entire window between sunrise and ten in the morning.</p>
+</section>
+
+<!-- ── IMAGE: MASTER BEDROOM ── -->
+<div class="image-panel" style="background-image:url('img/06_master_circle_mirror.jpg')">
+    <p class="image-caption">The principal bedroom has a single window the size of a wall. The mountain is the only artwork it needs.</p>
+</div>
+
+<!-- ── IMAGE: MASTER BATHROOM ── -->
+<div class="image-panel" style="background-image:url('img/07_bedroom_garden_side.jpg')">
+    <p class="image-caption">Book-matched marble in the principal bathroom. Two basins, two sinks, two mirrors &mdash; built for two people who do not have to take turns.</p>
+</div>
+
+<!-- ════════════════════════════════════════════════════ -->
+<!-- PANEL 07 — Scale / Space                              -->
+<!-- ════════════════════════════════════════════════════ -->
+<section class="panel">
+    <div class="panel-content">
+        <div class="panel-line panel-line--left">
+            I have five en-suite bedrooms, a basement of two hundred square metres, and a separate guest apartment
+            with its own entrance. What this means in practice: when family arrives in July, no one has to share a
+            bathroom. When friends come for the weekend they can stay as long as they want. When the grandchildren
+            bring their friends one day, there is room for that too.
+        </div>
+        <div class="panel-line panel-line--right">
+            Most people, when they finally build the house they always wanted, build it one size too small. They
+            optimize for today and forget that the next twenty years will include birthdays, anniversaries,
+            Christmases, unplanned visits, the summer the children come home with someone new, the winter a friend
+            needs somewhere quiet to recover. I was built one size larger on purpose. Six garage spaces below. A
+            walk-in closet you do not need to apologize for. A laundry the size of someone else&rsquo;s second
+            bedroom. Enough room for the life that happens when you stop counting heads.
+        </div>
+    </div>
+    <p class="panel-detail">The basement is currently empty. It has been wired for a cinema, a gym, or both.</p>
+</section>
+
+<!-- ── IMAGE: ENTRY HALL ── -->
+<div class="image-panel" style="background-image:url('img/10_master_art_chair.jpg')">
+    <p class="image-caption">The entry hall has a glass elevator and a wood-and-iron staircase. A choice of two ways up.</p>
+</div>
+
+<!-- ════════════════════════════════════════════════════ -->
+<!-- PANEL 08 — The neighbourhood                          -->
+<!-- ════════════════════════════════════════════════════ -->
+<section class="panel">
+    <div class="panel-content">
+        <div class="panel-line panel-line--left">
+            La Caleta started life as a fishing village, and parts of it still behave like one. Six wooden boats go
+            out before sunrise. The seafront is a five-minute drive &mdash; octopus restaurants on the rocks,
+            families walking the promenade in the evening, the Atlantic doing what the Atlantic does on islands
+            that face nothing for three thousand kilometres.
+        </div>
+        <div class="panel-line panel-line--right">
+            The rest of the life you might want is on the same radius. Costa Adeje. The Michelin-starred kitchens of
+            La Caleta village. The marina at Puerto Col&oacute;n. The international school, if that matters. The Sky
+            Bar at Royal Hideaway, if you forget to plan dinner. The airport is twenty-five minutes back the way you
+            came. What La Caleta is not: a development. It was not invented for the people who will buy me. It
+            existed first. That is why it still feels like somewhere, rather than anywhere.
+        </div>
+    </div>
+    <p class="panel-detail">Three Michelin-starred restaurants are within walking distance of my front gate.</p>
+</section>
+
+<!-- ── IMAGE: TERRACE ── -->
+<div class="image-panel" style="background-image:url('img/08_bedroom_terrace_view.jpg')">
+    <p class="image-caption">An afternoon in shade. The villa wraps around the pool on three sides. Privacy without walls.</p>
+</div>
+
+<!-- ── IMAGE: OUTDOOR DINING ── -->
+<div class="image-panel" style="background-image:url('img/02_master_suite.jpg')">
+    <p class="image-caption">An outdoor dining table backed by banana plants. Everyone&rsquo;s favourite room is the one without a roof.</p>
+</div>
+
+<!-- ════════════════════════════════════════════════════ -->
+<!-- PANEL 09 — The closing                                -->
+<!-- ════════════════════════════════════════════════════ -->
+<section class="panel">
+    <div class="panel-content">
+        <div class="panel-line panel-line--left">
+            I am not a holiday rental, and I have no interest in becoming one. I was built for a single household
+            who wanted a real home in a country where the weather lets you live the way you have always wanted to
+            live &mdash; and who decided that South Tenerife was the right country to do it in.
+        </div>
+        <div class="panel-line panel-line--right">
+            I have been here for some time. Not because no one has looked. Because the right house and the right
+            household recognize each other, and that recognition cannot be hurried. If the photographs on this page
+            have begun to feel less like an interesting abstraction and more like a possibility &mdash; come and
+            walk through me. The right villa is always obvious within five minutes of the first viewing. If I am
+            yours, you will know before you reach the kitchen.
+        </div>
+    </div>
+    <p class="panel-detail">I have been waiting.</p>
+</section>
+
+<!-- ── CURSIVE SIGNATURE ── -->
+<section class="panel" style="min-height: 50vh">
+    <p class="panel-script">Arizona</p>
+    <p class="scroll-indicator">Keep scrolling &darr;</p>
+</section>
+
+<!-- ════════════════════════════════════════════════════ -->
+<!-- SPECS PANEL                                           -->
+<!-- ════════════════════════════════════════════════════ -->
+<section class="specs-panel" id="facts">
+    <p class="specs-eyebrow">Facts</p>
+    <h2 class="specs-headline">A modern villa in <em>Barranco del Ingl&eacute;s</em>, La Caleta &mdash; completed June 2023, ready to live in.</h2>
+    <dl class="specs-grid">
+        <div class="spec"><div class="spec-label">Bedrooms</div><div class="spec-value">5 en-suite</div></div>
+        <div class="spec"><div class="spec-label">Built</div><div class="spec-value">600 m&sup2;</div></div>
+        <div class="spec"><div class="spec-label">Plot</div><div class="spec-value">2,500 m&sup2;</div></div>
+        <div class="spec"><div class="spec-label">Garage</div><div class="spec-value">6 cars</div></div>
+        <div class="spec"><div class="spec-label">Pool</div><div class="spec-value">Private</div></div>
+        <div class="spec"><div class="spec-label">Price</div><div class="spec-value">&euro;6,150,000</div></div>
+    </dl>
+</section>
+
+<!-- ── CTA ── -->
+<section class="cta-panel" id="viewing">
+    <p class="cta-eyebrow">If you are ready</p>
+    <p class="cta-quote">She was built <em>before you knew</em> you needed her.</p>
+    <div class="cta-buttons">
+        <a class="btn-line btn-line--filled" href="https://wa.me/34659003377?text=Hola%2C%20me%20interesa%20Villa%20Arizona%20(TRI-261125-01)">Message on WhatsApp</a>
+    </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+    <img class="stazio-portrait" src="stazio.jpg" alt="Stazio &mdash; Tenerife Resort Invest">
+    <p class="stazio-caption">Stazio &middot; Forty-five years in South Tenerife</p>
+    <p class="footer-quote">&ldquo;Villas like this one are the reason I have stayed on this island for <em>forty-five years</em>.&rdquo;</p>
+    <p class="footer-signature">Stazio</p>
+    <img class="footer-logo" src="tri_logo.png" alt="Tenerife Resort Invest">
+    <p class="footer-meta">
+        TRI-261125-01 &middot; Villa Arizona &middot; Barranco del Ingl&eacute;s, La Caleta, Adeje<br>
+        Av. de la Macaronesia, 9, Costa la Caleta, Adeje, 38679<br>
+        <a href="mailto:info@teneriferesortinvest.es">info@teneriferesortinvest.es</a> &middot; <a href="https://teneriferesortinvest.es">teneriferesortinvest.es</a>
+    </p>
+</footer>
+
+</body>
+</html>
