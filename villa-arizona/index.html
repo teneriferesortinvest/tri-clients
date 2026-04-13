@@ -182,8 +182,10 @@
             .top-brand { font-size: 11px; letter-spacing: 0.3px; }
             .top-brand em { font-size: 11px; }
             .top-center { display: none; }
-            .top-right a { font-size: 10px; padding: 12px 16px; min-height: 44px; display: flex; align-items: center; }
-            .top-right a:not(:last-child) { display: none; }
+            .top-right { gap: 0; }
+            .top-right a { font-size: 10px; padding: 12px 14px; min-height: 44px; display: flex; align-items: center; }
+            /* Mobile: hide the Facts/Datos anchor link to make room for langToggle + WhatsApp */
+            .top-right a[href="#facts"] { display: none; }
         }
 
         /* ── HERO WITH PHOTO BACKGROUND + SCATTERED TYPOGRAPHY (Home of Ambrose) ── */
