@@ -127,7 +127,11 @@
             white-space: nowrap;
             mix-blend-mode: difference;
             text-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+            text-decoration: none;
+            cursor: pointer;
+            transition: opacity 0.2s;
         }
+        .top-brand:hover { opacity: 0.75; }
         .top-brand em {
             font-family: 'Archivo', 'Inter', sans-serif;
             font-style: italic;
@@ -178,14 +182,26 @@
         .top-right a:hover { opacity: 0.8; }
 
         @media (max-width: 700px) {
-            nav.topbar { padding: 14px 16px; }
-            .top-brand { font-size: 11px; letter-spacing: 0.3px; }
-            .top-brand em { font-size: 11px; }
+            nav.topbar { padding: 12px 14px; }
+            .top-brand { font-size: 10px; letter-spacing: 0.2px; }
+            .top-brand em { font-size: 10px; }
             .top-center { display: none; }
             .top-right { gap: 0; }
-            .top-right a { font-size: 10px; padding: 12px 14px; min-height: 44px; display: flex; align-items: center; }
-            /* Mobile: hide the Facts/Datos anchor link to make room for langToggle + WhatsApp */
-            .top-right a[href="#facts"] { display: none; }
+            /* Smaller buttons so langToggle + WhatsApp + Facts/Datos all fit on iPhone */
+            .top-right a {
+                font-size: 9px;
+                padding: 11px 9px;
+                min-height: 40px;
+                display: flex;
+                align-items: center;
+                letter-spacing: 0.8px;
+            }
+        }
+        @media (max-width: 380px) {
+            /* Tightest iPhone SE class — even smaller */
+            .top-right a { font-size: 8px; padding: 11px 7px; letter-spacing: 0.6px; }
+            .top-brand { font-size: 9px; }
+            .top-brand em { font-size: 9px; }
         }
 
         /* ── HERO WITH PHOTO BACKGROUND + SCATTERED TYPOGRAPHY (Home of Ambrose) ── */
@@ -816,7 +832,7 @@
 
 <!-- ── FIXED TOP BAR (Home of Ambrose layout) ── -->
 <nav class="topbar">
-    <div class="top-brand">HOME <em>of</em> VILLA ARIZONA</div>
+    <a href="#hero-top" class="top-brand" aria-label="Back to top">HOME <em>of</em> VILLA ARIZONA</a>
     <div class="top-center">
         <a href="#about" class="top-center-btn">About the Villa</a>
     </div>
@@ -830,7 +846,7 @@
 <!-- ════════════════════════════════════════════════════ -->
 <!-- HERO — PHOTO BACKGROUND + SCATTERED POEM             -->
 <!-- ════════════════════════════════════════════════════ -->
-<section class="video-hero">
+<section class="video-hero" id="hero-top">
     <!-- Stacked typography: bilingual EN / ES -->
     <div class="hero-words">
         <h1 class="hero-line"><span class="lang-en">You built the life.</span><span class="lang-es">Usted construyó la vida.</span></h1>
