@@ -32,27 +32,32 @@ body { font-family: var(--body); background: var(--paper); color: var(--ink); mi
 
 /* Header */
 .header {
-    padding: 28px 24px 20px; text-align: center;
-    border-bottom: 1px solid var(--rule);
+    padding: 40px 24px 28px; text-align: center;
+    background: var(--ink); color: var(--paper);
 }
 .header h1 {
-    font-family: var(--hero); font-size: 13px; letter-spacing: 2px;
-    text-transform: uppercase; margin-bottom: 6px;
+    font-family: var(--hero); font-size: 15px; letter-spacing: 0.5px;
+    text-transform: uppercase; margin-bottom: 8px; font-weight: 400;
+}
+.header h1 em {
+    font-family: var(--serif); font-style: italic; text-transform: lowercase;
+    font-size: 14px; letter-spacing: 0.3px; padding: 0 3px;
 }
 .header .subtitle {
-    font-family: var(--display); font-size: 18px; color: var(--ink-soft);
-    font-weight: 400; font-style: italic;
+    font-family: var(--display); font-size: 20px; color: var(--paper);
+    font-weight: 300; font-style: italic; opacity: 0.85;
 }
 .header .meta {
-    font-size: 10px; color: var(--ink-quiet); margin-top: 8px;
+    font-size: 10px; color: var(--paper); opacity: 0.5; margin-top: 10px;
     letter-spacing: 0.5px;
 }
 
 /* Criteria bar */
 .criteria {
     display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;
-    padding: 14px 24px; background: white;
+    padding: 12px 24px; background: var(--paper-deep);
     border-bottom: 1px solid var(--rule); font-size: 11px;
+    font-family: var(--body);
 }
 .criteria span {
     color: var(--ink-quiet);
@@ -192,7 +197,7 @@ body { font-family: var(--body); background: var(--paper); color: var(--ink); mi
 <body>
 
 <div class="header">
-    <h1>Tenerife Resort Invest</h1>
+    <h1>TENERIFE <em>resort</em> INVEST</h1>
     <div class="subtitle">Propiedades seleccionadas para Mendez</div>
     <div class="meta">Actualizado 2026-04-16 · 6 propiedades · Toca una propiedad para ver detalles</div>
 </div>
@@ -398,7 +403,7 @@ body { font-family: var(--body); background: var(--paper); color: var(--ink); mi
                     <span>El Rincon, Los Cristianos</span>
                 </div>
                 <div class="card-price">€465,000</div>
-                <div class="prop-highlight">Visitado — gustó al abuelo</div>
+                <div class="prop-highlight">Visitado</div>
             </div>
         </div>
         <div class="card-detail" id="card-5" style="display:none">
