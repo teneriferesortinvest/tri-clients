@@ -152,6 +152,73 @@
 
         .prop-cta .btn-whatsapp:hover { filter: brightness(1.05); }
 
+        /* ── Gallery + expand ── */
+        .prop { cursor: pointer; }
+        .prop .prop-cta a { cursor: pointer; }
+
+        .prop-detail {
+            display: none;
+            padding: 0 var(--space-md) var(--space-md);
+            border-top: 1px solid var(--rule);
+        }
+
+        .prop.open .prop-detail { display: block; }
+
+        .prop-desc {
+            font-size: 0.82rem;
+            line-height: 1.55;
+            color: var(--ink-soft);
+            padding: var(--space-md) 0;
+        }
+
+        .prop-chips {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-bottom: var(--space-md);
+        }
+
+        .prop-chips .chip {
+            font-size: 0.66rem;
+            padding: 3px 10px;
+            background: var(--blue-faint);
+            color: var(--blue);
+            border-radius: 4px;
+            letter-spacing: 0.2px;
+            text-transform: capitalize;
+        }
+
+        .prop-gallery {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            padding-bottom: var(--space-sm);
+            margin-bottom: var(--space-md);
+            scroll-snap-type: x mandatory;
+        }
+
+        .prop-gallery img {
+            width: 180px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 6px;
+            flex-shrink: 0;
+            scroll-snap-align: start;
+            background: var(--rule);
+        }
+
+        .prop-hint {
+            font-size: 0.64rem;
+            text-align: center;
+            color: var(--ink-quiet);
+            padding: 4px 0 var(--space-sm);
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+        }
+
+        .prop.open .prop-hint { display: none; }
+
         .prop-photo {
             width: 100%;
             aspect-ratio: 16 / 10;
@@ -279,6 +346,8 @@
         
         .prop:nth-of-type(1) { animation-delay: 0.0s; }
         
+        .prop:nth-of-type(2) { animation-delay: 0.07s; }
+        
 
         @keyframes rise { to { opacity: 1; transform: none; } }
 
@@ -292,7 +361,7 @@
 <header>
     <p class="brand">Tenerife Resort Invest</p>
     <h1 class="greeting">We found these<br>for <em>Javier Calbet</em></h1>
-    <p class="date">17 April 2026 · 1 properties from 1 agencies</p>
+    <p class="date">17 April 2026 · 2 properties from 1 agencies</p>
 </header>
 
 <div class="filters">
@@ -303,13 +372,25 @@
     
     <span class="tag">Adeje</span>
     
+    <span class="tag">Costa Adeje</span>
+    
+    <span class="tag">La Caleta</span>
+    
+    <span class="tag">Los Cristianos</span>
+    
+    <span class="tag">Las Americas</span>
+    
+    <span class="tag">Arona</span>
+    
     <span class="tag">Budget: €350,000</span>
     
 </div>
 
 <main>
     
-    <div class="prop">
+    <div class="prop"
+         id="card-0"
+         onclick="togglePropCard(event, 'card-0')">
 
         
         <div class="prop-photo" style="background-image:url('https://www.castleproperties.es/wp-content/uploads/2025/09/6e575a6f-3e43-47b7-861b-0403991f8d08_alta-libre-aspect-ratio_default_0-525x328.jpg?v=1757759938')">
@@ -328,16 +409,141 @@
                 <span class="prop-price">242.000 €</span>
                 <span class="prop-where">Adeje</span>
             </div>
+        </div>
+
+        <p class="prop-hint">Tap for photos + details ↓</p>
+
+        <div class="prop-detail">
+            
+            <div class="prop-gallery">
+                
+                <img src="https://www.castleproperties.es/wp-content/uploads/2026/04/x-271865627.jpg" alt="Apartment in Adeje" loading="lazy">
+                
+                <img src="https://www.castleproperties.es/wp-content/uploads/2026/03/Veril-del-Duque-20.jpeg" alt="Apartment in Adeje" loading="lazy">
+                
+                <img src="https://www.castleproperties.es/wp-content/uploads/2026/02/WhatsApp-Image-2026-02-08-at-15.10.45-1.jpeg" alt="Apartment in Adeje" loading="lazy">
+                
+                <img src="https://www.castleproperties.es/wp-content/uploads/2025/09/6e575a6f-3e43-47b7-861b-0403991f8d08_alta-libre-aspect-ratio_default_0.jpg" alt="Apartment in Adeje" loading="lazy">
+                
+                <img src="https://www.castleproperties.es/wp-content/uploads/2025/09/Adeje-C.-La-Cruz-11.jpeg" alt="Apartment in Adeje" loading="lazy">
+                
+                <img src="https://www.castleproperties.es/wp-content/uploads/2025/09/Adeje-C.-La-Cruz-1.jpeg" alt="Apartment in Adeje" loading="lazy">
+                
+                <img src="https://www.castleproperties.es/wp-content/uploads/2025/09/Adeje-C.-La-Cruz-2.jpeg" alt="Apartment in Adeje" loading="lazy">
+                
+                <img src="https://www.castleproperties.es/wp-content/uploads/2025/09/Adeje-C.-La-Cruz-3.jpeg" alt="Apartment in Adeje" loading="lazy">
+                
+                <img src="https://www.castleproperties.es/wp-content/uploads/2025/09/Adeje-C.-La-Cruz-6.jpeg" alt="Apartment in Adeje" loading="lazy">
+                
+                <img src="https://www.castleproperties.es/wp-content/uploads/2025/09/Adeje-C.-La-Cruz-7.jpeg" alt="Apartment in Adeje" loading="lazy">
+                
+                <img src="https://www.castleproperties.es/wp-content/uploads/2025/09/Adeje-C.-La-Cruz-8.jpeg" alt="Apartment in Adeje" loading="lazy">
+                
+                <img src="https://www.castleproperties.es/wp-content/uploads/2025/09/Adeje-C.-La-Cruz-10.jpeg" alt="Apartment in Adeje" loading="lazy">
+                
+            </div>
+            
+
+            
+
             
         </div>
 
         <div class="prop-cta">
             <a class="btn-whatsapp"
                href="https://wa.me/34659003377?text=Hola%20Stazio%2C%20me%20interesa%20esta%20propiedad%3A%20Apartment%20in%20Adeje%20%E2%80%94%20242.000%20%E2%82%AC"
-               target="_blank" rel="noopener">Ask TRI about this property</a>
+               target="_blank" rel="noopener"
+               onclick="event.stopPropagation()">Ask TRI about this property</a>
         </div>
     </div>
     
+    <div class="prop"
+         id="card-1"
+         onclick="togglePropCard(event, 'card-1')">
+
+        
+        <div class="prop-photo" style="background-image:url('https://www.castleproperties.es/wp-content/uploads/2025/06/WhatsApp-Image-2025-06-16-at-18.50.43-2-525x328.jpeg?v=1750333027')">
+            <span class="prop-agency">Castle Properties</span>
+        </div>
+        
+
+        <div class="prop-body">
+            <h2 class="prop-name">House in Adeje-Tijoco</h2>
+            <p class="prop-meta">
+                <span>3 bed</span>
+                <span>2 bath</span>
+                <span>70,00 m2</span>
+            </p>
+            <div class="prop-row">
+                <span class="prop-price">270.000 €</span>
+                <span class="prop-where">Adeje-Tijoco</span>
+            </div>
+        </div>
+
+        <p class="prop-hint">Tap for photos + details ↓</p>
+
+        <div class="prop-detail">
+            
+            <div class="prop-gallery">
+                
+                <img src="https://www.castleproperties.es/wp-content/uploads/2026/02/Adeje-Park-.jpg" alt="House in Adeje-Tijoco" loading="lazy">
+                
+                <img src="https://www.castleproperties.es/wp-content/uploads/2025/10/WhatsApp-Image-2025-10-28-at-13.10.58-2.jpeg" alt="House in Adeje-Tijoco" loading="lazy">
+                
+                <img src="https://www.castleproperties.es/wp-content/uploads/2023/03/Pool.jpg" alt="House in Adeje-Tijoco" loading="lazy">
+                
+                <img src="https://www.castleproperties.es/wp-content/uploads/2025/06/WhatsApp-Image-2025-06-16-at-18.50.43-2.jpeg" alt="House in Adeje-Tijoco" loading="lazy">
+                
+                <img src="https://www.castleproperties.es/wp-content/uploads/2025/06/tijoco-alto-ss.jpg" alt="House in Adeje-Tijoco" loading="lazy">
+                
+                <img src="https://www.castleproperties.es/wp-content/uploads/2025/06/WhatsApp-Image-2025-06-16-at-18.50.43-1.jpeg" alt="House in Adeje-Tijoco" loading="lazy">
+                
+                <img src="https://www.castleproperties.es/wp-content/uploads/2025/06/WhatsApp-Image-2025-06-16-at-18.50.43-3.jpeg" alt="House in Adeje-Tijoco" loading="lazy">
+                
+                <img src="https://www.castleproperties.es/wp-content/uploads/2025/06/WhatsApp-Image-2025-06-16-at-18.50.43-4.jpeg" alt="House in Adeje-Tijoco" loading="lazy">
+                
+                <img src="https://www.castleproperties.es/wp-content/uploads/2025/06/WhatsApp-Image-2025-06-16-at-18.50.44-2.jpeg" alt="House in Adeje-Tijoco" loading="lazy">
+                
+                <img src="https://www.castleproperties.es/wp-content/uploads/2025/06/WhatsApp-Image-2025-06-16-at-18.50.44-4.jpeg" alt="House in Adeje-Tijoco" loading="lazy">
+                
+                <img src="https://www.castleproperties.es/wp-content/uploads/2025/06/WhatsApp-Image-2025-06-16-at-18.50.44-5.jpeg" alt="House in Adeje-Tijoco" loading="lazy">
+                
+                <img src="https://www.castleproperties.es/wp-content/uploads/2025/06/WhatsApp-Image-2025-06-16-at-18.50.44-6.jpeg" alt="House in Adeje-Tijoco" loading="lazy">
+                
+            </div>
+            
+
+            
+
+            
+            <div class="prop-chips">
+                <span class="chip">ocean view</span>
+            </div>
+            
+        </div>
+
+        <div class="prop-cta">
+            <a class="btn-whatsapp"
+               href="https://wa.me/34659003377?text=Hola%20Stazio%2C%20me%20interesa%20esta%20propiedad%3A%20House%20in%20Adeje-Tijoco%20%E2%80%94%20270.000%20%E2%82%AC"
+               target="_blank" rel="noopener"
+               onclick="event.stopPropagation()">Ask TRI about this property</a>
+        </div>
+    </div>
+    
+
+    <script>
+    function togglePropCard(ev, id) {
+        if (ev.target.closest('.prop-cta') || ev.target.closest('.prop-gallery')) return;
+        var el = document.getElementById(id);
+        if (!el) return;
+        var isOpen = el.classList.contains('open');
+        document.querySelectorAll('.prop.open').forEach(function(x){ x.classList.remove('open'); });
+        if (!isOpen) {
+            el.classList.add('open');
+            setTimeout(function(){ el.scrollIntoView({behavior:'smooth', block:'nearest'}); }, 80);
+        }
+    }
+    </script>
 </main>
 
 <footer>
