@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naty — Your Property Selection</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,600&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+
+        :root {
+            --navy: oklch(0.2 0.035 250);
+            --blue: oklch(0.56 0.11 240);
+            --blue-faint: oklch(0.94 0.02 240);
+            --surface: oklch(0.975 0.004 250);
+            --paper: oklch(0.993 0.002 250);
+            --ink: oklch(0.16 0.02 250);
+            --ink-soft: oklch(0.4 0.015 250);
+            --ink-quiet: oklch(0.58 0.01 250);
+            --rule: oklch(0.88 0.006 250);
+            --warm: oklch(0.7 0.09 70);
+
+            --serif: 'Literata', 'Georgia', serif;
+            --sans: 'Figtree', system-ui, sans-serif;
+
+            --space-2xs: 2px;
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --space-xl: 32px;
+            --space-2xl: 48px;
+            --space-3xl: 72px;
+
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        body {
+            font-family: var(--sans);
+            background: var(--surface);
+            color: var(--ink);
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+        }
+
+        /* ── Header ── */
+        header {
+            background: var(--navy);
+            padding: var(--space-3xl) var(--space-lg) var(--space-2xl);
+        }
+
+        .brand {
+            font-family: var(--sans);
+            font-weight: 400;
+            font-size: 0.62rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--blue);
+            margin-bottom: var(--space-xl);
+        }
+
+        .greeting {
+            font-family: var(--serif);
+            font-weight: 400;
+            font-size: clamp(1.5rem, 5vw, 2rem);
+            color: oklch(0.96 0.003 250);
+            line-height: 1.25;
+        }
+
+        .greeting em {
+            font-style: normal;
+            color: oklch(0.98 0.002 250);
+            font-weight: 600;
+        }
+
+        .date {
+            font-size: 0.75rem;
+            color: oklch(0.5 0.01 250);
+            margin-top: var(--space-md);
+            line-height: 1.55;
+        }
+
+        /* ── Criteria ── */
+        .filters {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            padding: var(--space-md) var(--space-lg);
+            background: var(--paper);
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .tag {
+            font-size: 0.68rem;
+            font-weight: 500;
+            padding: 3px 10px;
+            border-radius: 3px;
+            background: var(--blue-faint);
+            color: var(--blue);
+            letter-spacing: 0.2px;
+        }
+
+        /* ── Main ── */
+        main {
+            max-width: 520px;
+            margin: 0 auto;
+            padding: var(--space-lg) var(--space-md) var(--space-3xl);
+        }
+
+        .summary {
+            font-size: 0.75rem;
+            color: var(--ink-quiet);
+            margin-bottom: var(--space-xl);
+            padding-left: 2px;
+        }
+
+        /* ── Property card ── */
+        .prop {
+            display: block;
+            color: inherit;
+            background: var(--paper);
+            margin-bottom: var(--space-md);
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 1px 2px oklch(0.18 0.02 250 / 0.04);
+        }
+
+        .prop-cta {
+            display: flex;
+            gap: var(--space-sm);
+            padding: 0 var(--space-md) var(--space-md);
+        }
+
+        .prop-cta a {
+            flex: 1;
+            text-align: center;
+            padding: 10px 12px;
+            border-radius: 6px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            text-decoration: none;
+            letter-spacing: 0.2px;
+        }
+
+        .prop-cta .btn-whatsapp {
+            background: oklch(0.72 0.16 155);
+            color: oklch(0.12 0.03 155);
+        }
+
+        .prop-cta .btn-whatsapp:hover { filter: brightness(1.05); }
+
+        /* ── Gallery + expand ── */
+        .prop { cursor: pointer; }
+        .prop .prop-cta a { cursor: pointer; }
+
+        .prop-detail {
+            display: none;
+            padding: 0 var(--space-md) var(--space-md);
+            border-top: 1px solid var(--rule);
+        }
+
+        .prop.open .prop-detail { display: block; }
+
+        .prop-desc {
+            font-size: 0.82rem;
+            line-height: 1.55;
+            color: var(--ink-soft);
+            padding: var(--space-md) 0;
+        }
+
+        .prop-chips {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-bottom: var(--space-md);
+        }
+
+        .prop-chips .chip {
+            font-size: 0.66rem;
+            padding: 3px 10px;
+            background: var(--blue-faint);
+            color: var(--blue);
+            border-radius: 4px;
+            letter-spacing: 0.2px;
+            text-transform: capitalize;
+        }
+
+        .prop-gallery {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            padding-bottom: var(--space-sm);
+            margin-bottom: var(--space-md);
+            scroll-snap-type: x mandatory;
+        }
+
+        .prop-gallery img {
+            width: 180px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 6px;
+            flex-shrink: 0;
+            scroll-snap-align: start;
+            background: var(--rule);
+        }
+
+        .prop-hint {
+            font-size: 0.64rem;
+            text-align: center;
+            color: var(--ink-quiet);
+            padding: 4px 0 var(--space-sm);
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+        }
+
+        .prop.open .prop-hint { display: none; }
+
+        .prop-photo {
+            width: 100%;
+            aspect-ratio: 16 / 10;
+            background: var(--rule);
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .prop-photo--none {
+            aspect-ratio: 3 / 1;
+            display: grid;
+            place-items: center;
+        }
+
+        .prop-photo--none::after {
+            content: 'No photo yet';
+            font-size: 0.7rem;
+            color: var(--ink-quiet);
+        }
+
+        .prop-agency {
+            position: absolute;
+            bottom: var(--space-sm);
+            left: var(--space-sm);
+            font-size: 0.58rem;
+            font-weight: 600;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+            padding: 2px 7px;
+            border-radius: 2px;
+            background: oklch(0.12 0.02 250 / 0.65);
+            color: oklch(0.95 0.003 250);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+        }
+
+        .prop--ours .prop-agency {
+            background: oklch(0.68 0.09 70 / 0.88);
+            color: oklch(0.12 0.03 70);
+        }
+
+        .prop-body {
+            padding: var(--space-md) var(--space-md) var(--space-lg);
+        }
+
+        .prop-name {
+            font-family: var(--serif);
+            font-weight: 600;
+            font-size: 1rem;
+            line-height: 1.35;
+            margin-bottom: 6px;
+        }
+
+        .prop-meta {
+            font-size: 0.76rem;
+            color: var(--ink-soft);
+            margin-bottom: var(--space-md);
+        }
+
+        .prop-meta span + span::before {
+            content: ' · ';
+            color: var(--rule);
+        }
+
+        .prop-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+
+        .prop-price {
+            font-weight: 600;
+            font-size: 1.1rem;
+            letter-spacing: -0.3px;
+        }
+
+        .prop-where {
+            font-size: 0.7rem;
+            color: var(--ink-quiet);
+            text-align: right;
+            max-width: 50%;
+        }
+
+        .prop-note {
+            font-size: 0.6rem;
+            font-weight: 500;
+            color: var(--warm);
+            margin-top: 6px;
+            letter-spacing: 0.2px;
+        }
+
+        /* ── Footer ── */
+        footer {
+            text-align: center;
+            padding: var(--space-2xl) var(--space-lg);
+            font-size: 0.68rem;
+            line-height: 1.7;
+            color: var(--ink-quiet);
+            max-width: 380px;
+            margin: 0 auto;
+        }
+
+        footer strong {
+            font-weight: 500;
+            color: var(--ink-soft);
+            display: block;
+            margin-bottom: var(--space-xs);
+        }
+
+        footer a { color: var(--blue); text-decoration: none; }
+
+        /* ── Desktop ── */
+        @media (min-width: 600px) {
+            .prop-photo { aspect-ratio: 16 / 9; }
+            main { padding-top: var(--space-xl); }
+        }
+
+        /* ── Stagger entrance ── */
+        .prop {
+            opacity: 0;
+            transform: translateY(16px);
+            animation: rise 0.5s var(--ease-out-expo) forwards;
+        }
+        
+        .prop:nth-of-type(1) { animation-delay: 0.0s; }
+        
+        .prop:nth-of-type(2) { animation-delay: 0.07s; }
+        
+        .prop:nth-of-type(3) { animation-delay: 0.14s; }
+        
+        .prop:nth-of-type(4) { animation-delay: 0.21000000000000002s; }
+        
+
+        @keyframes rise { to { opacity: 1; transform: none; } }
+
+        @media (prefers-reduced-motion: reduce) {
+            .prop { animation: none; opacity: 1; transform: none; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <p class="brand">Tenerife Resort Invest</p>
+    <h1 class="greeting">We found these<br>for <em>Naty</em></h1>
+    <p class="date">17 April 2026 · 4 properties from 2 agencies</p>
+</header>
+
+<div class="filters">
+    
+    <span class="tag">2 bedrooms</span>
+    
+    <span class="tag">1 bathrooms</span>
+    
+    <span class="tag">Los Cristianos</span>
+    
+    <span class="tag">Las Americas</span>
+    
+    <span class="tag">Arona</span>
+    
+    <span class="tag">Adeje</span>
+    
+    <span class="tag">Costa Adeje</span>
+    
+    <span class="tag">La Caleta</span>
+    
+    <span class="tag">Budget: €340,000</span>
+    
+</div>
+
+<main>
+    
+    <div class="prop"
+         id="card-0"
+         onclick="togglePropCard(event, 'card-0')">
+
+        
+        <div class="prop-photo" style="background-image:url('https://www.castleproperties.es/wp-content/uploads/2025/02/WhatsApp-Image-2025-02-17-at-11.54.08-525x328.jpeg?v=1739881797')">
+            <span class="prop-agency">Castle Properties</span>
+        </div>
+        
+
+        <div class="prop-body">
+            <h2 class="prop-name">Property in Arona - Costa del Silencio</h2>
+            <p class="prop-meta">
+                <span>2 bed</span>
+                <span>1 bath</span>
+                <span>58,00 m2</span>
+            </p>
+            <div class="prop-row">
+                <span class="prop-price">167.000 €</span>
+                <span class="prop-where">Arona - Costa del Silencio</span>
+            </div>
+        </div>
+
+        <p class="prop-hint">Tap for photos + details ↓</p>
+
+        <div class="prop-detail">
+            
+            <div class="prop-gallery">
+                
+                <img src="https://www.castleproperties.es/wp-content/uploads/2026/04/x-271865627.jpg" alt="Property in Arona - Costa del Silencio" loading="lazy">
+                
+                <img src="https://www.castleproperties.es/wp-content/uploads/2026/03/Veril-del-Duque-20.jpeg" alt="Property in Arona - Costa del Silencio" loading="lazy">
+                
+                <img src="https://www.castleproperties.es/wp-content/uploads/2026/02/WhatsApp-Image-2026-02-08-at-15.10.45-1.jpeg" alt="Property in Arona - Costa del Silencio" loading="lazy">
+                
+                <img src="https://www.castleproperties.es/wp-content/uploads/2025/02/WhatsApp-Image-2025-02-17-at-11.54.08.jpeg" alt="Property in Arona - Costa del Silencio" loading="lazy">
+                
+                <img src="https://www.castleproperties.es/wp-content/uploads/2025/02/WhatsApp-Image-2025-02-17-at-11.53.58-4.jpeg" alt="Property in Arona - Costa del Silencio" loading="lazy">
+                
+                <img src="https://www.castleproperties.es/wp-content/uploads/2025/02/WhatsApp-Image-2025-02-17-at-11.53.58-3.jpeg" alt="Property in Arona - Costa del Silencio" loading="lazy">
+                
+                <img src="https://www.castleproperties.es/wp-content/uploads/2025/02/WhatsApp-Image-2025-02-17-at-11.53.58.jpeg" alt="Property in Arona - Costa del Silencio" loading="lazy">
+                
+                <img src="https://www.castleproperties.es/wp-content/uploads/2025/02/WhatsApp-Image-2025-02-17-at-11.53.56-1.jpeg" alt="Property in Arona - Costa del Silencio" loading="lazy">
+                
+                <img src="https://www.castleproperties.es/wp-content/uploads/2025/02/WhatsApp-Image-2025-02-17-at-11.53.55.jpeg" alt="Property in Arona - Costa del Silencio" loading="lazy">
+                
+                <img src="https://www.castleproperties.es/wp-content/uploads/2025/02/WhatsApp-Image-2025-02-17-at-11.53.53-1.jpeg" alt="Property in Arona - Costa del Silencio" loading="lazy">
+                
+                <img src="https://www.castleproperties.es/wp-content/uploads/2025/02/WhatsApp-Image-2025-02-17-at-11.53.53.jpeg" alt="Property in Arona - Costa del Silencio" loading="lazy">
+                
+                <img src="https://www.castleproperties.es/wp-content/uploads/2025/02/WhatsApp-Image-2025-02-17-at-11.53.51-1.jpeg" alt="Property in Arona - Costa del Silencio" loading="lazy">
+                
+            </div>
+            
+
+            
+
+            
+            <div class="prop-chips">
+                <span class="chip">garage</span><span class="chip">ocean view</span><span class="chip">balcony</span>
+            </div>
+            
+        </div>
+
+        <div class="prop-cta">
+            <a class="btn-whatsapp"
+               href="https://wa.me/34659003377?text=Hola%20Stazio%2C%20me%20interesa%20esta%20propiedad%3A%20Property%20in%20Arona%20-%20Costa%20del%20Silencio%20%E2%80%94%20167.000%20%E2%82%AC"
+               target="_blank" rel="noopener"
+               onclick="event.stopPropagation()">Ask TRI about this property</a>
+        </div>
+    </div>
+    
+    <div class="prop"
+         id="card-1"
+         onclick="togglePropCard(event, 'card-1')">
+
+        
+        <div class="prop-photo" style="background-image:url('https://www.castleproperties.es/wp-content/uploads/2024/12/WhatsApp-Image-2024-12-07-at-10.02.14-9-525x328.jpeg?v=1733569195')">
+            <span class="prop-agency">Castle Properties</span>
+        </div>
+        
+
+        <div class="prop-body">
+            <h2 class="prop-name">Property in Arona</h2>
+            <p class="prop-meta">
+                <span>2 bed</span>
+                <span>1 bath</span>
+                <span>71,00 m2</span>
+            </p>
+            <div class="prop-row">
+                <span class="prop-price">169.800 €</span>
+                <span class="prop-where">Arona</span>
+            </div>
+        </div>
+
+        <p class="prop-hint">Tap for photos + details ↓</p>
+
+        <div class="prop-detail">
+            
+            <div class="prop-gallery">
+                
+                <img src="https://www.castleproperties.es/wp-content/uploads/2026/04/x-271865627.jpg" alt="Property in Arona" loading="lazy">
+                
+                <img src="https://www.castleproperties.es/wp-content/uploads/2026/03/Veril-del-Duque-20.jpeg" alt="Property in Arona" loading="lazy">
+                
+                <img src="https://www.castleproperties.es/wp-content/uploads/2026/02/WhatsApp-Image-2026-02-08-at-15.10.45-1.jpeg" alt="Property in Arona" loading="lazy">
+                
+                <img src="https://www.castleproperties.es/wp-content/uploads/2024/12/WhatsApp-Image-2024-12-07-at-10.02.14-9.jpeg" alt="Property in Arona" loading="lazy">
+                
+                <img src="https://www.castleproperties.es/wp-content/uploads/2024/12/WhatsApp-Image-2024-12-07-at-10.02.14-1.jpeg" alt="Property in Arona" loading="lazy">
+                
+                <img src="https://www.castleproperties.es/wp-content/uploads/2024/12/WhatsApp-Image-2024-12-07-at-10.02.14-2.jpeg" alt="Property in Arona" loading="lazy">
+                
+                <img src="https://www.castleproperties.es/wp-content/uploads/2024/12/WhatsApp-Image-2024-12-07-at-10.02.14-3.jpeg" alt="Property in Arona" loading="lazy">
+                
+                <img src="https://www.castleproperties.es/wp-content/uploads/2024/12/WhatsApp-Image-2024-12-07-at-10.04.36.jpeg" alt="Property in Arona" loading="lazy">
+                
+                <img src="https://www.castleproperties.es/wp-content/uploads/2024/12/WhatsApp-Image-2024-12-07-at-10.04.35-6.jpeg" alt="Property in Arona" loading="lazy">
+                
+                <img src="https://www.castleproperties.es/wp-content/uploads/2024/12/WhatsApp-Image-2024-12-07-at-10.04.35-4.jpeg" alt="Property in Arona" loading="lazy">
+                
+                <img src="https://www.castleproperties.es/wp-content/uploads/2024/12/WhatsApp-Image-2024-12-07-at-10.02.14-4.jpeg" alt="Property in Arona" loading="lazy">
+                
+                <img src="https://www.castleproperties.es/wp-content/uploads/2024/12/WhatsApp-Image-2024-12-07-at-10.02.14-5.jpeg" alt="Property in Arona" loading="lazy">
+                
+            </div>
+            
+
+            
+
+            
+            <div class="prop-chips">
+                <span class="chip">garage</span>
+            </div>
+            
+        </div>
+
+        <div class="prop-cta">
+            <a class="btn-whatsapp"
+               href="https://wa.me/34659003377?text=Hola%20Stazio%2C%20me%20interesa%20esta%20propiedad%3A%20Property%20in%20Arona%20%E2%80%94%20169.800%20%E2%82%AC"
+               target="_blank" rel="noopener"
+               onclick="event.stopPropagation()">Ask TRI about this property</a>
+        </div>
+    </div>
+    
+    <div class="prop"
+         id="card-2"
+         onclick="togglePropCard(event, 'card-2')">
+
+        
+        <div class="prop-photo" style="background-image:url('https://www.castleproperties.es/wp-content/uploads/2023/07/Terraza-525x328.jpg?v=1689069489')">
+            <span class="prop-agency">Castle Properties</span>
+        </div>
+        
+
+        <div class="prop-body">
+            <h2 class="prop-name">Apartment in Arona,Arona-Los Cristianos</h2>
+            <p class="prop-meta">
+                <span>2 bed</span>
+                <span>1 bath</span>
+                <span>57,00 m2</span>
+            </p>
+            <div class="prop-row">
+                <span class="prop-price">225.000 €</span>
+                <span class="prop-where">Arona,Arona-Los Cristianos</span>
+            </div>
+        </div>
+
+        <p class="prop-hint">Tap for photos + details ↓</p>
+
+        <div class="prop-detail">
+            
+            <div class="prop-gallery">
+                
+                <img src="https://www.castleproperties.es/wp-content/uploads/2026/04/x-271865627.jpg" alt="Apartment in Arona,Arona-Los Cristianos" loading="lazy">
+                
+                <img src="https://www.castleproperties.es/wp-content/uploads/2026/03/Veril-del-Duque-20.jpeg" alt="Apartment in Arona,Arona-Los Cristianos" loading="lazy">
+                
+                <img src="https://www.castleproperties.es/wp-content/uploads/2026/02/WhatsApp-Image-2026-02-08-at-15.10.45-1.jpeg" alt="Apartment in Arona,Arona-Los Cristianos" loading="lazy">
+                
+                <img src="https://www.castleproperties.es/wp-content/uploads/2023/07/Terraza.jpg" alt="Apartment in Arona,Arona-Los Cristianos" loading="lazy">
+                
+                <img src="https://www.castleproperties.es/wp-content/uploads/2023/07/Vistas-a-la-montana.jpg" alt="Apartment in Arona,Arona-Los Cristianos" loading="lazy">
+                
+                <img src="https://www.castleproperties.es/wp-content/uploads/2023/07/Sala.jpg" alt="Apartment in Arona,Arona-Los Cristianos" loading="lazy">
+                
+                <img src="https://www.castleproperties.es/wp-content/uploads/2023/07/Sala-III.jpg" alt="Apartment in Arona,Arona-Los Cristianos" loading="lazy">
+                
+                <img src="https://www.castleproperties.es/wp-content/uploads/2023/07/Sala-II.jpg" alt="Apartment in Arona,Arona-Los Cristianos" loading="lazy">
+                
+                <img src="https://www.castleproperties.es/wp-content/uploads/2023/07/Sala-I.jpg" alt="Apartment in Arona,Arona-Los Cristianos" loading="lazy">
+                
+                <img src="https://www.castleproperties.es/wp-content/uploads/2023/07/Sala-desde-terraza.jpg" alt="Apartment in Arona,Arona-Los Cristianos" loading="lazy">
+                
+                <img src="https://www.castleproperties.es/wp-content/uploads/2023/07/Hall-de-entrada.jpg" alt="Apartment in Arona,Arona-Los Cristianos" loading="lazy">
+                
+                <img src="https://www.castleproperties.es/wp-content/uploads/2023/07/Entrada.jpg" alt="Apartment in Arona,Arona-Los Cristianos" loading="lazy">
+                
+            </div>
+            
+
+            
+
+            
+        </div>
+
+        <div class="prop-cta">
+            <a class="btn-whatsapp"
+               href="https://wa.me/34659003377?text=Hola%20Stazio%2C%20me%20interesa%20esta%20propiedad%3A%20Apartment%20in%20Arona%2CArona-Los%20Cristianos%20%E2%80%94%20225.000%20%E2%82%AC"
+               target="_blank" rel="noopener"
+               onclick="event.stopPropagation()">Ask TRI about this property</a>
+        </div>
+    </div>
+    
+    <div class="prop"
+         id="card-3"
+         onclick="togglePropCard(event, 'card-3')">
+
+        
+        <div class="prop-photo" style="background-image:url('https://www.morfittpropertiestenerife.com/sites/default/files/styles/listing_photo/public/StudioApartmentCoralesBeach13.jpg?itok=5HuBGkwh')">
+            <span class="prop-agency">Morfitt Properties</span>
+        </div>
+        
+
+        <div class="prop-body">
+            <h2 class="prop-name">Studio for sale in Corales Beach, La Caleta, Tenerife property, ST0245-0C</h2>
+            <p class="prop-meta">
+                
+                <span>1 bath</span>
+                
+            </p>
+            <div class="prop-row">
+                <span class="prop-price">€335,000</span>
+                <span class="prop-where">La Caleta</span>
+            </div>
+        </div>
+
+        <p class="prop-hint">Tap for photos + details ↓</p>
+
+        <div class="prop-detail">
+            
+            <div class="prop-gallery">
+                <img src="https://www.morfittpropertiestenerife.com/sites/default/files/styles/listing_photo/public/StudioApartmentCoralesBeach13.jpg?itok=5HuBGkwh" alt="Studio for sale in Corales Beach, La Caleta, Tenerife property, ST0245-0C" loading="lazy">
+            </div>
+            
+
+            
+
+            
+        </div>
+
+        <div class="prop-cta">
+            <a class="btn-whatsapp"
+               href="https://wa.me/34659003377?text=Hola%20Stazio%2C%20me%20interesa%20esta%20propiedad%3A%20Studio%20for%20sale%20in%20Corales%20Beach%2C%20La%20Caleta%2C%20Tenerife%20property%2C%20ST0245-0C%20%E2%80%94%20%E2%82%AC335%2C000"
+               target="_blank" rel="noopener"
+               onclick="event.stopPropagation()">Ask TRI about this property</a>
+        </div>
+    </div>
+    
+
+    <script>
+    function togglePropCard(ev, id) {
+        if (ev.target.closest('.prop-cta') || ev.target.closest('.prop-gallery')) return;
+        var el = document.getElementById(id);
+        if (!el) return;
+        var isOpen = el.classList.contains('open');
+        document.querySelectorAll('.prop.open').forEach(function(x){ x.classList.remove('open'); });
+        if (!isOpen) {
+            el.classList.add('open');
+            setTimeout(function(){ el.scrollIntoView({behavior:'smooth', block:'nearest'}); }, 80);
+        }
+    }
+    </script>
+</main>
+
+<footer>
+    <strong>Tenerife Resort Invest</strong>
+    Curated for Naty · 17 April 2026<br>
+    Prices and availability may change<br>
+    <a href="https://teneriferesortinvest.com">teneriferesortinvest.com</a>
+</footer>
+
+</body>
+</html>
