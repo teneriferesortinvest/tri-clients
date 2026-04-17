@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Violeta — Your Property Selection</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,600&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+
+        :root {
+            --navy: oklch(0.2 0.035 250);
+            --blue: oklch(0.56 0.11 240);
+            --blue-faint: oklch(0.94 0.02 240);
+            --surface: oklch(0.975 0.004 250);
+            --paper: oklch(0.993 0.002 250);
+            --ink: oklch(0.16 0.02 250);
+            --ink-soft: oklch(0.4 0.015 250);
+            --ink-quiet: oklch(0.58 0.01 250);
+            --rule: oklch(0.88 0.006 250);
+            --warm: oklch(0.7 0.09 70);
+
+            --serif: 'Literata', 'Georgia', serif;
+            --sans: 'Figtree', system-ui, sans-serif;
+
+            --space-2xs: 2px;
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --space-xl: 32px;
+            --space-2xl: 48px;
+            --space-3xl: 72px;
+
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        body {
+            font-family: var(--sans);
+            background: var(--surface);
+            color: var(--ink);
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+        }
+
+        /* ── Header ── */
+        header {
+            background: var(--navy);
+            padding: var(--space-3xl) var(--space-lg) var(--space-2xl);
+        }
+
+        .brand {
+            font-family: var(--sans);
+            font-weight: 400;
+            font-size: 0.62rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--blue);
+            margin-bottom: var(--space-xl);
+        }
+
+        .greeting {
+            font-family: var(--serif);
+            font-weight: 400;
+            font-size: clamp(1.5rem, 5vw, 2rem);
+            color: oklch(0.96 0.003 250);
+            line-height: 1.25;
+        }
+
+        .greeting em {
+            font-style: normal;
+            color: oklch(0.98 0.002 250);
+            font-weight: 600;
+        }
+
+        .date {
+            font-size: 0.75rem;
+            color: oklch(0.5 0.01 250);
+            margin-top: var(--space-md);
+            line-height: 1.55;
+        }
+
+        /* ── Criteria ── */
+        .filters {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            padding: var(--space-md) var(--space-lg);
+            background: var(--paper);
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .tag {
+            font-size: 0.68rem;
+            font-weight: 500;
+            padding: 3px 10px;
+            border-radius: 3px;
+            background: var(--blue-faint);
+            color: var(--blue);
+            letter-spacing: 0.2px;
+        }
+
+        /* ── Main ── */
+        main {
+            max-width: 520px;
+            margin: 0 auto;
+            padding: var(--space-lg) var(--space-md) var(--space-3xl);
+        }
+
+        .summary {
+            font-size: 0.75rem;
+            color: var(--ink-quiet);
+            margin-bottom: var(--space-xl);
+            padding-left: 2px;
+        }
+
+        /* ── Property card ── */
+        .prop {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            background: var(--paper);
+            margin-bottom: var(--space-md);
+            overflow: hidden;
+            border-radius: 8px;
+            transition: transform 0.25s var(--ease-out-expo), box-shadow 0.25s var(--ease-out-expo);
+        }
+
+        .prop:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px oklch(0.18 0.02 250 / 0.08);
+        }
+
+        .prop:active { transform: translateY(0); }
+
+        .prop-photo {
+            width: 100%;
+            aspect-ratio: 16 / 10;
+            background: var(--rule);
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .prop-photo--none {
+            aspect-ratio: 3 / 1;
+            display: grid;
+            place-items: center;
+        }
+
+        .prop-photo--none::after {
+            content: 'No photo yet';
+            font-size: 0.7rem;
+            color: var(--ink-quiet);
+        }
+
+        .prop-agency {
+            position: absolute;
+            bottom: var(--space-sm);
+            left: var(--space-sm);
+            font-size: 0.58rem;
+            font-weight: 600;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+            padding: 2px 7px;
+            border-radius: 2px;
+            background: oklch(0.12 0.02 250 / 0.65);
+            color: oklch(0.95 0.003 250);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+        }
+
+        .prop--ours .prop-agency {
+            background: oklch(0.68 0.09 70 / 0.88);
+            color: oklch(0.12 0.03 70);
+        }
+
+        .prop-body {
+            padding: var(--space-md) var(--space-md) var(--space-lg);
+        }
+
+        .prop-name {
+            font-family: var(--serif);
+            font-weight: 600;
+            font-size: 1rem;
+            line-height: 1.35;
+            margin-bottom: 6px;
+        }
+
+        .prop-meta {
+            font-size: 0.76rem;
+            color: var(--ink-soft);
+            margin-bottom: var(--space-md);
+        }
+
+        .prop-meta span + span::before {
+            content: ' · ';
+            color: var(--rule);
+        }
+
+        .prop-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+
+        .prop-price {
+            font-weight: 600;
+            font-size: 1.1rem;
+            letter-spacing: -0.3px;
+        }
+
+        .prop-where {
+            font-size: 0.7rem;
+            color: var(--ink-quiet);
+            text-align: right;
+            max-width: 50%;
+        }
+
+        .prop-note {
+            font-size: 0.6rem;
+            font-weight: 500;
+            color: var(--warm);
+            margin-top: 6px;
+            letter-spacing: 0.2px;
+        }
+
+        /* ── Footer ── */
+        footer {
+            text-align: center;
+            padding: var(--space-2xl) var(--space-lg);
+            font-size: 0.68rem;
+            line-height: 1.7;
+            color: var(--ink-quiet);
+            max-width: 380px;
+            margin: 0 auto;
+        }
+
+        footer strong {
+            font-weight: 500;
+            color: var(--ink-soft);
+            display: block;
+            margin-bottom: var(--space-xs);
+        }
+
+        footer a { color: var(--blue); text-decoration: none; }
+
+        /* ── Desktop ── */
+        @media (min-width: 600px) {
+            .prop-photo { aspect-ratio: 16 / 9; }
+            main { padding-top: var(--space-xl); }
+        }
+
+        /* ── Stagger entrance ── */
+        .prop {
+            opacity: 0;
+            transform: translateY(16px);
+            animation: rise 0.5s var(--ease-out-expo) forwards;
+        }
+        
+        .prop:nth-of-type(1) { animation-delay: 0.0s; }
+        
+        .prop:nth-of-type(2) { animation-delay: 0.07s; }
+        
+        .prop:nth-of-type(3) { animation-delay: 0.14s; }
+        
+        .prop:nth-of-type(4) { animation-delay: 0.21000000000000002s; }
+        
+        .prop:nth-of-type(5) { animation-delay: 0.28s; }
+        
+        .prop:nth-of-type(6) { animation-delay: 0.35000000000000003s; }
+        
+        .prop:nth-of-type(7) { animation-delay: 0.42000000000000004s; }
+        
+        .prop:nth-of-type(8) { animation-delay: 0.49000000000000005s; }
+        
+        .prop:nth-of-type(9) { animation-delay: 0.56s; }
+        
+        .prop:nth-of-type(10) { animation-delay: 0.6300000000000001s; }
+        
+        .prop:nth-of-type(11) { animation-delay: 0.7000000000000001s; }
+        
+        .prop:nth-of-type(12) { animation-delay: 0.77s; }
+        
+        .prop:nth-of-type(13) { animation-delay: 0.8400000000000001s; }
+        
+        .prop:nth-of-type(14) { animation-delay: 0.9100000000000001s; }
+        
+        .prop:nth-of-type(15) { animation-delay: 0.9800000000000001s; }
+        
+        .prop:nth-of-type(16) { animation-delay: 1.05s; }
+        
+        .prop:nth-of-type(17) { animation-delay: 1.12s; }
+        
+        .prop:nth-of-type(18) { animation-delay: 1.1900000000000002s; }
+        
+        .prop:nth-of-type(19) { animation-delay: 1.2600000000000002s; }
+        
+        .prop:nth-of-type(20) { animation-delay: 1.33s; }
+        
+        .prop:nth-of-type(21) { animation-delay: 1.4000000000000001s; }
+        
+        .prop:nth-of-type(22) { animation-delay: 1.4700000000000002s; }
+        
+        .prop:nth-of-type(23) { animation-delay: 1.54s; }
+        
+        .prop:nth-of-type(24) { animation-delay: 1.61s; }
+        
+        .prop:nth-of-type(25) { animation-delay: 1.6800000000000002s; }
+        
+
+        @keyframes rise { to { opacity: 1; transform: none; } }
+
+        @media (prefers-reduced-motion: reduce) {
+            .prop { animation: none; opacity: 1; transform: none; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <p class="brand">Tenerife Resort Invest</p>
+    <h1 class="greeting">We found these<br>for <em>Violeta</em></h1>
+    <p class="date">17 April 2026 · 25 properties from 5 agencies</p>
+</header>
+
+<div class="filters">
+    
+    <span class="tag">Budget: €200,000</span>
+    
+</div>
+
+
+<p style="padding:12px 24px 0;max-width:720px;color:oklch(0.4 0.015 250);font-size:0.9rem;line-height:1.6;">
+  <strong>Strict €200K cap — 19 properties from 4 sources.</strong>
+  Mix of apartments, land (terrenos), and mid-market inventory across South Tenerife.
+</p>
+<main>
+    
+    <a class="prop"
+       href="https://www.castleproperties.es/properties/26141/" target="_blank" rel="noopener">
+
+        
+        <div class="prop-photo" style="background-image:url('https://www.castleproperties.es/wp-content/uploads/2026/04/x-271865627-525x328.jpg?v=1776334144')">
+            <span class="prop-agency">Castle Properties</span>
+        </div>
+        
+
+        <div class="prop-body">
+            <h2 class="prop-name">Apartment in Adeje Casco</h2>
+            <p class="prop-meta">
+                <span>1 bed</span>
+                <span>1 bath</span>
+                <span>42,00 m2</span>
+            </p>
+            <div class="prop-row">
+                <span class="prop-price">185.000 €</span>
+                <span class="prop-where">Adeje Casco</span>
+            </div>
+            
+        </div>
+    </a>
+    
+    <a class="prop"
+       href="https://www.castleproperties.es/properties/id-25910-one-bedroom-apartment-for-sale-in-balcon-del-mar-costa-del-silencio/" target="_blank" rel="noopener">
+
+        
+        <div class="prop-photo" style="background-image:url('https://www.castleproperties.es/wp-content/uploads/2025/11/balcon-del-mar-525x328.jpg?v=1763820329')">
+            <span class="prop-agency">Castle Properties</span>
+        </div>
+        
+
+        <div class="prop-body">
+            <h2 class="prop-name">Property in Costa del Silencio</h2>
+            <p class="prop-meta">
+                <span>1 bed</span>
+                <span>1 bath</span>
+                
+            </p>
+            <div class="prop-row">
+                <span class="prop-price">190.000 €</span>
+                <span class="prop-where">Costa del Silencio</span>
+            </div>
+            
+        </div>
+    </a>
+    
+    <a class="prop"
+       href="https://www.castleproperties.es/properties/id-25552-apartment-for-sale-in-chio-adeje/" target="_blank" rel="noopener">
+
+        
+        <div class="prop-photo" style="background-image:url('https://www.castleproperties.es/wp-content/uploads/2025/04/WhatsApp-Image-2025-04-05-at-13.22.22.jpeg?v=1743855763')">
+            <span class="prop-agency">Castle Properties</span>
+        </div>
+        
+
+        <div class="prop-body">
+            <h2 class="prop-name">Apartment in Adeje - Chío</h2>
+            <p class="prop-meta">
+                <span>2 bed</span>
+                <span>1 bath</span>
+                <span>67,00 m2</span>
+            </p>
+            <div class="prop-row">
+                <span class="prop-price">185.500 €</span>
+                <span class="prop-where">Adeje - Chío</span>
+            </div>
+            
+        </div>
+    </a>
+    
+    <a class="prop"
+       href="https://www.castleproperties.es/properties/id-25342-ground-floor-apartment-for-sale-in-las-galletas/" target="_blank" rel="noopener">
+
+        
+        <div class="prop-photo" style="background-image:url('https://www.castleproperties.es/wp-content/uploads/2025/02/2017011422551149307-525x328.jpg?v=1739882809')">
+            <span class="prop-agency">Castle Properties</span>
+        </div>
+        
+
+        <div class="prop-body">
+            <h2 class="prop-name">Apartment in Arona - Las Galletas</h2>
+            <p class="prop-meta">
+                
+                <span>1 bath</span>
+                <span>33,00 m2</span>
+            </p>
+            <div class="prop-row">
+                <span class="prop-price">105.000 €</span>
+                <span class="prop-where">Arona - Las Galletas</span>
+            </div>
+            
+        </div>
+    </a>
+    
+    <a class="prop"
+       href="https://www.castleproperties.es/properties/id-25316-two-bedroom-apartment-for-sale-in-garanana-costa-del-silencio/" target="_blank" rel="noopener">
+
+        
+        <div class="prop-photo" style="background-image:url('https://www.castleproperties.es/wp-content/uploads/2025/02/WhatsApp-Image-2025-02-17-at-11.54.08-525x328.jpeg?v=1739881797')">
+            <span class="prop-agency">Castle Properties</span>
+        </div>
+        
+
+        <div class="prop-body">
+            <h2 class="prop-name">Property in Arona - Costa del Silencio</h2>
+            <p class="prop-meta">
+                <span>2 bed</span>
+                <span>1 bath</span>
+                <span>58,00 m2</span>
+            </p>
+            <div class="prop-row">
+                <span class="prop-price">167.000 €</span>
+                <span class="prop-where">Arona - Costa del Silencio</span>
+            </div>
+            
+        </div>
+    </a>
+    
+    <a class="prop"
+       href="https://www.castleproperties.es/properties/id-two-bedroom-apartment-for-sale-in-arona/" target="_blank" rel="noopener">
+
+        
+        <div class="prop-photo" style="background-image:url('https://www.castleproperties.es/wp-content/uploads/2024/12/WhatsApp-Image-2024-12-07-at-10.02.14-9-525x328.jpeg?v=1733569195')">
+            <span class="prop-agency">Castle Properties</span>
+        </div>
+        
+
+        <div class="prop-body">
+            <h2 class="prop-name">Property in Arona</h2>
+            <p class="prop-meta">
+                <span>2 bed</span>
+                <span>1 bath</span>
+                <span>71,00 m2</span>
+            </p>
+            <div class="prop-row">
+                <span class="prop-price">169.800 €</span>
+                <span class="prop-where">Arona</span>
+            </div>
+            
+        </div>
+    </a>
+    
+    <a class="prop"
+       href="https://gsservices.es/en/property/housing-with-parking-in-valle-san-lorenzo-4245204/" target="_blank" rel="noopener">
+
+        
+        <div class="prop-photo" style="background-image:url('https://witei-client-photos.s3.eu-north-1.amazonaws.com/agencias/gsservices.es/ea2096c0-0004245204.jpg')">
+            <span class="prop-agency">GS Services</span>
+        </div>
+        
+
+        <div class="prop-body">
+            <h2 class="prop-name">Flat in Valle San Lorenzo (Ref. DG-0140)</h2>
+            <p class="prop-meta">
+                <span>2 bed</span>
+                <span>1 bath</span>
+                <span>77 m²</span>
+            </p>
+            <div class="prop-row">
+                <span class="prop-price">195.000€</span>
+                <span class="prop-where">Valle San Lorenzo</span>
+            </div>
+            
+        </div>
+    </a>
+    
+    <a class="prop"
+       href="https://gsservices.es/en/property/commercial-premises-with-private-terrace-in-playa-de-fanabe-r-costa-adeje-4210426/" target="_blank" rel="noopener">
+
+        
+        <div class="prop-photo" style="background-image:url('https://witei-client-photos.s3.eu-north-1.amazonaws.com/agencias/gsservices.es/a6c31897-0004210426.jpg')">
+            <span class="prop-agency">GS Services</span>
+        </div>
+        
+
+        <div class="prop-body">
+            <h2 class="prop-name">Business Projects in Playa de la Américas (Ref. AE-0112)</h2>
+            <p class="prop-meta">
+                <span>1 bed</span>
+                <span>1 bath</span>
+                <span>75 m²</span>
+            </p>
+            <div class="prop-row">
+                <span class="prop-price">195.000€</span>
+                <span class="prop-where">Playa de la Américas</span>
+            </div>
+            
+        </div>
+    </a>
+    
+    <a class="prop"
+       href="https://gsservices.es/en/property/rustic-land-in-fasnia-4220816/" target="_blank" rel="noopener">
+
+        
+        <div class="prop-photo" style="background-image:url('https://www.imediasystems.es/conector/propertify/assets/img/iconos/youtube-lista.png')">
+            <span class="prop-agency">GS Services</span>
+        </div>
+        
+
+        <div class="prop-body">
+            <h2 class="prop-name">Ground in Fasnia (Ref. AY-0028)</h2>
+            <p class="prop-meta">
+                
+                
+                
+            </p>
+            <div class="prop-row">
+                <span class="prop-price">19.900€</span>
+                <span class="prop-where">Fasnia</span>
+            </div>
+            
+        </div>
+    </a>
+    
+    <a class="prop"
+       href="https://gsservices.es/en/property/urban-land-in-tamaimo-4223218/" target="_blank" rel="noopener">
+
+        
+        <div class="prop-photo" style="background-image:url('https://witei-client-photos.s3.eu-north-1.amazonaws.com/agencias/gsservices.es/4a70b8b9-0004223218.jpg')">
+            <span class="prop-agency">GS Services</span>
+        </div>
+        
+
+        <div class="prop-body">
+            <h2 class="prop-name">Ground in Santiago del Teide (Ref. GG-0110)</h2>
+            <p class="prop-meta">
+                
+                
+                
+            </p>
+            <div class="prop-row">
+                <span class="prop-price">93.000€</span>
+                <span class="prop-where">Santiago del Teide</span>
+            </div>
+            
+        </div>
+    </a>
+    
+    <a class="prop"
+       href="https://gsservices.es/en/property/rustic-land-in-buenavista-del-norte-4220817/" target="_blank" rel="noopener">
+
+        
+        <div class="prop-photo" style="background-image:url('https://www.imediasystems.es/conector/propertify/assets/img/iconos/youtube-lista.png')">
+            <span class="prop-agency">GS Services</span>
+        </div>
+        
+
+        <div class="prop-body">
+            <h2 class="prop-name">Ground in Buenavista del Norte (Ref. AY-0029)</h2>
+            <p class="prop-meta">
+                
+                
+                
+            </p>
+            <div class="prop-row">
+                <span class="prop-price">39.900€</span>
+                <span class="prop-where">Buenavista del Norte</span>
+            </div>
+            
+        </div>
+    </a>
+    
+    <a class="prop"
+       href="https://gsservices.es/en/property/residential-urban-plot-in-la-escalona-vilaflor-4218534/" target="_blank" rel="noopener">
+
+        
+        <div class="prop-photo" style="background-image:url('https://witei-client-photos.s3.eu-north-1.amazonaws.com/agencias/gsservices.es/d91b6808-0004218534.jpg')">
+            <span class="prop-agency">GS Services</span>
+        </div>
+        
+
+        <div class="prop-body">
+            <h2 class="prop-name">Fincas in La Escalona (Ref. AE-0116)</h2>
+            <p class="prop-meta">
+                
+                
+                
+            </p>
+            <div class="prop-row">
+                <span class="prop-price">79.000€</span>
+                <span class="prop-where">La Escalona</span>
+            </div>
+            
+        </div>
+    </a>
+    
+    <a class="prop"
+       href="https://gsservices.es/en/property/mixed-land-in-vilaflor-4223829/" target="_blank" rel="noopener">
+
+        
+        <div class="prop-photo" style="background-image:url('https://witei-client-photos.s3.eu-north-1.amazonaws.com/agencias/gsservices.es/587bb735-0004223829.jpg')">
+            <span class="prop-agency">GS Services</span>
+        </div>
+        
+
+        <div class="prop-body">
+            <h2 class="prop-name">Fincas in CHASNA (Ref. AE-0120)</h2>
+            <p class="prop-meta">
+                
+                
+                
+            </p>
+            <div class="prop-row">
+                <span class="prop-price">144.000€</span>
+                <span class="prop-where">CHASNA</span>
+            </div>
+            
+        </div>
+    </a>
+    
+    <a class="prop"
+       href="https://gsservices.es/en/property/urban-land-in-vilaflor-4223822/" target="_blank" rel="noopener">
+
+        
+        <div class="prop-photo" style="background-image:url('https://witei-client-photos.s3.eu-north-1.amazonaws.com/agencias/gsservices.es/7ce28b6e-0004223822.jpg')">
+            <span class="prop-agency">GS Services</span>
+        </div>
+        
+
+        <div class="prop-body">
+            <h2 class="prop-name">Ground in CHASNA (Ref. AE-0119)</h2>
+            <p class="prop-meta">
+                
+                
+                
+            </p>
+            <div class="prop-row">
+                <span class="prop-price">99.000€</span>
+                <span class="prop-where">CHASNA</span>
+            </div>
+            
+        </div>
+    </a>
+    
+    <a class="prop"
+       href="https://gsservices.es/en/property/potentially-productive-agricultural-rustic-land-in-el-tanque-r-tenerife-4222948/" target="_blank" rel="noopener">
+
+        
+        <div class="prop-photo" style="background-image:url('https://witei-client-photos.s3.eu-north-1.amazonaws.com/agencias/gsservices.es/62376ed1-0004222948.jpg')">
+            <span class="prop-agency">GS Services</span>
+        </div>
+        
+
+        <div class="prop-body">
+            <h2 class="prop-name">Ground in El Tanque (Ref. AE-0118)</h2>
+            <p class="prop-meta">
+                
+                
+                
+            </p>
+            <div class="prop-row">
+                <span class="prop-price">90.000€</span>
+                <span class="prop-where">El Tanque</span>
+            </div>
+            
+        </div>
+    </a>
+    
+    <a class="prop"
+       href="https://gsservices.es/en/property/urban-plot-with-project-in-a-strategic-area-of-granadilla-de-abona-4222384/" target="_blank" rel="noopener">
+
+        
+        <div class="prop-photo" style="background-image:url('https://www.imediasystems.es/conector/propertify/assets/img/iconos/youtube-lista.png')">
+            <span class="prop-agency">GS Services</span>
+        </div>
+        
+
+        <div class="prop-body">
+            <h2 class="prop-name">Ground in Granadilla (Ref. MA-0017)</h2>
+            <p class="prop-meta">
+                
+                
+                
+            </p>
+            <div class="prop-row">
+                <span class="prop-price">49.950€</span>
+                <span class="prop-where">Granadilla</span>
+            </div>
+            
+        </div>
+    </a>
+    
+    <a class="prop"
+       href="https://www.morfittpropertiestenerife.com/sales/apartment-playa-paraiso-3464" target="_blank" rel="noopener">
+
+        
+        <div class="prop-photo" style="background-image:url('https://www.morfittpropertiestenerife.com/sites/default/files/styles/listing_photo/public/ApartmentinMarinaPalace1.jpg?itok=1qv1F-TV')">
+            <span class="prop-agency">Morfitt Properties</span>
+        </div>
+        
+
+        <div class="prop-body">
+            <h2 class="prop-name">Apartment for sale in Marina Palace, Playa Paraiso, Tenerife property, AP0913-1C</h2>
+            <p class="prop-meta">
+                <span>1 bed</span>
+                <span>1 bath</span>
+                
+            </p>
+            <div class="prop-row">
+                <span class="prop-price">€172,500</span>
+                <span class="prop-where">Playa Paraiso</span>
+            </div>
+            
+        </div>
+    </a>
+    
+    <a class="prop"
+       href="https://platinumcanary.eu/nemovitost/2-loznicovy-apartman-kanarske-ostrovy-tenerife-arona-costa-del-silencio/" target="_blank" rel="noopener">
+
+        
+        <div class="prop-photo" style="background-image:url('https://platinumcanary.eu/wp-content/uploads/2026/04/WhatsApp-Image-2026-01-05-at-16.17.25-2-1024x747.jpeg')">
+            <span class="prop-agency">Platinum Canary</span>
+        </div>
+        
+
+        <div class="prop-body">
+            <h2 class="prop-name">2-ložnicový apartmán – Kanárské ostrovy – Tenerife, Arona – Costa del Silencio</h2>
+            <p class="prop-meta">
+                
+                
+                <span>87 m²</span>
+            </p>
+            <div class="prop-row">
+                <span class="prop-price">2 1 247 000 €</span>
+                <span class="prop-where">Arona</span>
+            </div>
+            
+            <p class="prop-note">Near match</p>
+            
+        </div>
+    </a>
+    
+    <a class="prop"
+       href="https://platinumcanary.eu/nemovitost/4-loznicova-vila-kanarske-ostrovy-tenerife-costa-adeje/" target="_blank" rel="noopener">
+
+        
+        <div class="prop-photo" style="background-image:url('https://platinumcanary.eu/wp-content/uploads/2026/04/20260310-40-CoastFlat-Chantal-E-Roque-del-Conde-V2-34-1024x680.jpg')">
+            <span class="prop-agency">Platinum Canary</span>
+        </div>
+        
+
+        <div class="prop-body">
+            <h2 class="prop-name">4-ložnicová vila – Kanárské ostrovy – Tenerife – Costa Adeje</h2>
+            <p class="prop-meta">
+                
+                
+                <span>750 m²</span>
+            </p>
+            <div class="prop-row">
+                <span class="prop-price">4 5 1 950 000 €</span>
+                <span class="prop-where">Costa Adeje</span>
+            </div>
+            
+            <p class="prop-note">Near match</p>
+            
+        </div>
+    </a>
+    
+</main>
+
+<footer>
+    <strong>Tenerife Resort Invest</strong>
+    Curated for Violeta · 17 April 2026<br>
+    Prices and availability may change<br>
+    <a href="https://teneriferesortinvest.com">teneriferesortinvest.com</a>
+</footer>
+
+</body>
+</html>
