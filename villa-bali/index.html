@@ -1,0 +1,1589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>Villa Bali — Tenerife Resort Invest</title>
+    <meta name="description" content="A modern villa on Los Andenes, Playa Paraíso, Adeje. Three en-suite bedrooms, infinity pool, ocean and mountain views. €5,500,000.">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&family=Caveat:wght@400&family=Pinyon+Script&family=Sacramento&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --paper: #ece7dc;          /* warm travertine — concrete + Bali stone */
+            --paper-deeper: #d6d0c1;   /* deeper stone */
+            --ink: #1a1a16;            /* near-black, warm */
+            --ink-soft: #4a463d;       /* warm dark grey text */
+            --ink-quiet: #8a8470;      /* quiet stone */
+            --rule: #c8c3b6;           /* warm rule */
+            --black: #0a0a08;
+            --accent: #5f6b5a;         /* sage-slate accent (palm-green against travertine) */
+            --stone: #a49f92;          /* mid warm-grey */
+            --moss: #7a8572;           /* moss highlight */
+
+            --serif: 'EB Garamond', Georgia, serif;
+            --display: 'Fraunces', 'EB Garamond', Georgia, serif;
+            --display-alt: 'Cormorant Garamond', 'EB Garamond', Georgia, serif;
+            --hero: 'Archivo Black', 'Inter', -apple-system, sans-serif;
+            --sans: 'Inter', -apple-system, system-ui, sans-serif;
+            --script: 'Caveat', cursive;
+            /* "Bali" wordmark — matches the italic "vivirla." in the hero. Minimal, elegant,
+               same Archivo family, just italic. No calligraphy. */
+            --script-bali: 'Archivo', 'Inter', -apple-system, sans-serif;
+            --script-soft: 'Archivo', 'Inter', -apple-system, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+            scroll-snap-type: y mandatory;
+        }
+
+        /* ── BILINGUAL CONTENT: hide the inactive language ── */
+        html[lang="en"] .lang-es { display: none !important; }
+        html[lang="es"] .lang-en { display: none !important; }
+        /* Inline spans inside paragraphs */
+        .lang-en, .lang-es { }
+        /* Snap targets: every major section becomes a slide */
+        .video-hero,
+        .hero-videos,
+        .panel,
+        .image-panel,
+        .inspiration,
+        .specs-panel,
+        .cta-panel,
+        footer {
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
+        }
+
+        /* ── KEEP SCROLLING button — injected into every slide by JS ── */
+        .next-slide {
+            position: absolute;
+            bottom: 22px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: var(--sans);
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-decoration: none;
+            padding: 12px 20px;
+            min-height: 44px;
+            display: inline-flex;
+            align-items: center;
+            cursor: pointer;
+            z-index: 10;
+            animation: next-slide-pulse 2.4s ease-in-out infinite;
+            transition: opacity 0.25s;
+            white-space: nowrap;
+        }
+        .next-slide:hover { opacity: 0.7; }
+        .next-slide--dark  { color: var(--ink-quiet); }
+        .next-slide--light {
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 0 1px 8px rgba(0, 0, 0, 0.55);
+        }
+        @keyframes next-slide-pulse {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50%      { transform: translateX(-50%) translateY(6px); }
+        }
+        /* Position relative on snap targets so the absolute button anchors correctly */
+        .video-hero, .hero-videos, .panel, .image-panel, .inspiration, .specs-panel, .cta-panel {
+            position: relative;
+        }
+
+        body {
+            font-family: var(--serif);
+            background: var(--paper);
+            color: var(--ink);
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+            line-height: 1.6;
+            padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom) 0;
+            -webkit-text-size-adjust: 100%;
+            overflow-x: hidden;
+            max-width: 100vw;
+        }
+
+        /* ── TOP BAR (Home of Ambrose style) ── */
+        nav.topbar {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            padding: 24px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            pointer-events: none;
+        }
+        .top-brand {
+            font-family: 'Archivo Black', var(--sans);
+            font-size: 16px;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            color: white;
+            pointer-events: auto;
+            line-height: 1;
+            white-space: nowrap;
+            mix-blend-mode: difference;
+            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+            text-decoration: none;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        .top-brand:hover { opacity: 0.75; }
+        .top-brand em {
+            font-family: 'Archivo', 'Inter', sans-serif;
+            font-style: italic;
+            font-weight: 500;
+            font-size: 15px;
+            letter-spacing: 0.3px;
+            text-transform: lowercase;
+            padding: 0 3px;
+            vertical-align: baseline;
+            color: white;
+        }
+        .top-center { pointer-events: auto; }
+        .top-center-btn {
+            display: inline-block;
+            font-family: var(--sans);
+            font-size: 9px;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--ink);
+            border: 1px solid var(--ink);
+            padding: 8px 14px;
+            text-decoration: none;
+            background: var(--paper);
+            transition: all 0.2s;
+        }
+        .top-center-btn:hover { background: var(--ink); color: var(--paper); }
+
+        .top-right {
+            display: flex;
+            gap: 0;
+            pointer-events: auto;
+        }
+        .top-right a {
+            font-family: var(--sans);
+            font-size: 9px;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--paper);
+            background: var(--ink);
+            padding: 8px 12px;
+            text-decoration: none;
+            border-right: 1px solid var(--paper);
+            transition: opacity 0.2s;
+        }
+        .top-right a:last-child { border-right: none; }
+        .top-right a:hover { opacity: 0.8; }
+
+        @media (max-width: 700px) {
+            nav.topbar { padding: 12px 14px; }
+            .top-brand { font-size: 10px; letter-spacing: 0.2px; }
+            .top-brand em { font-size: 10px; }
+            .top-center { display: none; }
+            .top-right { gap: 0; }
+            /* Smaller buttons so langToggle + WhatsApp + Facts/Datos all fit on iPhone */
+            .top-right a {
+                font-size: 9px;
+                padding: 11px 9px;
+                min-height: 40px;
+                display: flex;
+                align-items: center;
+                letter-spacing: 0.8px;
+            }
+        }
+        @media (max-width: 380px) {
+            /* Tightest iPhone SE class — even smaller */
+            .top-right a { font-size: 8px; padding: 11px 7px; letter-spacing: 0.6px; }
+            .top-brand { font-size: 9px; }
+            .top-brand em { font-size: 9px; }
+        }
+
+        /* ── HERO WITH PHOTO BACKGROUND + SCATTERED TYPOGRAPHY (Home of Ambrose) ── */
+        .video-hero {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            height: 100dvh;
+            min-height: 560px;
+            overflow: hidden;
+            background: var(--ink) url('img/00_hero_exterior_pool.jpg') center/cover no-repeat;
+        }
+        .video-hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.10) 45%, rgba(0,0,0,0.45) 100%);
+            pointer-events: none;
+        }
+
+        /* Three-line stacked headline (was scattered) */
+        .hero-words {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 0 6%;
+            gap: 8px;
+        }
+
+        /* ── HERO VIDEO — cinematic 16:9, grey backdrop, cycles 9 clips ── */
+        .hero-videos {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            background: #c7c2b4;       /* warm stone backdrop — matches new travertine palette */
+            width: 100%;
+            height: 100vh;
+            height: 100dvh;
+            padding: 6vh 0;
+        }
+        .hero-video-frame {
+            position: relative;
+            width: min(72vw, 140vh);
+            aspect-ratio: 16 / 9;
+            max-height: 72vh;
+            background: #000;
+            overflow: hidden;
+            border-radius: 6px;
+            box-shadow: 0 30px 80px -22px rgba(0,0,0,0.45);
+        }
+        .hero-video-frame video {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            opacity: 1;
+            transition: opacity 220ms ease;
+        }
+        .hero-video-frame video.is-swapping { opacity: 0; }
+        /* Progress strip — IG Stories style */
+        .hero-video-dots {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            display: flex;
+            gap: 3px;
+            z-index: 3;
+        }
+        .hero-video-dot {
+            flex: 1;
+            height: 2px;
+            background: rgba(255,255,255,0.28);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        .hero-video-dot.is-active {
+            background: rgba(255,255,255,0.9);
+        }
+        .hero-video-dot.is-done {
+            background: rgba(255,255,255,0.75);
+        }
+        .hero-video-caption {
+            font-family: var(--sans);
+            font-size: 11px;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--ink-soft);
+            text-align: center;
+        }
+        /* ── Mobile: let the cinematic frame FILL the phone (the complaint was it was too small) ── */
+        @media (max-width: 768px) {
+            .hero-videos {
+                padding: 3vh 0;
+                gap: 10px;
+            }
+            .hero-video-frame {
+                width: 96vw;
+                max-height: 88vh;
+            }
+            .hero-video-caption { font-size: 10px; letter-spacing: 2px; }
+        }
+
+        /* ── PREV / NEXT nav arrows on the video frame ── */
+        .hero-video-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.38);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            color: #fff;
+            font-size: 18px;
+            line-height: 1;
+            opacity: 0.35;
+            transition: opacity 0.2s, background 0.2s, transform 0.2s;
+            z-index: 3;
+            user-select: none;
+        }
+        .hero-video-nav:hover {
+            opacity: 1;
+            background: rgba(0, 0, 0, 0.55);
+        }
+        .hero-video-nav:active { transform: translateY(-50%) scale(0.93); }
+        .hero-video-nav--prev { left: 14px; }
+        .hero-video-nav--next { right: 14px; }
+        .hero-video-frame:hover .hero-video-nav { opacity: 0.85; }
+        @media (max-width: 768px) {
+            .hero-video-nav { opacity: 0.7; }
+        }
+        .hero-video-cell {
+            position: relative;
+            overflow: hidden;
+            background: var(--ink);
+        }
+        .hero-video-cell video {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        @media (max-width: 768px) {
+            .hero-videos {
+                display: flex;
+                flex-direction: row;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+            }
+            .hero-videos::-webkit-scrollbar { display: none; }
+            .hero-video-cell {
+                flex: 0 0 80%;
+                scroll-snap-align: center;
+                aspect-ratio: 9 / 16;
+                max-height: 75vh;
+            }
+        }
+
+        /* Mid-page scattered headline — same font as hero, on cream paper */
+        .inspiration {
+            position: relative;
+            min-height: 80vh;
+            background: var(--paper);
+            overflow: hidden;
+            padding: 0;
+        }
+        .inspiration-eyebrow {
+            position: absolute;
+            top: 48px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: var(--sans);
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--ink-quiet);
+        }
+        .inspiration-word {
+            position: absolute;
+            font-family: var(--hero);
+            font-weight: 400;
+            font-style: normal;
+            color: var(--ink);
+            font-size: clamp(64px, 13vw, 200px);
+            line-height: 0.88;
+            letter-spacing: -0.035em;
+            white-space: nowrap;
+        }
+        .inspiration-word em {
+            font-family: 'Archivo', 'Inter', sans-serif;
+            font-style: italic;
+            font-weight: 500;
+        }
+        /* Scattered words sit in the TOP half only — leaving room below for "Bali" + subline */
+        .inspiration-word    { font-size: clamp(48px, 8.5vw, 120px); line-height: 0.88; }
+        .inspiration-word--1 { top: 12%; left: 6%; }
+        .inspiration-word--2 { top: 22%; right: 7%; }
+        .inspiration-word--3 { top: 32%; left: 20%; }
+
+        /* ── The Bali answer — italic Archivo, like "vivirla." in the hero ── */
+        .inspiration-answer {
+            position: absolute;
+            left: 50%;
+            bottom: 16%;
+            transform: translateX(-50%);
+            font-family: 'Archivo', 'Inter', sans-serif;
+            font-style: italic;
+            font-weight: 500;
+            font-size: clamp(92px, 12vw, 170px);
+            line-height: 0.9;
+            color: var(--ink);
+            text-align: center;
+            white-space: nowrap;
+            letter-spacing: -0.035em;
+        }
+        .inspiration-answer em {
+            font-family: 'Archivo', 'Inter', sans-serif;
+            font-style: italic;
+            font-weight: 500;
+        }
+        .inspiration-subline {
+            position: absolute;
+            left: 50%;
+            bottom: 9%;
+            transform: translateX(-50%);
+            font-family: var(--display-alt);
+            font-size: clamp(14px, 1.3vw, 18px);
+            font-style: italic;
+            font-weight: 300;
+            color: var(--ink-soft);
+            max-width: 560px;
+            text-align: center;
+            line-height: 1.5;
+            padding: 0 24px;
+        }
+        @media (max-width: 700px) {
+            .inspiration-word    { font-size: clamp(34px, 9vw, 56px); }
+            .inspiration-word--1 { top: 12%; left: 6%; }
+            .inspiration-word--2 { top: 22%; right: 6%; }
+            .inspiration-word--3 { top: 32%; left: 6%; }
+            .inspiration-answer  { font-size: clamp(72px, 20vw, 110px); top: 56%; }
+            .inspiration-subline { font-size: 13px; bottom: 10%; max-width: 320px; }
+        }
+
+        /* ── Bali inspiration image panel with overlay title ── */
+        .image-panel--bali { position: relative; }
+        .image-panel--bali::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(0,0,0,0.10) 0%, rgba(0,0,0,0.20) 55%, rgba(0,0,0,0.72) 100%);
+            z-index: 1;
+        }
+        .image-bali-title {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -60%);
+            font-family: 'Archivo', 'Inter', sans-serif;
+            font-style: italic;
+            font-weight: 500;
+            font-size: clamp(110px, 17vw, 240px);
+            line-height: 0.9;
+            letter-spacing: -0.035em;
+            color: rgba(255,255,255,0.95);
+            text-shadow: 0 6px 36px rgba(0,0,0,0.55);
+            z-index: 2;
+            pointer-events: none;
+        }
+        .image-panel--bali .image-caption {
+            display: block !important;       /* override hide-caption default */
+            position: absolute;
+            bottom: 36px;
+            left: 50%;
+            transform: translateX(-50%);
+            right: auto;
+            max-width: 640px;
+            width: calc(100% - 48px);
+            text-align: center;
+            color: rgba(255,255,255,0.92);
+            font-family: var(--display-alt);
+            font-weight: 300;
+            font-style: italic;
+            font-size: 16px;
+            line-height: 1.55;
+            z-index: 2;
+        }
+        @media (max-width: 700px) {
+            .image-bali-title { font-size: clamp(100px, 28vw, 180px); }
+            .image-panel--bali .image-caption { font-size: 13px; bottom: 24px; }
+        }
+        @media (max-width: 768px) {
+            .inspiration { min-height: 68vh; }
+            .inspiration-eyebrow { top: 36px; font-size: 10px; }
+            .inspiration-word { font-size: clamp(46px, 14vw, 82px); letter-spacing: -0.04em; }
+            .inspiration-word--1 { top: 18%; left: 6%; }
+            .inspiration-word--2 { top: 40%; right: 6%; }
+            .inspiration-word--3 { bottom: 16%; left: 6%; }
+        }
+        @media (max-width: 500px) {
+            .inspiration-word { font-size: clamp(40px, 13vw, 60px); }
+        }
+        .hero-line {
+            font-family: var(--hero);
+            font-weight: 400;  /* Archivo Black is inherently 900-weight */
+            font-style: normal;
+            color: white;
+            font-size: clamp(40px, 7.5vw, 112px);
+            line-height: 0.96;
+            letter-spacing: -0.035em;
+            text-shadow: 0 2px 24px rgba(0, 0, 0, 0.35);
+            white-space: nowrap;
+            margin: 0;
+        }
+        .hero-line em {
+            font-family: 'Archivo', 'Inter', sans-serif;
+            font-style: italic;
+            font-weight: 500;
+        }
+
+        /* Bottom corners: location left, italic body right */
+        .hero-corner {
+            position: absolute;
+            font-family: var(--sans);
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.6;
+            z-index: 3;
+            text-shadow: 0 1px 8px rgba(0, 0, 0, 0.4);
+        }
+        .hero-corner--bottom-left {
+            bottom: 32px;
+            left: 32px;
+        }
+        .hero-corner--bottom-right {
+            bottom: 32px;
+            right: 32px;
+            max-width: 340px;
+            font-family: var(--serif);
+            font-style: italic;
+            font-size: 14px;
+            font-weight: 400;
+            text-transform: none;
+            letter-spacing: 0.1px;
+            color: rgba(255, 255, 255, 0.92);
+            text-align: right;
+        }
+        .hero-scroll {
+            position: absolute;
+            bottom: 32px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: var(--sans);
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.85);
+            z-index: 3;
+            text-decoration: none;
+            padding: 12px 20px;
+            min-height: 44px;
+            display: inline-flex;
+            align-items: center;
+            cursor: pointer;
+            transition: opacity 0.25s, transform 0.25s;
+            text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
+            animation: hero-scroll-pulse 2.4s ease-in-out infinite;
+        }
+        .hero-scroll:hover { opacity: 0.7; }
+        @keyframes hero-scroll-pulse {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50%      { transform: translateX(-50%) translateY(6px); }
+        }
+
+        @media (max-width: 900px) {
+            .video-hero { height: 92vh; min-height: 580px; }
+            .hero-words { padding: 0 6%; gap: 6px; }
+            .hero-line { font-size: clamp(32px, 7.5vw, 64px); letter-spacing: -0.04em; }
+            .hero-corner--bottom-left,
+            .hero-corner--bottom-right { display: none; }
+            .hero-scroll { bottom: 18px; }
+        }
+
+        @media (max-width: 500px) {
+            .video-hero { min-height: 560px; }
+            .hero-words { padding: 0 6%; gap: 4px; }
+            .hero-line { font-size: clamp(26px, 7vw, 42px); white-space: normal; }
+        }
+
+        /* ── PANEL (text storytelling) ── */
+        .panel {
+            min-height: 100vh;
+            min-height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 120px 24px 80px;
+            position: relative;
+        }
+        .panel-content {
+            max-width: 1100px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+        }
+        .panel-content--centered {
+            grid-template-columns: 1fr;
+            text-align: center;
+            max-width: 720px;
+        }
+        .panel-line {
+            font-family: var(--serif);
+            font-weight: 400;
+            font-size: 29px;
+            line-height: 1.5;
+            color: var(--ink);
+            letter-spacing: 0.1px;
+        }
+        .panel-line--right {
+            text-align: right;
+            justify-self: end;
+            max-width: 560px;
+        }
+        .panel-line--left { max-width: 560px; }
+
+        /* The opening salutation panel — same Archivo Black as hero */
+        .panel-salutation {
+            font-family: var(--hero);
+            font-weight: 400;
+            font-style: normal;
+            font-size: clamp(36px, 5.5vw, 76px);
+            line-height: 0.95;
+            letter-spacing: -0.035em;
+        }
+        .panel-salutation em {
+            font-family: 'Archivo', 'Inter', sans-serif;
+            font-style: italic;
+            font-weight: 500;
+        }
+
+        .panel-script {
+            font-family: 'Archivo', 'Inter', sans-serif;  /* italic Archivo, like "vivirla." */
+            font-style: italic;
+            font-weight: 500;
+            font-size: 96px;
+            letter-spacing: -0.035em;
+            color: var(--ink);
+            text-align: center;
+            line-height: 1;
+        }
+
+        @media (max-width: 700px) {
+            .panel {
+                padding: 90px 22px 70px;
+                min-height: 100dvh;
+            }
+            .panel-content { grid-template-columns: 1fr; gap: 28px; text-align: center; }
+            .panel-line--right, .panel-line--left { max-width: 100%; text-align: center; justify-self: center; }
+            .panel-line { font-size: 26px; line-height: 1.5; }
+            .panel-script { font-size: 54px; }
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 36px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: var(--sans);
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--ink-quiet);
+        }
+
+        .panel-detail { display: none; }
+
+        @media (max-width: 700px) {
+            .panel-detail {
+                position: static;
+                max-width: 100%;
+                margin: 40px auto 0;
+                text-align: center;
+                font-size: 13px;
+                padding: 0 24px;
+            }
+            .scroll-indicator { bottom: 16px; }
+        }
+
+        /* ── FULL-BLEED IMAGE PANEL ── */
+        .image-panel {
+            width: 100%;
+            height: 90vh;
+            min-height: 540px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        .image-caption { display: none; }
+
+        @media (max-width: 700px) {
+            .image-panel { height: 70vh; min-height: 440px; }
+            .image-caption { right: 20px; bottom: 20px; font-size: 13px; max-width: 260px; }
+        }
+
+        /* ── VIDEO TOUR SECTION ── */
+        .video-section {
+            padding: 100px 24px;
+            background: var(--paper-deeper);
+            border-top: 1px solid var(--rule);
+            border-bottom: 1px solid var(--rule);
+            text-align: center;
+        }
+        .video-eyebrow {
+            font-family: var(--sans);
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--ink-quiet);
+            margin-bottom: 24px;
+        }
+        .video-headline {
+            font-family: var(--display);
+            font-style: italic;
+            font-weight: 300;
+            font-size: clamp(36px, 5vw, 64px);
+            line-height: 1.1;
+            letter-spacing: -0.015em;
+            color: var(--ink);
+            max-width: 820px;
+            margin: 0 auto 48px;
+            font-variation-settings: "opsz" 144;
+        }
+        .video-wrapper {
+            max-width: 1100px;
+            margin: 0 auto;
+            aspect-ratio: 16 / 9;
+            background: var(--ink);
+            position: relative;
+            overflow: hidden;
+        }
+        .video-wrapper video {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+        }
+        .video-note {
+            font-family: var(--serif);
+            font-style: italic;
+            font-size: 12px;
+            color: var(--ink-quiet);
+            margin-top: 20px;
+            max-width: 580px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @media (max-width: 700px) {
+            .video-section { padding: 64px 16px; }
+        }
+
+        /* ── SPECS PANEL ── */
+        .specs-panel {
+            padding: 120px 24px;
+            text-align: center;
+        }
+        .specs-eyebrow {
+            font-family: var(--sans);
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--accent);       /* sage accent on eyebrow */
+            margin-bottom: 24px;
+            position: relative;
+            padding-bottom: 14px;
+        }
+        .specs-eyebrow::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 36px;
+            height: 2px;
+            background: var(--moss);    /* sage-green underline rule */
+        }
+        .specs-headline {
+            font-family: var(--hero);
+            font-weight: 400;
+            font-style: normal;
+            font-size: clamp(34px, 5vw, 64px);
+            line-height: 1.05;
+            letter-spacing: -0.03em;
+            color: var(--ink);
+            max-width: 900px;
+            margin: 0 auto 64px;
+        }
+        .specs-headline em {
+            font-family: 'Archivo', 'Inter', sans-serif;
+            font-style: italic;
+            font-weight: 500;
+        }
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 32px;
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 36px 0;
+            border-top: 1px solid var(--rule);
+            border-bottom: 1px solid var(--rule);
+        }
+        .spec { text-align: center; }
+        .spec-label {
+            font-family: var(--sans);
+            font-size: 9px;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--ink-quiet);
+            margin-bottom: 8px;
+        }
+        .spec-value {
+            font-family: var(--serif);
+            font-size: 22px;
+            font-weight: 400;
+            color: var(--ink);
+        }
+
+        @media (max-width: 700px) {
+            .specs-panel { padding: 80px 20px; }
+            .specs-grid { grid-template-columns: repeat(2, 1fr); gap: 28px; padding: 28px 0; }
+            .spec-value { font-size: 18px; }
+        }
+
+        /* ── CTA ── */
+        .cta-panel {
+            min-height: 80vh;
+            min-height: 80dvh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 120px 24px;
+            background: var(--paper-deeper);
+            border-top: 1px solid var(--rule);
+        }
+        .cta-eyebrow {
+            font-family: var(--sans);
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--accent);      /* sage accent on CTA eyebrow */
+            margin-bottom: 32px;
+        }
+        .cta-quote {
+            font-family: var(--hero);
+            font-weight: 400;
+            font-style: normal;
+            font-size: clamp(36px, 5.5vw, 76px);
+            line-height: 1.0;
+            letter-spacing: -0.035em;
+            color: var(--ink);
+            max-width: 960px;
+            margin: 0 auto 56px;
+        }
+        .cta-quote em {
+            font-family: 'Archivo', 'Inter', sans-serif;
+            font-style: italic;
+            font-weight: 500;
+        }
+        .cta-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .btn-line {
+            display: inline-block;
+            font-family: var(--sans);
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 14px 24px;
+            text-decoration: none;
+            border: 1px solid var(--ink);
+            color: var(--ink);
+            background: transparent;
+            transition: all 0.2s;
+        }
+        .btn-line:hover { background: var(--ink); color: var(--paper); }
+        .btn-line--filled {
+            background: var(--ink);
+            color: var(--paper);
+        }
+        .btn-line--filled:hover { background: var(--accent); border-color: var(--accent); }
+
+        /* ── FOOTER ── */
+        footer {
+            text-align: center;
+            padding: 120px 24px 80px;
+            border-top: 1px solid var(--rule);
+        }
+        .stazio-portrait {
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 40px;
+            display: block;
+            box-shadow: 0 16px 50px rgba(26, 26, 22, 0.20);
+            border: 8px solid var(--paper);
+        }
+        @media (max-width: 700px) {
+            .stazio-portrait { width: 220px; height: 220px; border-width: 6px; }
+        }
+        .stazio-caption {
+            font-family: var(--sans);
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 1.8px;
+            text-transform: uppercase;
+            color: var(--ink-quiet);
+            margin-bottom: 32px;
+        }
+        .footer-quote {
+            font-family: var(--hero);
+            font-weight: 400;
+            font-style: normal;
+            font-size: clamp(26px, 3.8vw, 44px);
+            line-height: 1.1;
+            letter-spacing: -0.025em;
+            color: var(--ink);
+            max-width: 820px;
+            margin: 0 auto 40px;
+        }
+        .footer-quote em {
+            font-family: 'Archivo', 'Inter', sans-serif;
+            font-style: italic;
+            font-weight: 500;
+        }
+        .footer-signature {
+            font-family: var(--script);
+            font-size: 38px;
+            color: var(--ink);
+            margin-bottom: 40px;
+            line-height: 1;
+        }
+        .footer-logo {
+            height: 24px;
+            margin-bottom: 24px;
+            opacity: 0.5;
+        }
+        .footer-meta {
+            font-family: var(--sans);
+            font-size: 10px;
+            color: var(--ink-quiet);
+            line-height: 1.8;
+        }
+        .footer-meta a { color: var(--ink-soft); text-decoration: none; }
+
+        @media (max-width: 700px) {
+            footer { padding: 64px 20px 48px; }
+            .footer-quote { font-size: 16px; }
+            .footer-signature { font-size: 32px; }
+        }
+
+        /* ── ENTRANCE ANIMATIONS — left column slides in first, right ~850ms later ── */
+        /* Re-animates every time the slide enters / leaves the viewport */
+        .panel .panel-line {
+            opacity: 0;
+            transition: opacity 1700ms cubic-bezier(0.19, 1, 0.22, 1),
+                        transform 1700ms cubic-bezier(0.19, 1, 0.22, 1);
+            will-change: opacity, transform;
+        }
+        .panel .panel-line--left {
+            transform: translateX(-60px);
+            transition-delay: 0ms;
+        }
+        .panel .panel-line--right {
+            transform: translateX(60px);
+            transition-delay: 850ms;
+        }
+        .panel.is-visible .panel-line {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        @media (max-width: 768px) {
+            .panel .panel-line {
+                transition-duration: 1300ms;
+            }
+            .panel .panel-line--left  { transform: translateX(-34px); transition-delay: 0ms; }
+            .panel .panel-line--right { transform: translateX(34px); transition-delay: 800ms; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; scroll-snap-type: none; }
+            * { transition: none !important; animation: none !important; }
+            .panel .panel-line {
+                opacity: 1 !important;
+                transform: none !important;
+            }
+            .hero-scroll, .next-slide { transform: translateX(-50%) !important; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ── FIXED TOP BAR (Home of Ambrose layout) ── -->
+<nav class="topbar">
+    <a href="#hero-top" class="top-brand" aria-label="Back to top">HOME <em>of</em> VILLA BALI</a>
+    <div class="top-center">
+        <a href="#about" class="top-center-btn">About the Villa</a>
+    </div>
+    <div class="top-right">
+        <a href="#" id="langToggle" class="lang-toggle" aria-label="Cambiar idioma / Change language"><span class="lang-en">ES</span><span class="lang-es">EN</span></a>
+        <a href="https://wa.me/34659003377?text=Hola%2C%20me%20interesa%20Villa%20Bali%20(TRI-210423-01)" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="#facts"><span class="lang-en">Facts</span><span class="lang-es">Datos</span></a>
+    </div>
+</nav>
+
+<!-- ════════════════════════════════════════════════════ -->
+<!-- HERO — PHOTO BACKGROUND + SCATTERED POEM             -->
+<!-- ════════════════════════════════════════════════════ -->
+<section class="video-hero" id="hero-top">
+    <!-- Stacked typography: bilingual EN / ES -->
+    <div class="hero-words">
+        <h1 class="hero-line"><span class="lang-en">One man built it.</span><span class="lang-es">Un hombre la construyó.</span></h1>
+        <h1 class="hero-line"><span class="lang-en">He knew what</span><span class="lang-es">Sabía lo que</span></h1>
+        <h1 class="hero-line"><span class="lang-en"><em>he wanted.</em></span><span class="lang-es"><em>quería.</em></span></h1>
+    </div>
+    <a href="#hero-videos" class="hero-scroll" aria-label="Scroll to next slide"><span class="lang-en">Keep scrolling &darr;</span><span class="lang-es">Siga deslizando &darr;</span></a>
+</section>
+
+<!-- ════════════════════════════════════════════════════ -->
+<!-- HERO VIDEO — single centered portrait, cycles 9 clips  -->
+<!-- ════════════════════════════════════════════════════ -->
+<section class="hero-videos" id="hero-videos" aria-label="Villa Bali on Instagram">
+    <div class="hero-video-frame" id="bali-reel">
+        <div class="hero-video-dots" id="bali-reel-dots" aria-hidden="true"></div>
+        <video id="bali-reel-video" muted playsinline preload="auto"
+               poster="img/00_hero_exterior_pool.jpg"
+               src="video/ig_8.mp4"></video>
+        <button class="hero-video-nav hero-video-nav--prev" id="bali-reel-prev" aria-label="Previous clip">&larr;</button>
+        <button class="hero-video-nav hero-video-nav--next" id="bali-reel-next" aria-label="Next clip">&rarr;</button>
+    </div>
+    <p class="hero-video-caption"><span class="lang-en">Villa Bali — from above</span><span class="lang-es">Villa Bali — desde el aire</span></p>
+</section>
+<script>
+(function () {
+    var videoEl = document.getElementById('bali-reel-video');
+    var dotsEl = document.getElementById('bali-reel-dots');
+    if (!videoEl || !dotsEl) return;
+    var N = 9;
+    var i = 7;   // start with clip #8 (array index 7)
+
+    // Build dots
+    var dots = [];
+    for (var k = 0; k < N; k++) {
+        var d = document.createElement('div');
+        d.className = 'hero-video-dot';
+        dotsEl.appendChild(d);
+        dots.push(d);
+    }
+
+    function markState() {
+        for (var k = 0; k < N; k++) {
+            dots[k].classList.remove('is-active', 'is-done');
+            if (k < i) dots[k].classList.add('is-done');
+            else if (k === i) dots[k].classList.add('is-active');
+        }
+    }
+
+    var swapGuard = 0;
+    function loadAndPlay(idx) {
+        i = ((idx % N) + N) % N;
+        markState();
+        var myGuard = ++swapGuard;                   // cancel stale loads if user clicks fast
+        videoEl.classList.add('is-swapping');        // fade out
+        var revealAndPlay = function () {
+            if (myGuard !== swapGuard) return;       // a newer click superseded us
+            videoEl.removeEventListener('canplay', revealAndPlay);
+            videoEl.removeEventListener('loadeddata', revealAndPlay);
+            videoEl.classList.remove('is-swapping'); // fade in
+            var p = videoEl.play();
+            if (p && p.catch) p.catch(function(){});
+        };
+        videoEl.addEventListener('canplay', revealAndPlay, { once: false });
+        videoEl.addEventListener('loadeddata', revealAndPlay, { once: false });
+        // Swap src slightly AFTER opacity transition kicks in — avoids the tail-frame flash
+        setTimeout(function () {
+            if (myGuard !== swapGuard) return;
+            videoEl.pause();
+            try { videoEl.removeAttribute('src'); videoEl.load(); } catch (e) {}
+            videoEl.src = 'video/ig_' + (i + 1) + '.mp4';
+            videoEl.load();
+        }, 80);
+    }
+
+    videoEl.addEventListener('ended', function () {
+        loadAndPlay(i + 1);
+    });
+
+    // Prev / Next buttons
+    var prevBtn = document.getElementById('bali-reel-prev');
+    var nextBtn = document.getElementById('bali-reel-next');
+    if (prevBtn) prevBtn.addEventListener('click', function (e) { e.stopPropagation(); loadAndPlay(i - 1); });
+    if (nextBtn) nextBtn.addEventListener('click', function (e) { e.stopPropagation(); loadAndPlay(i + 1); });
+
+    // Keyboard arrows (when user is interacting with this section)
+    document.addEventListener('keydown', function (e) {
+        var section = document.getElementById('hero-videos');
+        if (!section) return;
+        var r = section.getBoundingClientRect();
+        if (r.bottom < 0 || r.top > window.innerHeight) return;  // only when visible
+        if (e.key === 'ArrowLeft')  { loadAndPlay(i - 1); }
+        if (e.key === 'ArrowRight') { loadAndPlay(i + 1); }
+    });
+
+    // Swipe gestures
+    var frame = document.getElementById('bali-reel');
+    var startX = null;
+    frame.addEventListener('touchstart', function (e) { startX = e.touches[0].clientX; }, { passive: true });
+    frame.addEventListener('touchend', function (e) {
+        if (startX === null) return;
+        var dx = (e.changedTouches[0].clientX) - startX;
+        startX = null;
+        if (Math.abs(dx) < 40) return;              // ignore micro-swipes
+        if (dx < 0) loadAndPlay(i + 1);             // swipe left → next
+        else        loadAndPlay(i - 1);             // swipe right → prev
+    });
+
+    // Start the first clip when the section enters view
+    var started = false;
+    var startIfVisible = function () {
+        var section = document.getElementById('hero-videos');
+        if (!section || started) return;
+        var r = section.getBoundingClientRect();
+        if (r.top < window.innerHeight && r.bottom > 0) {
+            started = true;
+            markState();
+            var p = videoEl.play();
+            if (p && p.catch) p.catch(function(){});
+        }
+    };
+    window.addEventListener('scroll', startIfVisible, { passive: true });
+    window.addEventListener('load', function () { markState(); startIfVisible(); });
+})();
+</script>
+
+<!-- ════════════════════════════════════════════════════ -->
+<!-- PANEL 01 — Salutation                                -->
+<!-- ════════════════════════════════════════════════════ -->
+<section class="panel" id="about">
+    <div class="panel-content">
+        <div class="panel-line panel-line--left panel-salutation"><span class="lang-en">The house was built <em>by hand.</em></span><span class="lang-es">La casa se construyó <em>a mano.</em></span></div>
+        <div class="panel-line panel-line--right panel-salutation"><span class="lang-en">You will feel it <em>before</em> you see it.</span><span class="lang-es">La sentirá <em>antes</em> de verla.</span></div>
+    </div>
+    <p class="panel-detail"><span class="lang-en">The drive up is short. The arrival is not. You will slow down before the door opens, and you will not know why.</span><span class="lang-es">La subida es corta. La llegada, no. Se detendrá antes de que se abra la puerta, y no sabrá por qué.</span></p>
+</section>
+
+<!-- ════════════════════════════════════════════════════ -->
+<!-- PANEL 02 — The arrival                                -->
+<!-- ════════════════════════════════════════════════════ -->
+<section class="panel">
+    <div class="panel-content">
+        <div class="panel-line panel-line--left">
+            <span class="lang-en">You have seen many houses. Most were built to sell. Few were built to be lived in by someone who would notice.</span>
+            <span class="lang-es">Ha visto muchas casas. La mayoría se construyeron para venderse. Pocas, para que viviera en ellas alguien que se daría cuenta.</span>
+        </div>
+        <div class="panel-line panel-line--right">
+            <span class="lang-en">There is a difference you have felt, but perhaps never named &mdash; the difference between a house <em>assembled</em> and a house <em>made.</em></span>
+            <span class="lang-es">Existe una diferencia que ha sentido, pero quizá nunca ha nombrado &mdash; la diferencia entre una casa <em>ensamblada</em> y una casa <em>hecha.</em></span>
+        </div>
+    </div>
+</section>
+
+<!-- ── IMAGE: POOL HERO ── -->
+<div class="image-panel" style="background-image:url('img/09_second_image_master_pool.jpg')">
+    <p class="image-caption">The pool runs the length of the south-facing garden. The mountains do most of the talking.</p>
+</div>
+
+<!-- ════════════════════════════════════════════════════ -->
+<!-- PANEL 03 — Mornings                                   -->
+<!-- ════════════════════════════════════════════════════ -->
+<section class="panel">
+    <div class="panel-content">
+        <div class="panel-line panel-line--left">
+            <span class="lang-en">
+                I was drawn before I was built.
+                <br><br>
+                Every wall, every shadow, every window was chosen by the man who would live here.
+                <br><br>
+                I am poured concrete &mdash; the kind that holds its shape through a century.
+            </span>
+            <span class="lang-es">
+                Me dibujaron antes de construirme.
+                <br><br>
+                Cada muro, cada sombra, cada ventana la eligió el hombre que iba a vivir aquí.
+                <br><br>
+                Soy hormigón armado &mdash; del que aguanta un siglo sin ceder.
+            </span>
+        </div>
+        <div class="panel-line panel-line--right">
+            <span class="lang-en">
+                <em>I am Bali,</em> on an island that does not know Bali.
+                <br><br>
+                I was made slowly. You will recognize it.
+            </span>
+            <span class="lang-es">
+                <em>Soy Bali,</em> en una isla que no conoce Bali.
+                <br><br>
+                Me hicieron despacio. Lo reconocerá.
+            </span>
+        </div>
+    </div>
+</section>
+
+<!-- ── IMAGE: COURTYARD ── -->
+<div class="image-panel" style="background-image:url('img/11_third_panel_bedroom_art.jpg')">
+    <p class="image-caption">An interior courtyard with a single olive tree. A quiet place between the rooms.</p>
+</div>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- MID-PAGE SCATTERED HEADLINE — What inspired her        -->
+<!-- ══════════════════════════════════════════════════════ -->
+<section class="inspiration">
+    <p class="inspiration-eyebrow"><span class="lang-en">What inspired her</span><span class="lang-es">Qu&eacute; la inspir&oacute;</span></p>
+    <h2 class="inspiration-word inspiration-word--1"><span class="lang-en">What</span><span class="lang-es">Qu&eacute;</span></h2>
+    <h2 class="inspiration-word inspiration-word--2"><span class="lang-en">inspired</span><span class="lang-es">inspir&oacute;</span></h2>
+    <h2 class="inspiration-word inspiration-word--3"><span class="lang-en"><em>her.</em></span><span class="lang-es"><em>su nombre.</em></span></h2>
+    <p class="inspiration-answer"><em>Bali.</em></p>
+</section>
+
+<!-- ── IMAGE: BALI INSPIRATION (Tukad Cepung waterfall) ── -->
+<div class="image-panel image-panel--bali" style="background-image:url('img/arizona_1.jpg')">
+    <p class="image-bali-title">Bali</p>
+</div>
+
+<!-- ════════════════════════════════════════════════════ -->
+<!-- PANEL 04 — Why I am called Bali (moved here)          -->
+<!-- ════════════════════════════════════════════════════ -->
+<section class="panel">
+    <div class="panel-content">
+        <div class="panel-line panel-line--left">
+            <span class="lang-en">
+                Two hundred and fifty lights. <em>Placed, not installed.</em>
+                <br><br>
+                Aerothermal climate by Daikin &mdash; the house breathes for you.
+                <br><br>
+                Domotica that disappears into use.
+            </span>
+            <span class="lang-es">
+                Doscientas cincuenta luces. <em>Colocadas, no instaladas.</em>
+                <br><br>
+                Climatización aerotérmica Daikin &mdash; la casa respira por usted.
+                <br><br>
+                Domótica que desaparece al usarla.
+            </span>
+        </div>
+        <div class="panel-line panel-line--right">
+            <span class="lang-en">
+                Shadows designed before the concrete was poured.
+                <br><br>
+                <em>You will find the rest when you come.</em>
+            </span>
+            <span class="lang-es">
+                Sombras dibujadas antes de verter el hormigón.
+                <br><br>
+                <em>El resto lo encontrará cuando venga.</em>
+            </span>
+        </div>
+    </div>
+</section>
+
+<!-- ── IMAGE: PANEL 1 — dining room with chandelier ── -->
+<div class="image-panel" style="background-image:url('img/panel_1.jpg')">
+    <p class="image-caption">The principal living room opens completely to the garden. The sofa was placed for the view, not the television.</p>
+</div>
+
+<!-- ════════════════════════════════════════════════════ -->
+<!-- PANEL 05 — The kitchen and dining                     -->
+<!-- ════════════════════════════════════════════════════ -->
+<section class="panel">
+    <div class="panel-content">
+        <div class="panel-line panel-line--left">
+            <span class="lang-en">From my western windows, <em>another island waits.</em></span>
+            <span class="lang-es">Desde mis ventanas al oeste, <em>otra isla aguarda.</em></span>
+        </div>
+        <div class="panel-line panel-line--right">
+            <span class="lang-en">La Gomera changes through the day. So will your sense of the hour.</span>
+            <span class="lang-es">La Gomera cambia a lo largo del día. También su noción del tiempo.</span>
+        </div>
+    </div>
+</section>
+
+<!-- ── IMAGE: PANEL 2 — bedroom with pool view (the user-specified second image) ── -->
+<div class="image-panel" style="background-image:url('img/panel_2.jpg')">
+    <p class="image-caption">A bedroom that opens to the pool. The mirror was placed for the view, not the reflection.</p>
+</div>
+
+<!-- ════════════════════════════════════════════════════ -->
+<!-- PANEL 07 — Scale / Space                              -->
+<!-- ════════════════════════════════════════════════════ -->
+<section class="panel">
+    <div class="panel-content">
+        <div class="panel-line panel-line--left">
+            <span class="lang-en">
+                Some houses are an investment.
+                <br><br>
+                I am not one of them.
+            </span>
+            <span class="lang-es">
+                Hay casas que son una inversión.
+                <br><br>
+                Yo no soy una de ellas.
+            </span>
+        </div>
+        <div class="panel-line panel-line--right">
+            <span class="lang-en"><em>I am the last house you will look for.</em></span>
+            <span class="lang-es"><em>Soy la última casa que buscará.</em></span>
+        </div>
+    </div>
+    <p class="panel-detail">317 m&sup2; of habitable space on a 1,000 m&sup2; plot. Three bedrooms, four bathrooms, basement gym, private infinity pool.</p>
+</section>
+
+<!-- ── IMAGE: PANEL 3 — bedroom facing the volcanic foothills ── -->
+<div class="image-panel" style="background-image:url('img/panel_3.jpg')">
+    <p class="image-caption">A bedroom that faces the volcanic foothills. Built to wake up to the line of mountain rising into the morning sky.</p>
+</div>
+
+<!-- ════════════════════════════════════════════════════ -->
+<!-- PANEL 07b — Fully furnished, turnkey                  -->
+<!-- ════════════════════════════════════════════════════ -->
+<section class="panel">
+    <div class="panel-content">
+        <div class="panel-line panel-line--left">
+            <span class="lang-en">
+                Walk in with a suitcase. <em>The bed will be made.</em>
+            </span>
+            <span class="lang-es">
+                Entre con una maleta. <em>La cama estará hecha.</em>
+            </span>
+        </div>
+        <div class="panel-line panel-line--right">
+            <span class="lang-en">Every chair, every plate, every lamp was chosen by the man who built the house.</span>
+            <span class="lang-es">Cada silla, cada plato, cada lámpara la eligió el hombre que construyó la casa.</span>
+        </div>
+    </div>
+</section>
+
+<!-- ── IMAGE: PANEL 4 — bedroom opening to the garden ── -->
+<div class="image-panel" style="background-image:url('img/panel_4.jpg')">
+    <p class="image-caption">A bedroom with a door to the garden. The palms outside were planted before the windows were cut.</p>
+</div>
+
+<!-- ════════════════════════════════════════════════════ -->
+<!-- PANEL 08 — The neighbourhood                          -->
+<!-- ════════════════════════════════════════════════════ -->
+<section class="panel">
+    <div class="panel-content">
+        <div class="panel-line panel-line--left">
+            <span class="lang-en">Playa Paraíso was here long before I was.</span>
+            <span class="lang-es">Playa Paraíso estaba aquí mucho antes que yo.</span>
+        </div>
+        <div class="panel-line panel-line--right">
+            <span class="lang-en">A quiet coastal edge of Adeje, west-facing, within a short radius of the airport and the cliffs of Los Gigantes.</span>
+            <span class="lang-es">Un rincón tranquilo de la costa de Adeje, al oeste, a un radio corto del aeropuerto y de los acantilados de Los Gigantes.</span>
+        </div>
+    </div>
+</section>
+
+<!-- ── CURSIVE SIGNATURE ── -->
+<section class="panel" style="min-height: 50vh">
+    <p class="panel-script">Bali</p>
+</section>
+
+<!-- ════════════════════════════════════════════════════ -->
+<!-- SPECS PANEL                                           -->
+<!-- ════════════════════════════════════════════════════ -->
+<section class="specs-panel" id="facts">
+    <p class="specs-eyebrow"><span class="lang-en">Facts</span><span class="lang-es">Datos</span></p>
+    <h2 class="specs-headline">
+        <span class="lang-en">A modern villa on <em>Los Andenes, Playa Para&iacute;so</em> &mdash; completed 2022, ready to live in.</span>
+        <span class="lang-es">Una casa moderna en <em>Los Andenes, Playa Para&iacute;so</em> &mdash; terminada en 2022, lista para entrar a vivir.</span>
+    </h2>
+    <dl class="specs-grid">
+        <div class="spec">
+            <div class="spec-label"><span class="lang-en">Bedrooms</span><span class="lang-es">Dormitorios</span></div>
+            <div class="spec-value">3</div>
+        </div>
+        <div class="spec">
+            <div class="spec-label"><span class="lang-en">Bathrooms</span><span class="lang-es">Ba&ntilde;os</span></div>
+            <div class="spec-value">4</div>
+        </div>
+        <div class="spec">
+            <div class="spec-label"><span class="lang-en">Built</span><span class="lang-es">Construidos</span></div>
+            <div class="spec-value">317 m&sup2;</div>
+        </div>
+        <div class="spec">
+            <div class="spec-label"><span class="lang-en">Plot</span><span class="lang-es">Parcela</span></div>
+            <div class="spec-value"><span class="lang-en">1,000 m&sup2;</span><span class="lang-es">1.000 m&sup2;</span></div>
+        </div>
+        <div class="spec">
+            <div class="spec-label"><span class="lang-en">Pool</span><span class="lang-es">Piscina</span></div>
+            <div class="spec-value"><span class="lang-en">Private infinity</span><span class="lang-es">Privada infinity</span></div>
+        </div>
+        <div class="spec">
+            <div class="spec-label"><span class="lang-en">Price</span><span class="lang-es">Precio</span></div>
+            <div class="spec-value"><span class="lang-en">&euro;5,500,000</span><span class="lang-es">5.500.000 &euro;</span></div>
+        </div>
+    </dl>
+</section>
+
+<!-- ── CTA ── -->
+<section class="cta-panel" id="viewing">
+    <p class="cta-eyebrow"><span class="lang-en">By invitation</span><span class="lang-es">Por invitación</span></p>
+    <p class="cta-quote">
+        <span class="lang-en">Private viewings <em>by invitation.</em> Speak with the Owner.</span>
+        <span class="lang-es">Visitas privadas <em>por invitación.</em> Hable con el propietario.</span>
+    </p>
+    <div class="cta-buttons">
+        <a class="btn-line btn-line--filled" href="https://wa.me/34659003377?text=Hola%2C%20me%20interesa%20Villa%20Bali%20(TRI-210423-01)">
+            <span class="lang-en">Speak with the Owner</span><span class="lang-es">Hable con el propietario</span>
+        </a>
+    </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+    <img class="stazio-portrait" src="stazio.jpg" alt="Stazio &mdash; Tenerife Resort Invest">
+    <p class="stazio-caption">
+        <span class="lang-en">Stazio &middot; Forty-five years in South Tenerife</span>
+        <span class="lang-es">Stazio &middot; Cuarenta y cinco a&ntilde;os en el sur de Tenerife</span>
+    </p>
+    <p class="footer-quote">
+        <span class="lang-en">&ldquo;Villas like this one are the reason I have stayed on this island for <em>forty-five years</em>.&rdquo;</span>
+        <span class="lang-es">&laquo;Casas como esta son la raz&oacute;n por la que he permanecido en esta isla durante <em>cuarenta y cinco a&ntilde;os</em>.&raquo;</span>
+    </p>
+    <p class="footer-signature">Stazio</p>
+    <img class="footer-logo" src="tri_logo.png" alt="Tenerife Resort Invest">
+    <p class="footer-since" style="font-family:'EB Garamond',Georgia,serif;font-style:italic;font-size:13px;color:var(--ink-quiet);margin-top:8px;letter-spacing:0.5px;">Tenerife Resort Invest &mdash; since 1981.</p>
+    <p class="footer-meta">
+        TRI-210423-01 &middot; Villa Bali &middot; Los Andenes, Playa Paraíso, Adeje<br>
+        Los Andenes 5, Playa Paraíso, Adeje, 38670<br>
+        <a href="mailto:info@teneriferesortinvest.es">info@teneriferesortinvest.es</a> &middot; <a href="https://teneriferesortinvest.es">teneriferesortinvest.es</a>
+    </p>
+</footer>
+
+<script>
+    (function () {
+        // ── 1. Inject "Keep scrolling ↓" links into every snap-target slide ──
+        // Snap targets in document order; each slide gets a button anchored to the next.
+        // The hero already has its own .hero-scroll, so we skip injecting a duplicate there.
+        var slideSelectors = '.video-hero, .hero-videos, .panel, .image-panel, .inspiration, .specs-panel, .cta-panel';
+        var slides = document.querySelectorAll(slideSelectors);
+
+        // Assign sequential ids to anything that doesn't already have one
+        slides.forEach(function (el, i) {
+            if (!el.id) el.id = 'slide-' + (i + 1);
+        });
+
+        // Inject "Keep scrolling" link into each slide except the last
+        slides.forEach(function (el, i) {
+            var next = slides[i + 1];
+            if (!next) return; // last slide has no "next"
+            // Skip slides that already have a scroll indicator of any kind
+            if (el.querySelector('.hero-scroll') || el.querySelector('.next-slide') || el.querySelector('.scroll-indicator')) return;
+
+            var link = document.createElement('a');
+            link.className = 'next-slide';
+            // Light text on dark / photo backgrounds; dark text on cream paper
+            if (el.matches('.image-panel, .video-hero, .hero-videos')) {
+                link.classList.add('next-slide--light');
+            } else {
+                link.classList.add('next-slide--dark');
+            }
+            link.href = '#' + next.id;
+            link.setAttribute('aria-label', 'Scroll to next slide / Siguiente');
+            // Bilingual button content — CSS shows the right language based on <html lang>
+            link.innerHTML = '<span class="lang-en">Keep scrolling &darr;</span><span class="lang-es">Siga deslizando &darr;</span>';
+            el.appendChild(link);
+        });
+
+        // ── 1b. Language toggle (EN ⇄ ES) ──
+        // Switches <html lang> attribute; CSS show/hide rules do the rest.
+        // Persists choice in localStorage so the next visit remembers.
+        var langToggle = document.getElementById('langToggle');
+        function setLang(lang) {
+            document.documentElement.lang = lang;
+            try { localStorage.setItem('villaBaliLang', lang); } catch(e) {}
+        }
+        // Restore previously chosen language on page load
+        try {
+            var saved = localStorage.getItem('villaBaliLang');
+            if (saved === 'en' || saved === 'es') setLang(saved);
+        } catch(e) {}
+        if (langToggle) {
+            langToggle.addEventListener('click', function (e) {
+                e.preventDefault();
+                setLang(document.documentElement.lang === 'en' ? 'es' : 'en');
+            });
+        }
+
+        // ── 2. Entrance animations: slide-in right then left, on view ──
+        if (!('IntersectionObserver' in window)) {
+            document.querySelectorAll('.panel').forEach(function (p) { p.classList.add('is-visible'); });
+            document.querySelectorAll('.hero-video-cell video').forEach(function (v) {
+                if (v.dataset.src) { v.src = v.dataset.src; v.play().catch(function(){}); }
+            });
+            return;
+        }
+        // Re-animate on every entry AND exit (no unobserve) — so scrolling
+        // back up replays the slide-in, and scrolling away slides the text out.
+        var panelObserver = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                } else {
+                    entry.target.classList.remove('is-visible');
+                }
+            });
+        }, { threshold: 0.18, rootMargin: '0px 0px -8% 0px' });
+        document.querySelectorAll('.panel').forEach(function (p) { panelObserver.observe(p); });
+
+        // ── 3. Lazy-start hero videos when in view, pause when out ──
+        var videoObserver = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                var v = entry.target;
+                if (entry.isIntersecting) {
+                    if (!v.src && v.dataset.src) { v.src = v.dataset.src; }
+                    var p = v.play();
+                    if (p && typeof p.catch === 'function') { p.catch(function(){}); }
+                } else {
+                    v.pause();
+                }
+            });
+        }, { threshold: 0.25 });
+        document.querySelectorAll('.hero-video-cell video').forEach(function (v) {
+            videoObserver.observe(v);
+        });
+    })();
+</script>
+
+</body>
+</html>
