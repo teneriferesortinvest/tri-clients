@@ -258,8 +258,10 @@
         .hero-video-frame {
             position: relative;
             width: min(72vw, 140vh);
-            aspect-ratio: 16 / 9;
+            aspect-ratio: 4 / 3;          /* matches source videos (1920×1440) — no top/bottom crop */
             max-height: 72vh;
+            margin-left: auto;            /* safety: center in any flex parent */
+            margin-right: auto;
             background: #000;
             overflow: hidden;
             border-radius: 6px;
@@ -368,24 +370,6 @@
             object-fit: cover;
             display: block;
         }
-        @media (max-width: 768px) {
-            .hero-videos {
-                display: flex;
-                flex-direction: row;
-                overflow-x: auto;
-                scroll-snap-type: x mandatory;
-                -webkit-overflow-scrolling: touch;
-                scrollbar-width: none;
-            }
-            .hero-videos::-webkit-scrollbar { display: none; }
-            .hero-video-cell {
-                flex: 0 0 80%;
-                scroll-snap-align: center;
-                aspect-ratio: 9 / 16;
-                max-height: 75vh;
-            }
-        }
-
         /* Mid-page scattered headline — same font as hero, on cream paper */
         .inspiration {
             position: relative;
