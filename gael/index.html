@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Gael — Your Property Selection</title>
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="theme-color" content="#1a1a16">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&family=Caveat:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+
+        :root {
+            /* Brand v2 tokens — mirror of teneriferesortinvest.es prototype */
+            --paper:         #ffffff;
+            --paper-deeper:  #ffffff;
+            --ink:           #1a1a16;
+            --ink-soft:      #44423c;
+            --ink-quiet:     #8a8678;
+            --rule:          #ececec;
+            --warm-brown:    #6b5d3f;
+            --ink-deepest:   #0a0a08;
+
+            --display: 'EB Garamond', 'Times New Roman', Georgia, serif;
+            --hero:    'Archivo Black', Impact, sans-serif;
+            --serif:   'EB Garamond', Georgia, serif;
+            --sans:    'Inter', system-ui, -apple-system, sans-serif;
+            --script:  'Caveat', cursive;
+
+            --max-width: 1280px;
+            --gutter: clamp(20px, 4vw, 64px);
+            --ease: cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        body {
+            background: var(--paper);
+            color: var(--ink);
+            font-family: var(--serif);
+            font-size: 17px;
+            line-height: 1.55;
+            overflow-x: hidden;
+        }
+        img { max-width: 100%; display: block; }
+        a { color: inherit; text-decoration: none; }
+
+        /* ── Header ── */
+        .page-header {
+            padding: clamp(48px, 8vw, 112px) var(--gutter) clamp(32px, 4vw, 56px);
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+
+        .page-header__eyebrow {
+            font-family: var(--sans);
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--ink-quiet);
+            margin-bottom: 22px;
+        }
+
+        .page-header__title {
+            font-family: var(--display);
+            font-variation-settings: "opsz" 48;
+            font-weight: 500;
+            font-size: clamp(32px, 5vw, 56px);
+            line-height: 1.08;
+            color: var(--ink);
+            margin-bottom: 18px;
+            max-width: 20ch;
+        }
+
+        .page-header__title em {
+            font-family: var(--display);
+            font-style: italic;
+            font-weight: 500;
+            color: var(--ink);
+        }
+
+        .page-header__meta {
+            font-family: var(--sans);
+            font-size: 13px;
+            color: var(--ink-quiet);
+            letter-spacing: 0.02em;
+        }
+
+        /* ── Criteria strip ── */
+        .criteria {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 18px var(--gutter);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            border-top: 1px solid var(--rule);
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .criteria__tag {
+            font-family: var(--sans);
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--ink);
+            padding: 6px 12px;
+            border: 1px solid var(--ink);
+            border-radius: 2px;
+        }
+
+        /* ── Grid ── */
+        main {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: clamp(40px, 6vw, 80px) var(--gutter) clamp(80px, 10vw, 120px);
+        }
+
+        .property-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: clamp(40px, 5vw, 72px);
+        }
+
+        @media (max-width: 860px) {
+            .property-grid { grid-template-columns: 1fr; gap: 48px; }
+        }
+
+        /* ── Property card — mirrors teneriferesortinvest.es ── */
+        .property-card {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            color: inherit;
+            transition: transform 320ms var(--ease);
+            cursor: pointer;
+        }
+
+        .property-card:hover { transform: translateY(-3px); }
+
+        .property-card__image {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            aspect-ratio: 4 / 5;
+            background-color: var(--rule);
+            transition: filter 0.3s ease;
+        }
+
+        .property-card:hover .property-card__image { filter: brightness(0.94); }
+
+        .property-card__image > img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+        }
+
+        .property-card__image::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(0,0,0,0) 60%, rgba(0,0,0,0.18) 100%);
+            opacity: 0;
+            transition: opacity 320ms ease;
+            pointer-events: none;
+        }
+
+        .property-card:hover .property-card__image::after { opacity: 1; }
+
+        .property-card__badges {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            z-index: 2;
+        }
+
+        .badge {
+            font-family: var(--sans);
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            padding: 6px 10px;
+            border-radius: 2px;
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            white-space: nowrap;
+        }
+
+        .badge--source {
+            background: rgba(26, 26, 22, 0.82);
+            color: var(--paper);
+            border: 1px solid rgba(245, 241, 232, 0.2);
+        }
+
+        .badge--ours {
+            background: var(--warm-brown);
+            color: var(--paper);
+        }
+
+        .property-card__body { padding: 0 4px; }
+
+        .property-card__location {
+            font-family: var(--sans);
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--ink-quiet);
+            margin-bottom: 10px;
+        }
+
+        .property-card__title {
+            font-family: var(--display);
+            font-variation-settings: "opsz" 48;
+            font-weight: 500;
+            font-size: clamp(22px, 2vw, 28px);
+            line-height: 1.18;
+            margin-bottom: 10px;
+            color: var(--ink);
+        }
+
+        .property-card__meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 12px;
+            font-family: var(--sans);
+            font-size: 13px;
+            color: var(--ink-soft);
+            margin-bottom: 14px;
+            border-top: 1px solid var(--rule);
+            padding-top: 10px;
+        }
+
+        .property-card__price {
+            color: var(--ink);
+            font-weight: 600;
+            font-variant-numeric: tabular-nums;
+            white-space: nowrap;
+        }
+
+        .property-card__hint {
+            font-family: var(--sans);
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--ink);
+            padding-top: 2px;
+            transition: color 0.2s ease;
+        }
+
+        .property-card:hover .property-card__hint { color: var(--warm-brown); }
+
+        .property-card.is-open .property-card__hint { display: none; }
+
+        /* ── Expanded detail panel ── */
+        .property-card__detail {
+            display: none;
+            padding: 8px 4px 0;
+        }
+
+        .property-card.is-open .property-card__detail { display: block; }
+
+        .property-card__gallery {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scroll-snap-type: x mandatory;
+            padding-bottom: 12px;
+            margin-bottom: 16px;
+        }
+
+        .property-card__gallery img {
+            width: 240px;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 12px;
+            flex-shrink: 0;
+            scroll-snap-align: start;
+            background: var(--rule);
+        }
+
+        .property-card__desc {
+            font-family: var(--serif);
+            font-size: 15px;
+            line-height: 1.65;
+            color: var(--ink-soft);
+            margin-bottom: 14px;
+        }
+
+        .property-card__chips {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .property-card__chips .chip {
+            font-family: var(--sans);
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 5px 10px;
+            border: 1px solid var(--rule);
+            border-radius: 2px;
+            color: var(--ink-soft);
+            background: var(--paper);
+        }
+
+        .property-card__cta {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 20px;
+            font-family: var(--sans);
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--paper);
+            background: var(--ink);
+            border: 1px solid var(--ink);
+            border-radius: 2px;
+            transition: background 0.2s ease, color 0.2s ease;
+            width: 100%;
+        }
+
+        .property-card__cta:hover {
+            background: var(--warm-brown);
+            border-color: var(--warm-brown);
+        }
+
+        /* ── Footer ── */
+        footer {
+            border-top: 1px solid var(--rule);
+            padding: clamp(32px, 5vw, 56px) var(--gutter);
+            max-width: var(--max-width);
+            margin: 0 auto;
+            font-family: var(--sans);
+            font-size: 12px;
+            color: var(--ink-quiet);
+            letter-spacing: 0.02em;
+            line-height: 1.8;
+        }
+
+        footer .footer__brand {
+            font-family: var(--sans);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--ink);
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        footer a { color: var(--ink); border-bottom: 1px solid var(--rule); }
+        footer a:hover { border-bottom-color: var(--ink); }
+
+        /* ── Stagger entrance ── */
+        .property-card {
+            opacity: 0;
+            transform: translateY(16px);
+            animation: rise 0.55s var(--ease) forwards;
+        }
+        
+        .property-card:nth-of-type(1) { animation-delay: 0.0s; }
+        
+        .property-card:nth-of-type(2) { animation-delay: 0.06s; }
+        
+        .property-card:nth-of-type(3) { animation-delay: 0.12s; }
+        
+        .property-card:nth-of-type(4) { animation-delay: 0.18s; }
+        
+
+        @keyframes rise { to { opacity: 1; transform: none; } }
+
+        @media (prefers-reduced-motion: reduce) {
+            .property-card {
+                animation: none;
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+            .property-card__image { transition: none; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="page-header">
+    <p class="page-header__eyebrow">Tenerife Resort Invest</p>
+    <h1 class="page-header__title">Selected for <em>Gael</em></h1>
+    <p class="page-header__meta">23 April 2026 · 4 properties across 3 agencies</p>
+</header>
+
+<div class="criteria">
+    
+    <span class="criteria__tag">2 bed · 2 bath</span>
+    
+    <span class="criteria__tag">south / south-west orientation (to verify on viewing)</span>
+    
+    <span class="criteria__tag">€300,000 – €400,000</span>
+    
+    <span class="criteria__tag">Los Cristianos · Port Royale · Arona</span>
+    
+</div>
+
+<main>
+    <div class="property-grid">
+    
+        <div class="property-card property-card--ours"
+             id="card-0"
+             onclick="togglePropCard(event, 'card-0')">
+
+            <div class="property-card__image">
+                
+                <img src="img/tri-180326-02/image00001.jpeg" alt="Apartment at Port Royale, Los Cristianos" loading="lazy">
+                
+                <div class="property-card__badges">
+                    <span class="badge badge--ours">Tenerife Resort Invest</span>
+                </div>
+            </div>
+
+            <div class="property-card__body">
+                <p class="property-card__location">Port Royale, Los Cristianos</p>
+                <h2 class="property-card__title">Apartment at Port Royale, Los Cristianos</h2>
+                <p class="property-card__meta">
+                    <span>
+                        2 bed
+                         · 2 bath
+                        
+                    </span>
+                    <span class="property-card__price">€395,000</span>
+                </p>
+                <span class="property-card__hint">Tap for photos + details →</span>
+
+                <div class="property-card__detail">
+                    
+                    <div class="property-card__gallery">
+                        
+                        <img src="img/tri-180326-02/image00001.jpeg" alt="Apartment at Port Royale, Los Cristianos" loading="lazy">
+                        
+                        <img src="img/tri-180326-02/image00002.jpeg" alt="Apartment at Port Royale, Los Cristianos" loading="lazy">
+                        
+                        <img src="img/tri-180326-02/image00003.jpeg" alt="Apartment at Port Royale, Los Cristianos" loading="lazy">
+                        
+                        <img src="img/tri-180326-02/image00004.jpeg" alt="Apartment at Port Royale, Los Cristianos" loading="lazy">
+                        
+                        <img src="img/tri-180326-02/image00005.jpeg" alt="Apartment at Port Royale, Los Cristianos" loading="lazy">
+                        
+                        <img src="img/tri-180326-02/image00006.jpeg" alt="Apartment at Port Royale, Los Cristianos" loading="lazy">
+                        
+                        <img src="img/tri-180326-02/image00007.jpeg" alt="Apartment at Port Royale, Los Cristianos" loading="lazy">
+                        
+                        <img src="img/tri-180326-02/image00008.jpeg" alt="Apartment at Port Royale, Los Cristianos" loading="lazy">
+                        
+                        <img src="img/tri-180326-02/image00009.jpeg" alt="Apartment at Port Royale, Los Cristianos" loading="lazy">
+                        
+                        <img src="img/tri-180326-02/image00010.jpeg" alt="Apartment at Port Royale, Los Cristianos" loading="lazy">
+                        
+                        <img src="img/tri-180326-02/image00011.jpeg" alt="Apartment at Port Royale, Los Cristianos" loading="lazy">
+                        
+                        <img src="img/tri-180326-02/image00012.jpeg" alt="Apartment at Port Royale, Los Cristianos" loading="lazy">
+                        
+                        <img src="img/tri-180326-02/image00013.jpeg" alt="Apartment at Port Royale, Los Cristianos" loading="lazy">
+                        
+                        <img src="img/tri-180326-02/image00014.jpeg" alt="Apartment at Port Royale, Los Cristianos" loading="lazy">
+                        
+                        <img src="img/tri-180326-02/image00015.jpeg" alt="Apartment at Port Royale, Los Cristianos" loading="lazy">
+                        
+                        <img src="img/tri-180326-02/image00016.jpeg" alt="Apartment at Port Royale, Los Cristianos" loading="lazy">
+                        
+                    </div>
+                    
+
+                    
+                    <p class="property-card__desc">The apartment you're already booked to view this Friday at 17:00. Two bedrooms, two bathrooms, in the Port Royale residence — a short walk from Playa de las Vistas and the Los Cristianos seafront. We'll confirm the orientation on the viewing together.</p>
+                    
+
+                    
+
+                    <a class="property-card__cta"
+                       href="https://wa.me/34659003377?text=Hola%20Stazio%2C%20me%20interesa%20esta%20propiedad%3A%20Apartment%20at%20Port%20Royale%2C%20Los%20Cristianos%20%E2%80%94%20%E2%82%AC395%2C000"
+                       target="_blank" rel="noopener"
+                       onclick="event.stopPropagation()">Ask TRI about this property</a>
+                </div>
+            </div>
+        </div>
+    
+        <div class="property-card"
+             id="card-1"
+             onclick="togglePropCard(event, 'card-1')">
+
+            <div class="property-card__image">
+                
+                <img src="https://www.castleproperties.es/wp-content/uploads/2024/04/104656580-525x328.jpg?v=1712399259" alt="Property in Arona - Costa del Silencio" loading="lazy">
+                
+                <div class="property-card__badges">
+                    <span class="badge badge--source">Castle Properties</span>
+                </div>
+            </div>
+
+            <div class="property-card__body">
+                <p class="property-card__location">Arona - Costa del Silencio</p>
+                <h2 class="property-card__title">Property in Arona - Costa del Silencio</h2>
+                <p class="property-card__meta">
+                    <span>
+                        2 bed
+                         · 2 bath
+                        
+                    </span>
+                    <span class="property-card__price">178.500 €</span>
+                </p>
+                <span class="property-card__hint">Tap for photos + details →</span>
+
+                <div class="property-card__detail">
+                    
+                    <div class="property-card__gallery">
+                        
+                        <img src="https://www.castleproperties.es/wp-content/uploads/2026/04/img-adonis-castalia-brezos-aparthotel-costa-adeje-tenerife-16.jpg" alt="Property in Arona - Costa del Silencio" loading="lazy">
+                        
+                        <img src="https://www.castleproperties.es/wp-content/uploads/2026/04/x-271865627.jpg" alt="Property in Arona - Costa del Silencio" loading="lazy">
+                        
+                        <img src="https://www.castleproperties.es/wp-content/uploads/2026/03/Veril-del-Duque-20.jpeg" alt="Property in Arona - Costa del Silencio" loading="lazy">
+                        
+                        <img src="https://www.castleproperties.es/wp-content/uploads/2024/04/104656580.jpg" alt="Property in Arona - Costa del Silencio" loading="lazy">
+                        
+                        <img src="https://www.castleproperties.es/wp-content/uploads/2024/04/WhatsApp-Image-2024-04-06-at-11.24.06.jpeg" alt="Property in Arona - Costa del Silencio" loading="lazy">
+                        
+                        <img src="https://www.castleproperties.es/wp-content/uploads/2024/04/WhatsApp-Image-2024-04-06-at-11.24.06-5.jpeg" alt="Property in Arona - Costa del Silencio" loading="lazy">
+                        
+                        <img src="https://www.castleproperties.es/wp-content/uploads/2024/04/WhatsApp-Image-2024-04-06-at-11.24.06-1.jpeg" alt="Property in Arona - Costa del Silencio" loading="lazy">
+                        
+                        <img src="https://www.castleproperties.es/wp-content/uploads/2024/04/WhatsApp-Image-2024-04-06-at-11.24.06-2.jpeg" alt="Property in Arona - Costa del Silencio" loading="lazy">
+                        
+                        <img src="https://www.castleproperties.es/wp-content/uploads/2024/04/WhatsApp-Image-2024-04-06-at-11.24.05-5.jpeg" alt="Property in Arona - Costa del Silencio" loading="lazy">
+                        
+                        <img src="https://www.castleproperties.es/wp-content/uploads/2024/04/WhatsApp-Image-2024-04-06-at-11.24.06-4.jpeg" alt="Property in Arona - Costa del Silencio" loading="lazy">
+                        
+                        <img src="https://www.castleproperties.es/wp-content/uploads/2024/04/WhatsApp-Image-2024-04-06-at-11.24.05-4.jpeg" alt="Property in Arona - Costa del Silencio" loading="lazy">
+                        
+                        <img src="https://www.castleproperties.es/wp-content/uploads/2024/04/WhatsApp-Image-2024-04-06-at-11.24.06-3.jpeg" alt="Property in Arona - Costa del Silencio" loading="lazy">
+                        
+                    </div>
+                    
+
+                    
+
+                    
+                    <div class="property-card__chips">
+                        <span class="chip">pool</span><span class="chip">terrace</span>
+                    </div>
+                    
+
+                    <a class="property-card__cta"
+                       href="https://wa.me/34659003377?text=Hola%20Stazio%2C%20me%20interesa%20esta%20propiedad%3A%20Property%20in%20Arona%20-%20Costa%20del%20Silencio%20%E2%80%94%20178.500%20%E2%82%AC"
+                       target="_blank" rel="noopener"
+                       onclick="event.stopPropagation()">Ask TRI about this property</a>
+                </div>
+            </div>
+        </div>
+    
+        <div class="property-card"
+             id="card-2"
+             onclick="togglePropCard(event, 'card-2')">
+
+            <div class="property-card__image">
+                
+                <img src="https://www.morfittpropertiestenerife.com/sites/default/files/styles/listing_photo/public/ApartmentinCastleHarbour11.jpg?itok=LQehsVDW" alt="Apartment for sale in Castle Harbour, Los Cristianos, Tenerife property, AP0928-2C" loading="lazy">
+                
+                <div class="property-card__badges">
+                    <span class="badge badge--source">Morfitt Properties</span>
+                </div>
+            </div>
+
+            <div class="property-card__body">
+                <p class="property-card__location">Los Cristianos</p>
+                <h2 class="property-card__title">Apartment for sale in Castle Harbour, Los Cristianos, Tenerife property, AP0928-2C</h2>
+                <p class="property-card__meta">
+                    <span>
+                        2 bed
+                         · 2 bath
+                        
+                    </span>
+                    <span class="property-card__price">€325,000</span>
+                </p>
+                <span class="property-card__hint">Tap for photos + details →</span>
+
+                <div class="property-card__detail">
+                    
+                    <div class="property-card__gallery">
+                        
+                        <img src="https://www.morfittpropertiestenerife.com/sites/default/files/styles/listing_photo/public/ApartmentinCastleHarbour11.jpg?itok=LQehsVDW" alt="Apartment for sale in Castle Harbour, Los Cristianos, Tenerife property, AP0928-2C" loading="lazy">
+                        
+                        <img src="https://www.morfittpropertiestenerife.com/sites/default/files/styles/listing_photo/public/ApartmentinCastleHarbour13.jpg?itok=UDVwosY4" alt="Apartment for sale in Castle Harbour, Los Cristianos, Tenerife property, AP0928-2C" loading="lazy">
+                        
+                        <img src="https://www.morfittpropertiestenerife.com/sites/default/files/styles/listing_photo/public/ApartmentinCastleHarbour3.jpg?itok=QQkf7Mpt" alt="Apartment for sale in Castle Harbour, Los Cristianos, Tenerife property, AP0928-2C" loading="lazy">
+                        
+                        <img src="https://www.morfittpropertiestenerife.com/sites/default/files/styles/listing_photo/public/ApartmentinCastleHarbour4.jpg?itok=BMNI9Xdk" alt="Apartment for sale in Castle Harbour, Los Cristianos, Tenerife property, AP0928-2C" loading="lazy">
+                        
+                        <img src="https://www.morfittpropertiestenerife.com/sites/default/files/styles/listing_photo/public/ApartmentinCastleHarbour2.jpg?itok=5148CrjO" alt="Apartment for sale in Castle Harbour, Los Cristianos, Tenerife property, AP0928-2C" loading="lazy">
+                        
+                        <img src="https://www.morfittpropertiestenerife.com/sites/default/files/styles/listing_photo/public/ApartmentinCastleHarbour5.jpg?itok=ULndjwm5" alt="Apartment for sale in Castle Harbour, Los Cristianos, Tenerife property, AP0928-2C" loading="lazy">
+                        
+                        <img src="https://www.morfittpropertiestenerife.com/sites/default/files/styles/listing_photo/public/ApartmentinCastleHarbour6.jpg?itok=nstcC3-s" alt="Apartment for sale in Castle Harbour, Los Cristianos, Tenerife property, AP0928-2C" loading="lazy">
+                        
+                        <img src="https://www.morfittpropertiestenerife.com/sites/default/files/styles/listing_photo/public/ApartmentinCastleHarbour7.jpg?itok=_sfRVPyl" alt="Apartment for sale in Castle Harbour, Los Cristianos, Tenerife property, AP0928-2C" loading="lazy">
+                        
+                        <img src="https://www.morfittpropertiestenerife.com/sites/default/files/styles/listing_photo/public/ApartmentinCastleHarbour8.jpg?itok=y6JKWWXx" alt="Apartment for sale in Castle Harbour, Los Cristianos, Tenerife property, AP0928-2C" loading="lazy">
+                        
+                        <img src="https://www.morfittpropertiestenerife.com/sites/default/files/styles/listing_photo/public/ApartmentinCastleHarbour9.jpg?itok=D0ma5-N2" alt="Apartment for sale in Castle Harbour, Los Cristianos, Tenerife property, AP0928-2C" loading="lazy">
+                        
+                        <img src="https://www.morfittpropertiestenerife.com/sites/default/files/styles/listing_photo/public/ApartmentinCastleHarbour10.jpg?itok=FIIOH9O5" alt="Apartment for sale in Castle Harbour, Los Cristianos, Tenerife property, AP0928-2C" loading="lazy">
+                        
+                        <img src="https://www.morfittpropertiestenerife.com/sites/default/files/styles/listing_photo/public/ApartmentinCastleHarbour12.jpg?itok=rQ59Z0je" alt="Apartment for sale in Castle Harbour, Los Cristianos, Tenerife property, AP0928-2C" loading="lazy">
+                        
+                    </div>
+                    
+
+                    
+
+                    
+
+                    <a class="property-card__cta"
+                       href="https://wa.me/34659003377?text=Hola%20Stazio%2C%20me%20interesa%20esta%20propiedad%3A%20Apartment%20for%20sale%20in%20Castle%20Harbour%2C%20Los%20Cristianos%2C%20Tenerife%20property%2C%20AP0928-2C%20%E2%80%94%20%E2%82%AC325%2C000"
+                       target="_blank" rel="noopener"
+                       onclick="event.stopPropagation()">Ask TRI about this property</a>
+                </div>
+            </div>
+        </div>
+    
+        <div class="property-card"
+             id="card-3"
+             onclick="togglePropCard(event, 'card-3')">
+
+            <div class="property-card__image">
+                
+                <img src="https://www.morfittpropertiestenerife.com/sites/default/files/styles/listing_photo/public/ApartmentinRoyalPalm6_1.jpg?itok=k7dyvw5L" alt="Apartment for sale in Royal Palm, Los Cristianos, Tenerife property, AP0943-2C" loading="lazy">
+                
+                <div class="property-card__badges">
+                    <span class="badge badge--source">Morfitt Properties</span>
+                </div>
+            </div>
+
+            <div class="property-card__body">
+                <p class="property-card__location">Los Cristianos</p>
+                <h2 class="property-card__title">Apartment for sale in Royal Palm, Los Cristianos, Tenerife property, AP0943-2C</h2>
+                <p class="property-card__meta">
+                    <span>
+                        2 bed
+                         · 2 bath
+                        
+                    </span>
+                    <span class="property-card__price">€399,950</span>
+                </p>
+                <span class="property-card__hint">Tap for photos + details →</span>
+
+                <div class="property-card__detail">
+                    
+                    <div class="property-card__gallery">
+                        
+                        <img src="https://www.morfittpropertiestenerife.com/sites/default/files/styles/listing_photo/public/ApartmentinRoyalPalm6_1.jpg?itok=k7dyvw5L" alt="Apartment for sale in Royal Palm, Los Cristianos, Tenerife property, AP0943-2C" loading="lazy">
+                        
+                        <img src="https://www.morfittpropertiestenerife.com/sites/default/files/styles/listing_photo/public/ApartmentinRoyalPalm5_1.jpg?itok=HjmmGukj" alt="Apartment for sale in Royal Palm, Los Cristianos, Tenerife property, AP0943-2C" loading="lazy">
+                        
+                        <img src="https://www.morfittpropertiestenerife.com/sites/default/files/styles/listing_photo/public/ApartmentinRoyalPalm14_1.jpg?itok=VHRNnqyh" alt="Apartment for sale in Royal Palm, Los Cristianos, Tenerife property, AP0943-2C" loading="lazy">
+                        
+                        <img src="https://www.morfittpropertiestenerife.com/sites/default/files/styles/listing_photo/public/ApartmentinRoyalPalm11_1.jpg?itok=28gfz4YA" alt="Apartment for sale in Royal Palm, Los Cristianos, Tenerife property, AP0943-2C" loading="lazy">
+                        
+                        <img src="https://www.morfittpropertiestenerife.com/sites/default/files/styles/listing_photo/public/ApartmentinRoyalPalm8_1.jpg?itok=Mrkzw5as" alt="Apartment for sale in Royal Palm, Los Cristianos, Tenerife property, AP0943-2C" loading="lazy">
+                        
+                        <img src="https://www.morfittpropertiestenerife.com/sites/default/files/styles/listing_photo/public/ApartmentinRoyalPalm9_1.jpg?itok=jRuW3Qnw" alt="Apartment for sale in Royal Palm, Los Cristianos, Tenerife property, AP0943-2C" loading="lazy">
+                        
+                        <img src="https://www.morfittpropertiestenerife.com/sites/default/files/styles/listing_photo/public/ApartmentinRoyalPalm19_0.jpg?itok=OJoYrza5" alt="Apartment for sale in Royal Palm, Los Cristianos, Tenerife property, AP0943-2C" loading="lazy">
+                        
+                        <img src="https://www.morfittpropertiestenerife.com/sites/default/files/styles/listing_photo/public/ApartmentinRoyalPalm21_0.jpg?itok=z_afQr2y" alt="Apartment for sale in Royal Palm, Los Cristianos, Tenerife property, AP0943-2C" loading="lazy">
+                        
+                        <img src="https://www.morfittpropertiestenerife.com/sites/default/files/styles/listing_photo/public/ApartmentinRoyalPalm17_0.jpg?itok=RPY7hc06" alt="Apartment for sale in Royal Palm, Los Cristianos, Tenerife property, AP0943-2C" loading="lazy">
+                        
+                        <img src="https://www.morfittpropertiestenerife.com/sites/default/files/styles/listing_photo/public/ApartmentinRoyalPalm23.jpg?itok=PdKaEbSo" alt="Apartment for sale in Royal Palm, Los Cristianos, Tenerife property, AP0943-2C" loading="lazy">
+                        
+                        <img src="https://www.morfittpropertiestenerife.com/sites/default/files/styles/listing_photo/public/ApartmentinRoyalPalm16_0.jpg?itok=iVIGzzcs" alt="Apartment for sale in Royal Palm, Los Cristianos, Tenerife property, AP0943-2C" loading="lazy">
+                        
+                        <img src="https://www.morfittpropertiestenerife.com/sites/default/files/styles/listing_photo/public/ApartmentinRoyalPalm15_0.jpg?itok=kWbi-Q3P" alt="Apartment for sale in Royal Palm, Los Cristianos, Tenerife property, AP0943-2C" loading="lazy">
+                        
+                    </div>
+                    
+
+                    
+
+                    
+
+                    <a class="property-card__cta"
+                       href="https://wa.me/34659003377?text=Hola%20Stazio%2C%20me%20interesa%20esta%20propiedad%3A%20Apartment%20for%20sale%20in%20Royal%20Palm%2C%20Los%20Cristianos%2C%20Tenerife%20property%2C%20AP0943-2C%20%E2%80%94%20%E2%82%AC399%2C950"
+                       target="_blank" rel="noopener"
+                       onclick="event.stopPropagation()">Ask TRI about this property</a>
+                </div>
+            </div>
+        </div>
+    
+    </div>
+
+    <script>
+    function togglePropCard(ev, id) {
+        if (ev.target.closest('.property-card__cta') || ev.target.closest('.property-card__gallery')) return;
+        var el = document.getElementById(id);
+        if (!el) return;
+        var isOpen = el.classList.contains('is-open');
+        document.querySelectorAll('.property-card.is-open').forEach(function(x){ x.classList.remove('is-open'); });
+        if (!isOpen) {
+            el.classList.add('is-open');
+            setTimeout(function(){ el.scrollIntoView({behavior:'smooth', block:'nearest'}); }, 80);
+        }
+    }
+    </script>
+</main>
+
+<footer>
+    <span class="footer__brand">Tenerife Resort Invest</span>
+    Curated for Gael · 23 April 2026<br>
+    Prices and availability may change without notice.<br>
+    <a href="https://teneriferesortinvest.es">teneriferesortinvest.es</a>
+</footer>
+
+</body>
+</html>
